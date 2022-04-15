@@ -31,7 +31,7 @@ app.use(bodyParser.urlencoded({ extended: true, limit: `50mb` }));
 app.use(express.static(path.resolve(__dirname, "./client/build")));
 
 app.get(`/`, (req, res) => {
-  res.sendFile(path.resolve(__dirname, "./app/client/build", "index.html"));
+  res.sendFile(path.resolve(__dirname, "./client/build", "index.html"));
 });
 app.get(`/hours`, (req, res) => reciever(req, res, getAllHours));
 app.get(`/menu`, (req, res) => reciever(req, res, getAllMenu));
