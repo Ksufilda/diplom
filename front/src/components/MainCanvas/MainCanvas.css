@@ -1,0 +1,128 @@
+button {
+  background-color: transparent;
+  border: none;
+  width: -webkit-fill-available;
+  width: stretch;
+}
+
+.canvas-container {
+  position: relative;
+  margin-left: 16px;
+  display: flex;
+
+  background-color: wheat;
+  border-radius: 10px;
+
+  overflow-x: hidden;
+  overflow-y: scroll;
+
+  align-items: center;
+
+  justify-content: center;
+
+  overflow: visible;
+
+  padding: 10px;
+  flex: 1;
+}
+
+.canvas {
+  display: flex;
+  flex-direction: column;
+
+  width: 70%;
+  padding-bottom: 70%;
+  background-color: black;
+}
+
+.canvas-blocks-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 50px;
+  height: 50px;
+
+  border-radius: 8px;
+
+  cursor: pointer;
+
+  outline: none;
+  border: none;
+
+  transition: 0.5s;
+}
+
+.canvas-blocks-button:hover {
+  background-color: black;
+  transition: 0.5s;
+}
+
+.canvas-blocks-button.active {
+  right: 210px;
+}
+
+.canvas-blocks-button-img {
+  width: 100%;
+}
+
+.canvas-blocks-picker {
+  right: 0;
+  width: 0px;
+  visibility: hidden;
+  position: absolute;
+
+  height: 100%;
+  transition: 0.5s;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 1) 0%,
+    rgb(224, 209, 215) 53%,
+    rgb(183, 178, 187) 100%
+  );
+  border-radius: 10px;
+}
+
+.canvas-blocks-picker.active {
+  visibility: visible;
+
+  width: 200px;
+  transition: 0.5s;
+}
+
+.canvas-blocks-picker-el-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 10px;
+  border-radius: 20px;
+  background-color: #fff;
+  margin: 10px;
+  cursor: pointer;
+
+  box-shadow: 4px 4px 8px 0px rgba(28, 10, 47, 0.27),
+    -4px -4px 8px 0px rgba(218, 210, 229, 0.51);
+}
+.canvas-blocks-picker-el-container:hover {
+  background-color: #c9c9c9;
+}
+
+.canvas-blocks-picker-el {
+  height: 100px;
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 20px;
+  flex: 1;
+
+  box-shadow: inset -8px -8px 16px rgba(221, 212, 236, 0.49),
+    inset 8px 8px 16px rgba(28, 10, 47, 0.33);
+}
+
+.canvas-blocks-picker-el-img {
+  height: 80px;
+
+  object-fit: contain;
+  width: 100%;
+}
