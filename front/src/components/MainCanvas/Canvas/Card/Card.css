@@ -1,8 +1,41 @@
 .mask {
+  mask-size: contain;
+
+  display: inline-block;
+
+  align-items: center;
+  justify-content: center;
+  max-height: inherit;
+}
+
+.triangle-mask {
   -webkit-mask-image: url("../../../../assets/triangleBlock.png");
   mask-image: url("../../../../assets/triangleBlock.png");
   -webkit-mask-repeat: no-repeat;
   mask-repeat: no-repeat;
+}
 
-  mask-size: contain;
+.square-mask {
+  -webkit-mask-image: url("../../../../assets/square.png");
+  mask-image: url("../../../../assets/square.png");
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+}
+
+.polygon-mask {
+  -webkit-mask-image: url("../../../../assets/polygon.png");
+  mask-image: url("../../../../assets/polygon.png");
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+}
+
+.rectangle-mask {
+  -webkit-mask-image: url("../../../../assets/rectangle.png");
+  mask-image: url("../../../../assets/rectangle.png");
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+}
+
+.card-image {
+  max-height: inherit;
 }

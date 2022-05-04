@@ -1,17 +1,33 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./MainCanvas.css";
 import edit from "../../assets/edit.png";
 import BlockPicker from "./BlockPicker";
-import Card from "./Canvas/Card/Card";
-import { DndProvider, useDrop } from "react-dnd";
+import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { Canvas } from "./Canvas/Canvas";
 
 const MainCanvas = () => {
   const [pickerActive, setPickerActive] = useState(false);
-  const [cards, setCards] = useState([]);
+  const [boxes, setBoxes] = useState({});
 
-  function addBlock(type) {}
+  function addBlock(data) {
+    const randomId = Math.floor(
+      Math.random() * Math.floor(Math.random() * Date.now())
+    );
+
+    setBoxes({
+      ...boxes,
+      [randomId]: {
+        top: 0,
+        left: 0,
+        title: "Drag me around",
+        type: data.type,
+        image: data.image,
+        link: data.link,
+        text: data.text,
+      },
+    });
+  }
 
   return (
     <div className="canvas-container">
@@ -31,12 +47,8 @@ const MainCanvas = () => {
 
       <BlockPicker onAdd={addBlock} active={pickerActive} />
 
-      {cards.map((item) => {
-        return <Card type={item.type}></Card>;
-      })}
-
       <DndProvider backend={HTML5Backend}>
-        <Canvas></Canvas>
+        <Canvas setBoxes={setBoxes} boxes={boxes}></Canvas>
       </DndProvider>
     </div>
   );

@@ -1,0 +1,114 @@
+.modal-container {
+  z-index: 20;
+
+  display: flex;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+
+  background-color: #0000009e;
+
+  align-items: center;
+  justify-content: center;
+}
+
+.modal {
+  max-width: 80%;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 1) 0%,
+    rgb(224, 209, 215) 53%,
+    rgb(183, 178, 187) 100%
+  );
+
+  border-radius: 20px;
+
+  box-shadow: 4px 4px 8px 0px rgba(28, 10, 47, 0.27),
+    -4px -4px 8px 0px rgba(218, 210, 229, 0.51);
+}
+
+.canvas-blocks-picker-el-addmedia {
+  object-fit: cover;
+  margin: 30px 20px;
+  width: 340px;
+  height: 200px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.cross {
+  width: 60px;
+  height: 60px;
+
+  position: absolute;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.cross .cross-vertical {
+  position: absolute;
+  left: 25px;
+
+  border-radius: 20px;
+  background-color: #483376;
+
+  width: 10px;
+  height: 60px;
+}
+
+.cross .cross-horizontal {
+  position: absolute;
+  top: 25px;
+
+  border-radius: 20px;
+  background-color: #483376;
+
+  width: 60px;
+  height: 10px;
+}
+
+.file-input-hidden {
+  opacity: 0;
+  z-index: -1;
+  position: absolute;
+  display: none;
+  visibility: hidden;
+}
+
+.lds-ring {
+  display: inline-block;
+  position: relative;
+  width: 60px;
+  height: 60px;
+}
+.lds-ring div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 48px;
+  height: 48px;
+  margin: 8px;
+  border: 8px solid #000;
+  border-radius: 50%;
+  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: #000 transparent transparent transparent;
+}
+.lds-ring div:nth-child(1) {
+  animation-delay: -0.45s;
+}
+.lds-ring div:nth-child(2) {
+  animation-delay: -0.3s;
+}
+.lds-ring div:nth-child(3) {
+  animation-delay: -0.15s;
+}
+@keyframes lds-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

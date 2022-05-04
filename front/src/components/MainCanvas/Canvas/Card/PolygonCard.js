@@ -3,7 +3,7 @@ import ksuna from "../../../../assets/ksunaImage.png";
 import { useDrag } from "react-dnd";
 import { getStyles } from "../../../../common/cardFunctions";
 
-const TriangleCard = ({ id, type, text, left, top, image, link }) => {
+const PolygonCard = ({ id, type, text, left, top, image }) => {
   const [{ isDragging }, dragRef, preview] = useDrag(
     () => ({
       type,
@@ -25,12 +25,12 @@ const TriangleCard = ({ id, type, text, left, top, image, link }) => {
       style={getStyles(left, top, isDragging)}
       role="DraggableBox"
     >
-      <div className="mask triangle-mask">
-        <img className="card-image" src={image || ksuna} alt="test"></img>
+      <div className="mask polygon-mask">
+        <img src={image || ksuna} alt="test"></img>
         {text}
       </div>
     </div>
   );
 };
 
-export default TriangleCard;
+export default PolygonCard;
