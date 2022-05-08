@@ -10,7 +10,7 @@ const path = require("path");
 const { getProfile, getCanvas } = require("./queries/getData");
 
 const { postProfile, postCanvas } = require("./queries/postData");
-
+const cors = require("cors");
 const { Pool } = require("pg");
 const express = require(`express`);
 const bodyParser = require(`body-parser`);
@@ -19,6 +19,7 @@ require("dotenv").config();
 
 const port = process.env.PORT || 5432;
 const app = express();
+app.use(cors()); // <---- use cors middleware
 
 app.use(bodyParser.json({ limit: `50mb` }));
 app.use(bodyParser.urlencoded({ extended: true, limit: `50mb` }));

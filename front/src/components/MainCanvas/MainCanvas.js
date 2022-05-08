@@ -5,14 +5,14 @@ import BlockPicker from "./BlockPicker";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { Canvas } from "./Canvas/Canvas";
-import { getCanvas } from "../../api/queries";
+import { getCanvas, postCanvas } from "../../api/queries";
 
 const MainCanvas = () => {
   const [pickerActive, setPickerActive] = useState(false);
   const [boxes, setBoxes] = useState({});
 
   useEffect(() => {
-    getCanvas(1).then((res) => console.log(res));
+    getCanvas(1).then((res) => console.log(res.rows));
   }, []);
 
   function addBlock(data) {
@@ -31,6 +31,20 @@ const MainCanvas = () => {
         link: data.link,
         text: data.text,
       },
+    });
+
+    postCanvas({
+      userId: 1,
+      y: 0,
+      x: 0,
+      title: "Drag me around",
+      type: data.type,
+      image: data.image,
+      link: data.link,
+      text: data.text,
+      video: "",
+    }).then((res) => {
+      console.log(res);
     });
   }
 

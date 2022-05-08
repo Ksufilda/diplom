@@ -14,7 +14,7 @@ exports.postCanvas = async (sendBack, data) => {
 
   function insertCanvas(sendBack, data) {
     const sql = format(
-      `INSERT INTO canvas (id, text, image, type, link, video, x, y) VALUES %L`,
+      `INSERT INTO canvas (id, userId, text, image, type, link, video, x, y) VALUES %L`,
       data
     );
 
