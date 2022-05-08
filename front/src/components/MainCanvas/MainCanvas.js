@@ -1,14 +1,19 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./MainCanvas.css";
 import edit from "../../assets/edit.png";
 import BlockPicker from "./BlockPicker";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { Canvas } from "./Canvas/Canvas";
+import { getCanvas } from "../../api/queries";
 
 const MainCanvas = () => {
   const [pickerActive, setPickerActive] = useState(false);
   const [boxes, setBoxes] = useState({});
+
+  useEffect(() => {
+    getCanvas(1).then((res) => console.log(res));
+  }, []);
 
   function addBlock(data) {
     const randomId = Math.floor(

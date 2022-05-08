@@ -1,4 +1,9 @@
-const { createProfile, createCanvas } = require("./queries/tableQueries");
+const {
+  createProfile,
+  createCanvas,
+  dropCanvas,
+  dropProfile,
+} = require("./queries/tableQueries");
 
 const { setGlobalConn, reciever } = require("./queries/common");
 const path = require("path");
@@ -45,7 +50,8 @@ async function connectToDatabase() {
   console.log("Connecting...");
   setGlobalConn(await pool.connect());
   console.log("Connected!");
-
+  await dropCanvas();
+  await dropProfile();
   await createProfile();
   await createCanvas();
 }
