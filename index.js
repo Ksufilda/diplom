@@ -1,21 +1,10 @@
-const {
-  createOrganizationsTable,
-  createHoursTable,
-  createMenuTable,
-} = require("./queries/tableQueries");
+const { createProfile, createCanvas } = require("./queries/tableQueries");
 
 const { setGlobalConn, reciever } = require("./queries/common");
 const path = require("path");
-const {
-  getOrganizationMenu,
-  getOrganizationInfo,
-  getCoords,
-  getAllRows,
-  getAllHours,
-  getAllMenu,
-} = require("./queries/getData");
+const { getProfile, getCanvas } = require("./queries/getData");
 
-const { postMenu, postHours, postOrganization } = require("./queries/postData");
+const { postProfile, postCanvas } = require("./queries/postData");
 
 const { Pool } = require("pg");
 const express = require(`express`);
@@ -33,20 +22,12 @@ app.use(express.static(path.resolve(__dirname, "./front/build")));
 app.get(`/`, (req, res) => {
   res.sendFile(path.resolve(__dirname, "./front/build", "index.html"));
 });
-app.get(`/hours`, (req, res) => reciever(req, res, getAllHours));
-app.get(`/menu`, (req, res) => reciever(req, res, getAllMenu));
 
-app.get(`/organization/coords`, (req, res) => reciever(req, res, getCoords));
-app.get(`/organization/info/:id`, (req, res) =>
-  reciever(req, res, getOrganizationInfo)
-);
-app.get(`/organization/menu/:id`, (req, res) =>
-  reciever(req, res, getOrganizationMenu)
-);
+app.get(`/profile/:id`, (req, res) => reciever(req, res, getProfile));
+app.get(`/canvas/:id`, (req, res) => reciever(req, res, getCanvas));
 
-app.post(`/organization/hours`, (req, res) => reciever(req, res, postHours));
-app.post(`/organization/menu`, (req, res) => reciever(req, res, postMenu));
-app.post(`/organization`, (req, res) => reciever(req, res, postOrganization));
+app.post(`/profile`, (req, res) => reciever(req, res, postProfile));
+app.post(`/canvas`, (req, res) => reciever(req, res, postCanvas));
 
 app.listen(port, () => {
   console.log(`Server is running on port `, port);
@@ -65,9 +46,8 @@ async function connectToDatabase() {
   setGlobalConn(await pool.connect());
   console.log("Connected!");
 
-  await createOrganizationsTable();
-  await createHoursTable();
-  await createMenuTable();
+  await createProfile();
+  await createCanvas();
 }
 
 connectToDatabase();
