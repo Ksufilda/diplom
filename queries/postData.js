@@ -6,6 +6,7 @@ const {
 } = require("./common");
 
 exports.postCanvas = async (sendBack, data) => {
+  console.log(data);
   async function putCanvas(sendBack, data, id) {
     const sql = `DELETE FROM canvas WHERE id = ${id}`;
     simpleQuery(sql);
