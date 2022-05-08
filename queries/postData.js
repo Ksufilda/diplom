@@ -28,10 +28,10 @@ exports.postCanvas = async (sendBack, data) => {
   callbackQuery(sql, function (err, result) {
     if (result?.rows.length > 0) {
       console.log(`put canvas`, data.id);
-      putCanvas(sendBack, data.menuPositions, data.id);
+      putCanvas(sendBack, Object.values(data), data.id);
     } else {
       console.log(`insert canvas`, data.id);
-      insertCanvas(sendBack, data.menuPositions);
+      insertCanvas(sendBack, Object.values(data));
     }
   });
 };
