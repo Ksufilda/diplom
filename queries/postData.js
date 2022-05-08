@@ -19,6 +19,8 @@ exports.postCanvas = async (sendBack, data) => {
       data
     );
 
+    console.log(sql);
+
     simpleQueryWithResult(sql, sendBack);
   }
 

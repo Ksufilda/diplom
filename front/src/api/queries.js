@@ -17,8 +17,6 @@ export function postCanvas(data) {
       Accept: "application/json",
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(
-      Object.values({ id, userId, text, image, type, link, video, x, y })
-    ),
+    body: JSON.stringify({ id, userId, text, image, type, link, video, x, y }),
   }).then((data) => data.json());
 }
