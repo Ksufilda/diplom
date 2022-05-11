@@ -28,6 +28,6 @@ export function deleteCanvas(id) {
       Accept: "application/json",
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(id),
+    body: JSON.stringify({ id }),
   }).then((data) => data.json());
 }
