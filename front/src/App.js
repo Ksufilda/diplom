@@ -8,14 +8,29 @@ import MainCanvas from "./components/MainCanvas/MainCanvas";
 import Profile from "./components/profile/Profile";
 
 function App() {
+  // {id:1, name:'', profileImg:'', text1:'', text2:'', text3:''}
   const [profile, setProfile] = useState();
+  const [redact, setRedact] = useState(true);
 
   useEffect(() => {
     getProfile(1).then((res) => {
       console.log(res.rows[0]);
-      if (res.rows) setProfile(res.rows[0]);
+      if (res.rows.length) setProfile(res.rows[0]);
+      else
+        setProfile({
+          id: 1,
+          name: "",
+          profileImg: "",
+          text1: "",
+          text2: "",
+          text3: "",
+        });
     });
   }, []);
+
+  function changeView() {
+    setRedact(!redact);
+  }
 
   function changeProfile(data) {
     setProfile(data);
@@ -32,12 +47,21 @@ function App() {
   return (
     <DndProvider backend={HTML5Backend}>
       <div className="main-container">
-        <Header profile={profile} saveProfile={saveLocalProfile} />
+        <Header
+          redact={redact}
+          changeView={changeView}
+          profile={profile}
+          saveProfile={saveLocalProfile}
+        />
         <div className="container">
           {profile && (
-            <Profile profile={profile} changeProfile={changeProfile}></Profile>
+            <Profile
+              redact={redact}
+              profile={profile}
+              changeProfile={changeProfile}
+            ></Profile>
           )}
-          <MainCanvas></MainCanvas>
+          <MainCanvas redact={redact} />
         </div>
       </div>
     </DndProvider>

@@ -2,8 +2,9 @@ import React, { useEffect } from "react";
 import ksuna from "../../../../assets/ksunaImage.png";
 import { useDrag } from "react-dnd";
 import { getStyles } from "../../../../common/cardFunctions";
+import CardContainer from "./CardContainer";
 
-const SquareCard = ({ id, type, text, left, top, image }) => {
+const SquareCard = ({ redact, id, type, text, link, left, top, image }) => {
   const [{ isDragging }, dragRef, preview] = useDrag(
     () => ({
       type,
@@ -20,15 +21,17 @@ const SquareCard = ({ id, type, text, left, top, image }) => {
   }, []);
 
   return (
-    <div
-      ref={dragRef}
-      style={getStyles(left, top, isDragging)}
-      role="DraggableBox"
-    >
-      <div className="mask square-mask">
-        <img src={image || ksuna} alt="test"></img>
-        {text}
-      </div>
+    <div ref={redact ? dragRef : null}>
+      <CardContainer
+        href={link}
+        style={getStyles(left, top, isDragging)}
+        role="DraggableBox"
+      >
+        <div className="mask square-mask">
+          <img src={image || ksuna} alt="test"></img>
+          {text}
+        </div>
+      </CardContainer>
     </div>
   );
 };

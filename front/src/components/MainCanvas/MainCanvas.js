@@ -10,7 +10,7 @@ import { deleteCanvas, getCanvas, postCanvas } from "../../api/queries";
 import Garbage from "./Garbage";
 import { ItemTypes } from "./itemTypes";
 
-const MainCanvas = () => {
+const MainCanvas = ({ redact }) => {
   const [pickerActive, setPickerActive] = useState(false);
   const [boxes, setBoxes] = useState({});
 
@@ -93,23 +93,32 @@ const MainCanvas = () => {
 
   return (
     <div className="canvas-container">
-      <button
-        onClick={() => {
-          setPickerActive(!pickerActive);
-        }}
-        className={`canvas-blocks-button ${pickerActive ? " active" : " "}`}
-      >
-        <img
-          className="canvas-blocks-button-img"
-          alt="edit-btn"
-          src={edit}
-        ></img>
-      </button>
-      <Garbage drop={garbageBin}></Garbage>
+      {redact && (
+        <>
+          <button
+            onClick={() => {
+              setPickerActive(!pickerActive);
+            }}
+            className={`canvas-blocks-button ${pickerActive ? " active" : " "}`}
+          >
+            <img
+              className="canvas-blocks-button-img"
+              alt="edit-btn"
+              src={edit}
+            ></img>
+          </button>
+          <Garbage drop={garbageBin}></Garbage>
+        </>
+      )}
 
       <BlockPicker onAdd={addBlock} active={pickerActive} />
 
-      <Canvas isOverDelete={isOver} setBoxes={setBoxes} boxes={boxes}></Canvas>
+      <Canvas
+        redact={redact}
+        isOverDelete={isOver}
+        setBoxes={setBoxes}
+        boxes={boxes}
+      ></Canvas>
     </div>
   );
 };

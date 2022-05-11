@@ -84,3 +84,8 @@
   border-radius: 10px;
   flex: 1;
 }
+
+.profile-notes-block-el-textarea:disabled,
+.profile-notes-block-el-textarea[disabled] {
+  background-color: #fff;
+}

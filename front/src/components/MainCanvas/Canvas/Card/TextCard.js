@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
 import { useDrag } from "react-dnd";
 import { getStyles } from "../../../../common/cardFunctions";
+import CardContainer from "./CardContainer";
 
-const TextCard = ({ id, type, text, left, top }) => {
+const TextCard = ({ redact, id, type, link, text, left, top }) => {
   const [{ isDragging }, dragRef, preview] = useDrag(
     () => ({
       type,
@@ -19,12 +20,14 @@ const TextCard = ({ id, type, text, left, top }) => {
   }, []);
 
   return (
-    <div
-      ref={dragRef}
-      style={getStyles(left, top, isDragging)}
-      role="DraggableBox"
-    >
-      {text}
+    <div ref={redact ? dragRef : null}>
+      <CardContainer
+        href={link}
+        style={getStyles(left, top, isDragging)}
+        role="DraggableBox"
+      >
+        {text}
+      </CardContainer>
     </div>
   );
 };

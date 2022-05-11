@@ -6,7 +6,7 @@ import update from "immutability-helper";
 import { ItemTypes } from "../itemTypes";
 import { postCanvas } from "../../../api/queries";
 
-export const Canvas = ({ isOverDelete, boxes, setBoxes }) => {
+export const Canvas = ({ redact, isOverDelete, boxes, setBoxes }) => {
   const [{ isOver, canDrop }, drop] = useDrop(() => {
     return {
       accept: ItemTypes,
@@ -61,9 +61,20 @@ export const Canvas = ({ isOverDelete, boxes, setBoxes }) => {
   );
 
   return (
-    <div ref={drop} className="canvas" style={{ backgroundColor }}>
+    <div
+      ref={redact ? drop : null}
+      className="canvas"
+      style={{ backgroundColor }}
+    >
       {Object.keys(boxes).map((key) => {
-        return <Card id={key} {...boxes[key]} type={boxes[key].type}></Card>;
+        return (
+          <Card
+            redact={redact}
+            id={key}
+            {...boxes[key]}
+            type={boxes[key].type}
+          ></Card>
+        );
       })}
     </div>
   );

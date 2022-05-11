@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./profile.css";
 import defaultPicture from "../../assets/default-picture.png";
 
-const Profile = ({ profile, changeProfile }) => {
+const Profile = ({ redact, profile, changeProfile }) => {
   const [name, setName] = useState(profile.name);
   const [text1, setText1] = useState(profile.text1);
   const [text2, setText2] = useState(profile.text2);
@@ -49,6 +49,7 @@ const Profile = ({ profile, changeProfile }) => {
           alt="test"
         ></img>
         <input
+          disabled={!redact}
           style={{ overflow: "auto" }}
           onChange={(e) => {
             setName(e.target.value);
@@ -61,6 +62,7 @@ const Profile = ({ profile, changeProfile }) => {
       <div className="profile-notes-block">
         <div className="profile-notes-block-el">
           <textarea
+            disabled={!redact}
             onChange={(e) => {
               adjustTextarea(e);
               setText1(e.target.value);
@@ -71,6 +73,7 @@ const Profile = ({ profile, changeProfile }) => {
         </div>
         <div className="profile-notes-block-el">
           <textarea
+            disabled={!redact}
             onChange={(e) => {
               adjustTextarea(e);
               setText2(e.target.value);
@@ -81,6 +84,7 @@ const Profile = ({ profile, changeProfile }) => {
         </div>
         <div className="profile-notes-block-el">
           <textarea
+            disabled={!redact}
             onChange={(e) => {
               adjustTextarea(e);
               setText3(e.target.value);
