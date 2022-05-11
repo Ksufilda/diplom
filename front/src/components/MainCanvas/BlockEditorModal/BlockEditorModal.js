@@ -10,7 +10,6 @@ export default function BlockEditorModal({
   addBlock,
   chosenBlock,
 }) {
-  console.log(chosenBlock);
   const [text, setText] = useState("");
   const [link, setLink] = useState("");
   const [video, setVideo] = useState("");
@@ -148,7 +147,9 @@ export default function BlockEditorModal({
             </div>
           )}
         </div>
-        <button onClick={onAddBlock}>submit</button>
+        <button className="save-btn" onClick={onAddBlock}>
+          submit
+        </button>
       </button>
     </button>
   );

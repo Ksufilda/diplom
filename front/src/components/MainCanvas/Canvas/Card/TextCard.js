@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import ksuna from "../../../../assets/ksunaImage.png";
 import { useDrag } from "react-dnd";
 import { getStyles } from "../../../../common/cardFunctions";
 

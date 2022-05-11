@@ -1,17 +1,24 @@
 import React, { useEffect, useState } from "react";
 import "./profile.css";
-import ksuna from "../../assets/ksunaImage.png";
+import defaultPicture from "../../assets/default-picture.png";
 
 const Profile = ({ profile, changeProfile }) => {
-  const [name, setName] = useState(profile.name || "");
-  const [text1, setText1] = useState("");
-  const [text2, setText2] = useState("");
-  const [text3, setText3] = useState("");
-  const [profileImg, setProfileImg] = useState("");
+  const [name, setName] = useState(profile.name);
+  const [text1, setText1] = useState(profile.text1);
+  const [text2, setText2] = useState(profile.text2);
+  const [text3, setText3] = useState(profile.text3);
+  const [profileImg, setProfileImg] = useState(profile.profileImg || "");
 
   useEffect(() => {
     onChangeProfile();
   }, [name, text1, text2, text3, profileImg]);
+
+  useEffect(() => {
+    setText1(profile.text1);
+    setText2(profile.text2);
+    setText3(profile.text3);
+    setName(profile.name);
+  }, [profile]);
 
   function onChangeProfile() {
     const data = {
@@ -28,7 +35,6 @@ const Profile = ({ profile, changeProfile }) => {
 
   function adjustTextarea(e) {
     const el = e.target;
-    console.log(el.style.height, el.scrollHeight, el.clientHeight);
     el.style.height = "1px";
 
     el.style.height = el.scrollHeight + "px";
@@ -39,13 +45,15 @@ const Profile = ({ profile, changeProfile }) => {
       <div className="profile-header">
         <img
           className="profile-header-image"
-          src={profileImg || ksuna}
+          src={profileImg || defaultPicture}
           alt="test"
         ></img>
         <input
+          style={{ overflow: "auto" }}
           onChange={(e) => {
             setName(e.target.value);
           }}
+          value={name}
           maxLength={14}
           className="profile-header-nickname"
         ></input>
@@ -57,6 +65,7 @@ const Profile = ({ profile, changeProfile }) => {
               adjustTextarea(e);
               setText1(e.target.value);
             }}
+            value={text1}
             className="profile-notes-block-el-textarea"
           ></textarea>
         </div>
@@ -66,6 +75,7 @@ const Profile = ({ profile, changeProfile }) => {
               adjustTextarea(e);
               setText2(e.target.value);
             }}
+            value={text2}
             className="profile-notes-block-el-textarea"
           ></textarea>
         </div>
@@ -75,6 +85,7 @@ const Profile = ({ profile, changeProfile }) => {
               adjustTextarea(e);
               setText3(e.target.value);
             }}
+            value={text3}
             className="profile-notes-block-el-textarea"
           ></textarea>
         </div>

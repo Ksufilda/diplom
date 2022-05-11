@@ -8,12 +8,12 @@ import MainCanvas from "./components/MainCanvas/MainCanvas";
 import Profile from "./components/profile/Profile";
 
 function App() {
-  const [profile, setProfile] = useState({});
+  const [profile, setProfile] = useState();
 
   useEffect(() => {
     getProfile(1).then((res) => {
-      console.log(res.rows);
-      setProfile(res.rows);
+      console.log(res.rows[0]);
+      if (res.rows) setProfile(res.rows[0]);
     });
   }, []);
 
@@ -22,17 +22,21 @@ function App() {
   }
 
   function saveLocalProfile() {
-    saveProfile.then((res) => {
-      console.log(res.rows);
+    console.log(profile);
+    saveProfile(profile).then((res) => {
+      document.location.reload(true);
+      console.log(res);
     });
   }
 
   return (
     <DndProvider backend={HTML5Backend}>
       <div className="main-container">
-        <Header saveProfile={saveLocalProfile} />
+        <Header profile={profile} saveProfile={saveLocalProfile} />
         <div className="container">
-          <Profile profile={profile} changeProfile={changeProfile}></Profile>
+          {profile && (
+            <Profile profile={profile} changeProfile={changeProfile}></Profile>
+          )}
           <MainCanvas></MainCanvas>
         </div>
       </div>

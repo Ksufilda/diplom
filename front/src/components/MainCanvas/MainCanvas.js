@@ -88,8 +88,6 @@ const MainCanvas = () => {
       link: data.link,
       text: data.text,
       video: "",
-    }).then((res) => {
-      console.log(res);
     });
   }
 
@@ -97,7 +95,6 @@ const MainCanvas = () => {
     <div className="canvas-container">
       <button
         onClick={() => {
-          console.log(pickerActive);
           setPickerActive(!pickerActive);
         }}
         className={`canvas-blocks-button ${pickerActive ? " active" : " "}`}

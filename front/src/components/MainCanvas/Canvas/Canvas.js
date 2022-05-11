@@ -7,10 +7,6 @@ import { ItemTypes } from "../itemTypes";
 import { postCanvas } from "../../../api/queries";
 
 export const Canvas = ({ isOverDelete, boxes, setBoxes }) => {
-  useEffect(() => {
-    console.log(boxes, "updated");
-  }, [boxes]);
-
   const [{ isOver, canDrop }, drop] = useDrop(() => {
     return {
       accept: ItemTypes,
@@ -38,7 +34,6 @@ export const Canvas = ({ isOverDelete, boxes, setBoxes }) => {
     let top = Math.round(item.top + delta.y);
 
     moveBox(item.id, left, top);
-    console.log(item);
     postCanvas({
       id: item.id,
       userId: 1,
@@ -49,14 +44,11 @@ export const Canvas = ({ isOverDelete, boxes, setBoxes }) => {
       link: boxes[item.id].link,
       text: boxes[item.id].text,
       video: "",
-    }).then((res) => {
-      console.log(res);
     });
   }
 
   const moveBox = useCallback(
     (id, left, top) => {
-      console.log(boxes);
       setBoxes(
         update(boxes, {
           [id]: {
