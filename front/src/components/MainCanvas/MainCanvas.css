@@ -33,6 +33,25 @@ button {
   background-color: black;
 }
 
+.canvas-blocks-delete {
+  z-index: 10;
+
+  position: absolute;
+  top: 70px;
+  right: 10px;
+  width: 50px;
+  height: 50px;
+
+  border-radius: 8px;
+
+  cursor: pointer;
+
+  outline: none;
+  border: none;
+
+  transition: 0.5s;
+}
+
 .canvas-blocks-button {
   z-index: 10;
 
@@ -52,7 +71,8 @@ button {
   transition: 0.5s;
 }
 
-.canvas-blocks-button:hover {
+.canvas-blocks-button:hover,
+.canvas-blocks-delete:hover {
   background-color: black;
   transition: 0.5s;
 }

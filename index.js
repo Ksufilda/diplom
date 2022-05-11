@@ -9,7 +9,7 @@ const { setGlobalConn, reciever } = require("./queries/common");
 const path = require("path");
 const { getProfile, getCanvas } = require("./queries/getData");
 
-const { postProfile, postCanvas } = require("./queries/postData");
+const { postProfile, postCanvas, deleteCanvas } = require("./queries/postData");
 const cors = require("cors");
 const { Pool } = require("pg");
 const express = require(`express`);
@@ -34,6 +34,7 @@ app.get(`/canvas/:id`, (req, res) => reciever(req, res, getCanvas));
 
 app.post(`/profile`, (req, res) => reciever(req, res, postProfile));
 app.post(`/canvas`, (req, res) => reciever(req, res, postCanvas));
+app.post(`/canvas/:id`, (req, res) => reciever(req, res, deleteCanvas));
 
 app.listen(port, () => {
   console.log(`Server is running on port `, port);

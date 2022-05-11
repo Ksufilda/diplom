@@ -5,6 +5,11 @@ const {
   callbackQuery,
 } = require("./common");
 
+exports.deleteCanvas = async (sendBack, data) => {
+  const sql = `DELETE FROM canvas WHERE id = ${data}`;
+  simpleQueryWithResult(sql, sendBack);
+};
+
 exports.postCanvas = async (sendBack, data) => {
   console.log(data);
   async function putCanvas(sendBack, data, id) {

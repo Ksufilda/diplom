@@ -4,8 +4,9 @@ import Card from "./Card/Card";
 import "../MainCanvas.css";
 import update from "immutability-helper";
 import { ItemTypes } from "../itemTypes";
+import { postCanvas } from "../../../api/queries";
 
-export const Canvas = ({ boxes, setBoxes }) => {
+export const Canvas = ({ isOverDelete, boxes, setBoxes }) => {
   useEffect(() => {
     console.log(boxes, "updated");
   }, [boxes]);
@@ -23,7 +24,8 @@ export const Canvas = ({ boxes, setBoxes }) => {
 
   const isActive = canDrop && isOver;
   let backgroundColor = "#222";
-  if (isActive) {
+  if (isOverDelete) backgroundColor = "red";
+  else if (isActive) {
     backgroundColor = "darkgreen";
   } else if (canDrop) {
     backgroundColor = "darkkhaki";
@@ -36,6 +38,20 @@ export const Canvas = ({ boxes, setBoxes }) => {
     let top = Math.round(item.top + delta.y);
 
     moveBox(item.id, left, top);
+    console.log(item);
+    postCanvas({
+      id: item.id,
+      userId: 1,
+      y: top,
+      x: left,
+      type: boxes[item.id].type,
+      image: boxes[item.id].image,
+      link: boxes[item.id].link,
+      text: boxes[item.id].text,
+      video: "",
+    }).then((res) => {
+      console.log(res);
+    });
   }
 
   const moveBox = useCallback(
