@@ -34,6 +34,7 @@ const MainCanvas = () => {
     });
 
     postCanvas({
+      id: randomId,
       userId: 1,
       y: 0,
       x: 0,
