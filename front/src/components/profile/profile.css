@@ -23,13 +23,26 @@
 
 .profile-header {
   width: 100%;
-  max-width: 210px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .profile-header-nickname {
   text-align: center;
   color: #685298;
   margin: 0;
+  padding: 0;
+
+  margin-top: 10px;
+
+  border: none;
+  outline: none;
+  resize: none;
+  background-color: transparent;
+
+  font-size: inherit;
 }
 
 .profile-header-image {

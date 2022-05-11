@@ -1,9 +1,17 @@
 import React from "react";
+import "./header.css";
 
-export default function Header() {
+export default function Header({ saveProfile }) {
   return (
     <div>
-      <button>Сохранить страничку</button>
+      <button
+        onClick={() => {
+          saveProfile();
+        }}
+      >
+        Сохранить страничку
+      </button>
+      <button className="round-btn"></button>
     </div>
   );
 }

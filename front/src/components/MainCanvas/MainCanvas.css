@@ -3,18 +3,18 @@ button {
   border: none;
   width: -webkit-fill-available;
   width: stretch;
+
+  cursor: pointer;
 }
 
 .canvas-container {
+  overflow: hidden;
   position: relative;
   margin-left: 16px;
   display: flex;
 
   background-color: wheat;
   border-radius: 10px;
-
-  overflow-x: hidden;
-  overflow-y: scroll;
 
   align-items: center;
 

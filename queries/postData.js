@@ -61,10 +61,10 @@ exports.postProfile = async (sendBack, data) => {
   callbackQuery(sql, function (err, result) {
     if (result?.rows.length > 0) {
       console.log(`put menu`, data.id);
-      putProfile(sendBack, data.menuPositions, data.id);
+      putProfile(sendBack, [Object.values(data)], data.id);
     } else {
       console.log(`insert menu`, data.id);
-      insertProfile(sendBack, data.menuPositions);
+      insertProfile(sendBack, [Object.values(data)]);
     }
   });
 };
