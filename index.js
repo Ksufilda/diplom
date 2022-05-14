@@ -1,6 +1,8 @@
 const {
   createProfile,
   createCanvas,
+  createUser,
+  dropUser,
   dropCanvas,
   dropProfile,
 } = require("./queries/tableQueries");
@@ -9,7 +11,13 @@ const { setGlobalConn, reciever } = require("./queries/common");
 const path = require("path");
 const { getProfile, getCanvas } = require("./queries/getData");
 
-const { postProfile, postCanvas, deleteCanvas } = require("./queries/postData");
+const {
+  postProfile,
+  postCanvas,
+  deleteCanvas,
+  registerUser,
+  loginUser,
+} = require("./queries/postData");
 const cors = require("cors");
 const { Pool } = require("pg");
 const express = require(`express`);
@@ -36,6 +44,9 @@ app.post(`/profile`, (req, res) => reciever(req, res, postProfile));
 app.post(`/canvas`, (req, res) => reciever(req, res, postCanvas));
 app.post(`/canvas/:id`, (req, res) => reciever(req, res, deleteCanvas));
 
+app.post(`/register`, (req, res) => reciever(req, res, registerUser));
+app.post(`/login`, (req, res) => reciever(req, res, loginUser));
+
 app.listen(port, () => {
   console.log(`Server is running on port `, port);
 });
@@ -54,6 +65,9 @@ async function connectToDatabase() {
   console.log("Connected!");
   await dropCanvas();
   await dropProfile();
+  await dropUser();
+
+  await createUser();
   await createProfile();
   await createCanvas();
 }

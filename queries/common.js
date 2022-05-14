@@ -13,8 +13,7 @@ exports.reciever = (req, res, func) => {
     (err, data) => {
       if (err)
         res.status(500).send({
-          message:
-            err.message || `Some error occurred while retrieving customers.`,
+          message: err.message || `Some error occurred.`,
         });
       else res.send(data);
     },

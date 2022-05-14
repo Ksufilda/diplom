@@ -41,6 +41,50 @@ exports.postCanvas = async (sendBack, data) => {
   });
 };
 
+exports.registerUser = async (sendBack, data) => {
+  function insertUser(sendBack, data) {
+    const sql = format(
+      `INSERT INTO user (id, login, password, timeKey) VALUES %L`,
+      data
+    );
+
+    simpleQueryWithResult(sql, sendBack);
+  }
+
+  const sql = `SELECT id from user WHERE login=${data.login}`;
+  callbackQuery(sql, function (err, result) {
+    if (result?.rows.length > 0) {
+      sendBack({ message: "Такой логин уже используется" }, null);
+    } else {
+      console.log(`insert user`, data.id);
+      insertUser(sendBack, [Object.values(data)]);
+    }
+  });
+};
+
+exports.loginUser = async (sendBack, data) => {
+  function sendNewTimekey(id) {
+    const timeKey = Math.random() * Math.floor(Math.random() * Date.now());
+    const sql = format(
+      `UPDATE user SET timeKey = ${timeKey} WHERE id = ${id}`,
+      data
+    );
+
+    simpleQuery(sql);
+    sendBack(null, timeKey);
+  }
+
+  const sql = `SELECT id from profile WHERE login=${data.login} AND password=${data.password}`;
+  callbackQuery(sql, function (err, result) {
+    console.log(result);
+    if (result?.rows.length > 0) {
+      sendNewTimekey(result.body.id);
+    } else {
+      sendBack({ message: "Неверный логин или пароль" }, null);
+    }
+  });
+};
+
 exports.postProfile = async (sendBack, data) => {
   async function putProfile(sendBack, data, id) {
     const sql = `DELETE FROM profile WHERE id = ${id}`;
