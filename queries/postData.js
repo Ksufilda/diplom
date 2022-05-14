@@ -78,7 +78,7 @@ exports.loginUser = async (sendBack, data) => {
   callbackQuery(sql, function (err, result) {
     console.log(result);
     if (result?.rows.length > 0) {
-      sendNewTimekey(result.body.id);
+      sendNewTimekey(result?.rows[0].id);
     } else {
       sendBack({ message: "Неверный логин или пароль" }, null);
     }

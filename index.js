@@ -9,7 +9,12 @@ const {
 
 const { setGlobalConn, reciever } = require("./queries/common");
 const path = require("path");
-const { getProfile, getCanvas } = require("./queries/getData");
+const {
+  getProfile,
+  getCanvas,
+  getMyProfile,
+  getMyUser,
+} = require("./queries/getData");
 
 const {
   postProfile,
@@ -39,6 +44,8 @@ app.get(`/`, (req, res) => {
 
 app.get(`/profile/:id`, (req, res) => reciever(req, res, getProfile));
 app.get(`/canvas/:id`, (req, res) => reciever(req, res, getCanvas));
+app.get(`/myprofile/:key`, (req, res) => reciever(req, res, getMyProfile));
+app.get(`/myuser/:key`, (req, res) => reciever(req, res, getMyUser));
 
 app.post(`/profile`, (req, res) => reciever(req, res, postProfile));
 app.post(`/canvas`, (req, res) => reciever(req, res, postCanvas));

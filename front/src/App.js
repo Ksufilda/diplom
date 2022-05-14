@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
-import { getProfile, saveProfile } from "./api/queries";
+import { getProfile, getMe, getMyProfile, saveProfile } from "./api/queries";
 import "./App.css";
 import Header from "./components/Header/Header";
 import MainCanvas from "./components/MainCanvas/MainCanvas";
@@ -10,10 +10,17 @@ import Profile from "./components/profile/Profile";
 function App() {
   // {id:1, name:'', profileImg:'', text1:'', text2:'', text3:''}
   const [profile, setProfile] = useState();
+  const [loggedIn, setLoggedIn] = useState(false);
   const [redact, setRedact] = useState(true);
 
   useEffect(() => {
-    getProfile(1).then((res) => {
+    getMyProfile(document.cookie).then((res) => {
+      console.log(res);
+    });
+  }, []);
+
+  function getProfile() {
+    getMyProfile().then((res) => {
       console.log(res.rows[0]);
       if (res.rows.length) setProfile(res.rows[0]);
       else
@@ -26,7 +33,7 @@ function App() {
           text3: "",
         });
     });
-  }, []);
+  }
 
   function changeView() {
     setRedact(!redact);

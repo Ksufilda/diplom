@@ -9,6 +9,24 @@ export function getCanvas(id) {
   }).then((data) => data.json());
 }
 
+export function getMe(key) {
+  return fetch(`${SITE}myuser/${key}`, {
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+  }).then((data) => data.json());
+}
+
+export function getMyProfile(key) {
+  return fetch(`${SITE}myprofile/${key}`, {
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+  }).then((data) => data.json());
+}
+
 export function getProfile(id) {
   return fetch(`${SITE}profile/${id}`, {
     headers: {
