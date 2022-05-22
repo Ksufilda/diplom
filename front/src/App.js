@@ -15,14 +15,11 @@ function App() {
   const [loginModalOpened, setLoginModalOpened] = useState(false);
   const [redact, setRedact] = useState(true);
 
-  function finishAuth() {
-    setLoginModalOpened(false);
-  }
-
-  useEffect(() => {
+  function getLoggedInProfile() {
     const randomId = Math.floor(
       Math.random() * Math.floor(Math.random() * Date.now())
     );
+
     getMyProfile(document.cookie)
       .then((res) => {
         console.log("no_profile");
@@ -36,7 +33,6 @@ function App() {
             text3: "",
           });
         } else {
-          console.log(res.rows[0]);
           setProfile(res.rows[0]);
         }
       })
@@ -51,12 +47,23 @@ function App() {
           text3: "",
         });
       });
+  }
+
+  function finishAuth() {
+    setLoginModalOpened(false);
+  }
+
+  useEffect(() => {
+    const location = window.location.pathname.replace("/", "");
+    if (location) {
+      getUserProfile(location);
+    }
   }, []);
 
   function getUserProfile(id) {
     getProfile(id).then((res) => {
-      console.log(res.rows[0]);
       if (res.rows.length) setProfile(res.rows[0]);
+      else getLoggedInProfile();
     });
   }
 
