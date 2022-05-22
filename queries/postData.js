@@ -68,17 +68,20 @@ exports.registerUser = async (sendBack, data) => {
 
 exports.loginUser = async (sendBack, data) => {
   function sendNewTimekey(id) {
-    const timeKey = Math.random() * Math.floor(Math.random() * Date.now());
+    const timeKey = Math.floor(
+      Math.random() * Math.floor(Math.random() * Date.now())
+    );
     const sql = `UPDATE users SET timeKey='${timeKey}' WHERE id=${id}`;
+
+    console.log(sql);
 
     simpleQuery(sql);
     sendBack(null, timeKey);
   }
 
   const sql = `SELECT * from users WHERE login='${data.login}' AND password='${data.password}'`;
-  console.log(sql);
   callbackQuery(sql, function (err, result) {
-    console.log(result, "result");
+    console.log(result?.rows[0], "result");
     if (result?.rows.length > 0) {
       sendNewTimekey(result?.rows[0].id);
     } else {

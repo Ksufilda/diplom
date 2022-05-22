@@ -19,7 +19,9 @@ export default function AuthModal({ finishAuth }) {
       login,
     })
       .then((res) => {
+        document.cookie = "timeKey=" + res;
         finishAuth();
+
         console.log(res);
       })
       .catch((err) => {
