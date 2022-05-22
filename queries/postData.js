@@ -73,8 +73,9 @@ exports.loginUser = async (sendBack, data) => {
     );
     const sql = `UPDATE users SET timekey='${timeKey}' WHERE id=${id}`;
 
-    callbackQuery(sql, () => {
-      sendBack(null, timeKey);
+    callbackQuery(sql, (err, res) => {
+      res.rows[0] = timeKey;
+      sendBack(err, res);
     });
   }
 
