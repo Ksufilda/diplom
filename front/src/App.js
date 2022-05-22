@@ -36,7 +36,8 @@ function App() {
             text3: "",
           });
         } else {
-          console.log(res);
+          console.log(res.rows[0]);
+          setProfile(res.rows[0]);
         }
       })
       .catch((res) => {
