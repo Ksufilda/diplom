@@ -1,7 +1,7 @@
 const { simpleQueryWithResult, callbackQuery } = require("./common");
 
 exports.getMyProfile = (sendBack, data, requestParams) => {
-  const callbackSql = `SELECT profileId from users WHERE timeKey=${requestParams.key}`;
+  const callbackSql = `SELECT profileId from users WHERE timeKey='${requestParams.key}'`;
   callbackQuery(callbackSql, function (err, result) {
     console.log("aaaaaa");
     if (result?.rows.length > 0) {
