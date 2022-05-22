@@ -37,7 +37,7 @@ export function getProfile(id) {
 }
 
 export function saveProfile(data) {
-  const { id, name, profileImg, text1, text2, text3 } = data;
+  const { id, name, profileImg, text1, text2, text3, timeKey } = data;
   return fetch(`${SITE}profile`, {
     method: "POST",
     headers: {
@@ -51,6 +51,7 @@ export function saveProfile(data) {
       text1,
       text2,
       text3,
+      timeKey,
     }),
   }).then((data) => data.json());
 }
