@@ -45,6 +45,7 @@ exports.dropTable = async (sql, errLog, successLog) => {
 
 exports.simpleQuery = (sql) => {
   conn.query(sql, function (err, result) {
+    console.log(result, err, "cringe");
     if (err) {
       console.log(err);
       return;

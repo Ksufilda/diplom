@@ -46,7 +46,6 @@ app.use((err, req, res, next) => {
 });
 
 app.use((req, res, next) => {
-  console.log(res.body, res.params, res.status);
   const err = new Error("Not Found");
   err.status = 404;
   next(err);
