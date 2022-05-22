@@ -35,6 +35,8 @@ function App() {
             text2: "",
             text3: "",
           });
+        } else {
+          getUserProfile(res.rows[0].profileId);
         }
       })
       .catch((res) => {
@@ -50,8 +52,11 @@ function App() {
       });
   }, []);
 
-  function getProfile() {
-    getProfile().then((res) => {});
+  function getUserProfile(id) {
+    getProfile(id).then((res) => {
+      console.log(res.rows[0]);
+      if (res.rows.length) setProfile(res.rows[0]);
+    });
   }
 
   function changeView() {
