@@ -43,6 +43,8 @@ exports.postCanvas = async (sendBack, data) => {
 
 exports.registerUser = async (sendBack, data) => {
   function insertUser(sendBack, data) {
+    console.log(data);
+
     const sql = format(
       `INSERT INTO user (id, login, password, timeKey) VALUES %L`,
       data
