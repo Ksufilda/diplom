@@ -3,6 +3,7 @@ import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { getProfile, getMe, getMyProfile, saveProfile } from "./api/queries";
 import "./App.css";
+import { getCookie } from "./common/getCookie";
 import AuthModal from "./components/AuthModal/AuthModal";
 import Header from "./components/Header/Header";
 import MainCanvas from "./components/MainCanvas/MainCanvas";
@@ -20,7 +21,7 @@ function App() {
       Math.random() * Math.floor(Math.random() * Date.now())
     );
 
-    getMyProfile(document.cookie)
+    getMyProfile(getCookie("timeKey"))
       .then((res) => {
         console.log("no_profile");
         if (res?.message === "no_profile") {
@@ -86,7 +87,7 @@ function App() {
       text1,
       text2,
       text3,
-      timeKey: document.cookie,
+      timeKey: getCookie("timeKey"),
     }).then((res) => {
       document.location.reload(true);
     });

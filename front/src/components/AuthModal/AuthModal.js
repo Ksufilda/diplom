@@ -33,7 +33,7 @@ export default function AuthModal({ finishAuth }) {
     const cookie = Math.floor(
       Math.random() * Math.floor(Math.random() * Date.now())
     );
-    document.cookie = cookie;
+    document.cookie = "timeKey=" + cookie;
     const login = event.target[1].value;
     const password = event.target[2].value;
 

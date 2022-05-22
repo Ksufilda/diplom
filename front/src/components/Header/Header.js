@@ -1,10 +1,11 @@
 import React from "react";
 import "./header.css";
 import defaultPicture from "../../assets/default-picture.png";
+import { getCookie } from "../../common/getCookie";
 
 export default function Header({ redact, profile, saveProfile, changeView }) {
   function deleteAllCookies() {
-    var cookies = document.cookie.split(";");
+    var cookies = getCookie("timeKey").split(";");
     console.log(cookies);
 
     for (var i = 0; i < cookies.length; i++) {
