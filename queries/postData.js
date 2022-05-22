@@ -78,9 +78,10 @@ exports.loginUser = async (sendBack, data) => {
     sendBack(null, timeKey);
   }
 
-  const sql = `SELECT * from users WHERE login=${data.login} AND password=${data.password}`;
+  const sql = `SELECT * from users WHERE login='${data.login}' AND password='${data.password}'`;
+  console.log(sql);
   callbackQuery(sql, function (err, result) {
-    console.log(result);
+    console.log(result, "result");
     if (result?.rows.length > 0) {
       sendNewTimekey(result?.rows[0].id);
     } else {
