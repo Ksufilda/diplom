@@ -3,7 +3,7 @@ const { simpleQueryWithResult, callbackQuery } = require("./common");
 exports.getMyProfile = (sendBack, data, requestParams) => {
   const callbackSql = `SELECT profileId from users WHERE timeKey='${requestParams.key}'`;
   callbackQuery(callbackSql, function (err, result) {
-    console.log("aaaaaa");
+    console.log("aaaaaa", result);
     if (result?.rows.length > 0) {
       console.log(result);
       const id = result?.rows[0].id;
