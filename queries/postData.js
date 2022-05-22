@@ -71,12 +71,12 @@ exports.loginUser = async (sendBack, data) => {
     const timeKey = Math.floor(
       Math.random() * Math.floor(Math.random() * Date.now())
     );
-    const sql = `UPDATE users SET timeKey='${timeKey}' WHERE id=${id}`;
+    const sql = `UPDATE users SET timekey='${timeKey}' WHERE id=${id}`;
 
     console.log(sql);
 
     simpleQuery(sql);
-    sendBack(null, timeKey);
+    // sendBack(null, timeKey);
   }
 
   const sql = `SELECT * from users WHERE login='${data.login}' AND password='${data.password}'`;
