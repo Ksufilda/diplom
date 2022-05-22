@@ -57,7 +57,7 @@ function App() {
     const location = window.location.pathname.replace("/", "");
     if (location) {
       getUserProfile(location);
-    }
+    } else getLoggedInProfile();
   }, []);
 
   function getUserProfile(id) {
