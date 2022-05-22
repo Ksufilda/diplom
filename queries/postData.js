@@ -57,7 +57,7 @@ exports.registerUser = async (sendBack, data) => {
 
   const sql = `SELECT id from users WHERE login=${data.login}`;
   callbackQuery(sql, function (err, result) {
-    if (result?.rows.length > 0) {
+    if (result?.rows.length) {
       sendBack({ message: "Такой логин уже используется" }, null);
     } else {
       console.log(`insert users`, data.id, data);
@@ -78,7 +78,7 @@ exports.loginUser = async (sendBack, data) => {
     sendBack(null, timeKey);
   }
 
-  const sql = `SELECT id from users WHERE login=${data.login} AND password=${data.password}`;
+  const sql = `SELECT * from users WHERE login=${data.login} AND password=${data.password}`;
   callbackQuery(sql, function (err, result) {
     console.log(result);
     if (result?.rows.length > 0) {
