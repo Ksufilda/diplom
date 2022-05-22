@@ -91,8 +91,8 @@ exports.loginUser = async (sendBack, data) => {
 
 exports.postProfile = async (sendBack, data) => {
   async function putUsersProfileId() {
-    const sql = `UPDATE users SET profileId = ${data.id} WHERE timeKey = ${data.timeKey}`;
-    console.log("putUsersProfileId");
+    const sql = `UPDATE users SET profileId=${data.id} WHERE timeKey=${data.timeKey}`;
+    console.log("putUsersProfileId", data);
     simpleQueryWithResult(sql, sendBack);
   }
 
