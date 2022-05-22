@@ -73,8 +73,6 @@ exports.loginUser = async (sendBack, data) => {
     );
     const sql = `UPDATE users SET timekey='${timeKey}' WHERE id=${id}`;
 
-    console.log(sql, err);
-
     simpleQuery(sql);
     // sendBack(null, timeKey);
   }
