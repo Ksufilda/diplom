@@ -54,6 +54,7 @@ function App() {
 
   function finishAuth() {
     setLoginModalOpened(false);
+    document.location.reload(true);
   }
 
   useEffect(() => {

@@ -5,7 +5,7 @@ import { getCookie } from "../../common/getCookie";
 
 export default function Header({ redact, profile, saveProfile, changeView }) {
   function deleteAllCookies() {
-    var cookies = getCookie("timeKey").split(";");
+    var cookies = document.cookie.split(";");
     console.log(cookies);
 
     for (var i = 0; i < cookies.length; i++) {
