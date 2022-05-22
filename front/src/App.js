@@ -25,7 +25,7 @@ function App() {
     );
     getMyProfile(document.cookie)
       .then((res) => {
-        console.log("a");
+        console.log("no_profile");
         if (res?.message === "no_profile") {
           setProfile({
             id: randomId,

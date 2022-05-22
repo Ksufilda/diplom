@@ -92,6 +92,7 @@ exports.loginUser = async (sendBack, data) => {
 exports.postProfile = async (sendBack, data) => {
   async function putUsersProfileId() {
     const sql = `UPDATE users SET profileId = ${data.id} WHERE timeKey = ${data.timeKey}`;
+    console.log("putUsersProfileId");
     simpleQueryWithResult(sql, sendBack);
   }
 
@@ -99,7 +100,6 @@ exports.postProfile = async (sendBack, data) => {
     const sql = `DELETE FROM profile WHERE id = ${id}`;
     simpleQuery(sql);
     insertProfile(data);
-    putUsersProfileId();
   }
 
   function insertProfile(data) {
@@ -108,12 +108,14 @@ exports.postProfile = async (sendBack, data) => {
       data
     );
     simpleQuery(sql);
+    putUsersProfileId();
   }
 
   const sql = `SELECT id from profile WHERE id=${data.id}`;
   callbackQuery(sql, function (err, result) {
-    const profileData = data;
+    const profileData = JSON.parse(JSON.stringify(data));
     delete profileData.timeKey;
+
     if (result?.rows.length > 0) {
       console.log(`put menu`, data.id);
       putProfile([Object.values(profileData)], data.id);
