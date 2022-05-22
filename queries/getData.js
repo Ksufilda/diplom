@@ -3,9 +3,12 @@ const { simpleQueryWithResult, callbackQuery } = require("./common");
 exports.getMyProfile = (sendBack, data, requestParams) => {
   const callbackSql = `SELECT profileId from users WHERE timeKey=${requestParams.key}`;
   callbackQuery(callbackSql, function (err, result) {
+    console.log("aaaaaa");
     if (result?.rows.length > 0) {
       const id = result?.rows[0].id;
       const sql = `SELECT name, profileImg, text1, text2, text3 from profile WHERE id=${id}`;
+      console.log("aaaasdfsfsdfsdfdsaa");
+
       simpleQueryWithResult(sql, sendBack);
     } else sendBack({ message: "no_profile" }, null);
   });
