@@ -64,7 +64,17 @@ function App() {
 
   function saveLocalProfile() {
     console.log(profile);
-    saveProfile(profile).then((res) => {
+    const { id, name, profileImg, text1, text2, text3 } = profile;
+
+    saveProfile({
+      id,
+      name,
+      profileImg,
+      text1,
+      text2,
+      text3,
+      timeKey: document.cookie,
+    }).then((res) => {
       document.location.reload(true);
       console.log(res);
     });

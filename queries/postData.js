@@ -91,8 +91,7 @@ exports.loginUser = async (sendBack, data) => {
 
 exports.postProfile = async (sendBack, data) => {
   async function putUsersProfileId() {
-    const cookie = document.cookie;
-    const sql = `UPDATE users SET profileId = ${data.id} WHERE timeKey = ${cookie}`;
+    const sql = `UPDATE users SET profileId = ${data.id} WHERE timeKey = ${data.timeKey}`;
     simpleQueryWithResult(sql, sendBack);
   }
 
@@ -113,12 +112,14 @@ exports.postProfile = async (sendBack, data) => {
 
   const sql = `SELECT id from profile WHERE id=${data.id}`;
   callbackQuery(sql, function (err, result) {
+    const profileData = data;
+    delete profileData.timeKey;
     if (result?.rows.length > 0) {
       console.log(`put menu`, data.id);
-      putProfile([Object.values(data)], data.id);
+      putProfile([Object.values(profileData)], data.id);
     } else {
       console.log(`insert menu`, data.id);
-      insertProfile([Object.values(data)]);
+      insertProfile([Object.values(profileData)]);
     }
   });
 };
