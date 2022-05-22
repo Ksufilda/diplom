@@ -38,6 +38,13 @@ app.use(bodyParser.json({ limit: `50mb` }));
 app.use(bodyParser.urlencoded({ extended: true, limit: `50mb` }));
 app.use(express.static(path.resolve(__dirname, "./front/build")));
 
+app.use((err, req, res, next) => {
+  res.locals.error = err;
+  const status = err.status || 500;
+  res.status(status);
+  res.render("error");
+});
+
 app.get(`/`, (req, res) => {
   res.sendFile(path.resolve(__dirname, "./front/build", "index.html"));
 });

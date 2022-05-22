@@ -45,7 +45,6 @@ export default function AuthModal({ finishAuth }) {
     })
       .then((res) => {
         finishAuth();
-        loginUser(cookie);
       })
       .catch((err) => {
         console.log(err);
