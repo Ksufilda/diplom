@@ -16,6 +16,8 @@ function App() {
   const [loginModalOpened, setLoginModalOpened] = useState(false);
   const [redact, setRedact] = useState(true);
 
+  console.log(getCookie("timeKey"));
+
   function getLoggedInProfile() {
     const randomId = Math.floor(
       Math.random() * Math.floor(Math.random() * Date.now())
