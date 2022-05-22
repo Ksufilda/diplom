@@ -73,8 +73,9 @@ exports.loginUser = async (sendBack, data) => {
     );
     const sql = `UPDATE users SET timekey='${timeKey}' WHERE id=${id}`;
 
-    simpleQuery(sql);
-    // sendBack(null, timeKey);
+    callbackQuery(sql, () => {
+      sendBack(null, timeKey);
+    });
   }
 
   const sql = `SELECT * from users WHERE login='${data.login}' AND password='${data.password}'`;
