@@ -6,8 +6,8 @@ exports.dropProfile = async () => {
 };
 
 exports.dropUser = async () => {
-  const sql = `DROP TABLE user`;
-  dropTable(sql, `Table user not destroyed`, `Table user destroyed`);
+  const sql = `DROP TABLE users`;
+  dropTable(sql, `Table users not destroyed`, `Table users destroyed`);
 };
 
 exports.dropCanvas = async () => {
@@ -22,9 +22,9 @@ exports.createCanvas = async () => {
 };
 
 exports.createUser = async () => {
-  const sqlprofile = `CREATE TABLE user (id BIGINT, profileId BIGINT, login VARCHAR(255), password VARCHAR(255), timeKey VARCHAR(255))`;
+  const sqlprofile = `CREATE TABLE users (id BIGINT, profileId BIGINT, login VARCHAR(255), password VARCHAR(255), timeKey VARCHAR(255))`;
 
-  createTable(sqlprofile, `table user already exist`, `Table user created`);
+  createTable(sqlprofile, `table users already exist`, `Table users created`);
 };
 
 exports.createProfile = async () => {

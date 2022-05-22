@@ -46,7 +46,7 @@ exports.registerUser = async (sendBack, data) => {
     console.log(data);
 
     const sql = format(
-      `INSERT INTO user (id, login, password, timeKey) VALUES %L`,
+      `INSERT INTO users (id, login, password, timeKey) VALUES %L`,
       data
     );
 
@@ -55,12 +55,12 @@ exports.registerUser = async (sendBack, data) => {
     simpleQueryWithResult(sql, sendBack);
   }
 
-  const sql = `SELECT id from user WHERE login=${data.login}`;
+  const sql = `SELECT id from users WHERE login=${data.login}`;
   callbackQuery(sql, function (err, result) {
     if (result?.rows.length > 0) {
       sendBack({ message: "Такой логин уже используется" }, null);
     } else {
-      console.log(`insert user`, data.id, data);
+      console.log(`insert users`, data.id, data);
       insertUser(sendBack, [Object.values(data)]);
     }
   });
@@ -70,7 +70,7 @@ exports.loginUser = async (sendBack, data) => {
   function sendNewTimekey(id) {
     const timeKey = Math.random() * Math.floor(Math.random() * Date.now());
     const sql = format(
-      `UPDATE user SET timeKey = ${timeKey} WHERE id = ${id}`,
+      `UPDATE users SET timeKey = ${timeKey} WHERE id = ${id}`,
       data
     );
 
