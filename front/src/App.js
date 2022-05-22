@@ -21,6 +21,8 @@ function App() {
       Math.random() * Math.floor(Math.random() * Date.now())
     );
 
+    if (!getCookie("timeKey")) return setLoginModalOpened(true);
+
     getMyProfile(getCookie("timeKey"))
       .then((res) => {
         console.log("no_profile");
