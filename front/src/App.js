@@ -20,15 +20,24 @@ function App() {
   }
 
   useEffect(() => {
+    const randomId = Math.floor(
+      Math.random() * Math.floor(Math.random() * Date.now())
+    );
     getMyProfile(document.cookie)
       .then((res) => {
         console.log("a");
-        console.log(res);
+        if (res?.message === "no_profile") {
+          setProfile({
+            id: randomId,
+            name: "Гость №" + randomId,
+            profileImg: "",
+            text1: "",
+            text2: "",
+            text3: "",
+          });
+        }
       })
       .catch((res) => {
-        const randomId = Math.floor(
-          Math.random() * Math.floor(Math.random() * Date.now())
-        );
         setLoginModalOpened(true);
         setProfile({
           id: randomId,

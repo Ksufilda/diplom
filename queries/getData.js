@@ -7,7 +7,7 @@ exports.getMyProfile = (sendBack, data, requestParams) => {
       const id = result?.rows[0].id;
       const sql = `SELECT name, profileImg, text1, text2, text3 from profile WHERE id=${id}`;
       simpleQueryWithResult(sql, sendBack);
-    } else sendBack({ message: "вы не авторизованы" }, null);
+    } else sendBack({ message: "no_profile" }, null);
   });
 };
 
