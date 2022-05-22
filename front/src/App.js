@@ -88,8 +88,7 @@ function App() {
       text3,
       timeKey: document.cookie,
     }).then((res) => {
-      // document.location.reload(true);
-      console.log(res);
+      document.location.reload(true);
     });
   }
 
