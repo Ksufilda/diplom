@@ -69,10 +69,7 @@ exports.registerUser = async (sendBack, data) => {
 exports.loginUser = async (sendBack, data) => {
   function sendNewTimekey(id) {
     const timeKey = Math.random() * Math.floor(Math.random() * Date.now());
-    const sql = format(
-      `UPDATE users SET timeKey = ${timeKey} WHERE id = ${id}`,
-      data
-    );
+    const sql = `UPDATE users SET timeKey='${timeKey}' WHERE id=${id}`;
 
     simpleQuery(sql);
     sendBack(null, timeKey);
