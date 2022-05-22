@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { loginUser, registerUser } from "../../api/queries";
 import "./AuthModal.css";
 
-export default function AuthModal() {
+export default function AuthModal({ finishAuth }) {
   const [authState, setAuthState] = useState("login");
 
   function switchLogin(params) {
@@ -19,6 +19,7 @@ export default function AuthModal() {
       login,
     })
       .then((res) => {
+        finishAuth();
         console.log(res);
       })
       .catch((err) => {
@@ -35,12 +36,7 @@ export default function AuthModal() {
     document.cookie = cookie;
     const login = event.target[1].value;
     const password = event.target[2].value;
-    console.log({
-      id: Math.floor(Math.random() * Math.floor(Math.random() * Date.now())),
-      login: login,
-      password: password,
-      timeKey: cookie,
-    });
+
     registerUser({
       id: Math.floor(Math.random() * Math.floor(Math.random() * Date.now())),
       login: login,
@@ -48,6 +44,7 @@ export default function AuthModal() {
       timeKey: cookie,
     })
       .then((res) => {
+        finishAuth();
         loginUser(cookie);
       })
       .catch((err) => {

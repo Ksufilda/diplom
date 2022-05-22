@@ -12,8 +12,12 @@ function App() {
   // {id:1, name:'', profileImg:'', text1:'', text2:'', text3:''}
   const [profile, setProfile] = useState();
   const [loggedIn, setLoggedIn] = useState(false);
-  const [loginModalOpened, setLoginModalOpened] = useState(true);
+  const [loginModalOpened, setLoginModalOpened] = useState(false);
   const [redact, setRedact] = useState(true);
+
+  function finishAuth() {
+    setLoginModalOpened(false);
+  }
 
   useEffect(() => {
     getMyProfile(document.cookie)
@@ -26,7 +30,6 @@ function App() {
           Math.random() * Math.floor(Math.random() * Date.now())
         );
         setLoginModalOpened(true);
-
         setProfile({
           id: randomId,
           name: "Гость №" + randomId,
@@ -73,7 +76,7 @@ function App() {
   return (
     <DndProvider backend={HTML5Backend}>
       <div className="main-container">
-        {loginModalOpened && <AuthModal />}
+        {loginModalOpened && <AuthModal finishAuth={finishAuth} />}
         <Header
           redact={redact}
           changeView={changeView}
