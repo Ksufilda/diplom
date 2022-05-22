@@ -45,12 +45,6 @@ app.use((err, req, res, next) => {
   res.render("error");
 });
 
-app.use((req, res, next) => {
-  const err = new Error("Not Found");
-  err.status = 404;
-  next(err);
-});
-
 app.get(`/`, (req, res) => {
   res.sendFile(path.resolve(__dirname, "./front/build", "index.html"));
 });
