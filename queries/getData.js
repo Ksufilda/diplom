@@ -7,11 +7,13 @@ exports.getMyProfile = (sendBack, data, requestParams) => {
     if (result?.rows.length > 0) {
       console.log(result?.rows);
       const id = result?.rows[0].profileid;
-      if (!id) return sendBack({ message: "no_profile" }, null);
-      const sql = `SELECT name, profileImg, text1, text2, text3 from profile WHERE id=${id}`;
-      console.log("aaaasdfsfsdfsdfdsaa");
+      if (!id) sendBack({ message: "no_profile" }, null);
+      else {
+        const sql = `SELECT name, profileImg, text1, text2, text3 from profile WHERE id=${id}`;
+        console.log("aaaasdfsfsdfsdfdsaa");
 
-      simpleQueryWithResult(sql, sendBack);
+        simpleQueryWithResult(sql, sendBack);
+      }
     } else sendBack({ message: "no_profile" }, null);
   });
 };
