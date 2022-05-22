@@ -5,8 +5,8 @@ exports.getMyProfile = (sendBack, data, requestParams) => {
   callbackQuery(callbackSql, function (err, result) {
     console.log("aaaaaa", result);
     if (result?.rows.length > 0) {
-      console.log(result?.rows);
-      const id = result?.rows[0].profileid;
+      console.log(result?.rows[0]?.profileid);
+      const id = result?.rows[0]?.profileid;
       if (!id) sendBack({ message: "no_profile" }, null);
       else {
         const sql = `SELECT name, profileImg, text1, text2, text3 from profile WHERE id=${id}`;

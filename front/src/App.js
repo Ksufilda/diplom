@@ -36,7 +36,7 @@ function App() {
             text3: "",
           });
         } else {
-          getUserProfile(res.rows[0].profileId);
+          console.log(res);
         }
       })
       .catch((res) => {
