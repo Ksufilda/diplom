@@ -78,7 +78,7 @@ exports.loginUser = async (sendBack, data) => {
     sendBack(null, timeKey);
   }
 
-  const sql = `SELECT id from profile WHERE login=${data.login} AND password=${data.password}`;
+  const sql = `SELECT id from users WHERE login=${data.login} AND password=${data.password}`;
   callbackQuery(sql, function (err, result) {
     console.log(result);
     if (result?.rows.length > 0) {
