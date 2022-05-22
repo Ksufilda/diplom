@@ -44,7 +44,14 @@ export function saveProfile(data) {
       Accept: "application/json",
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ id, name, profileImg, text1, text2, text3 }),
+    body: JSON.stringify({
+      id,
+      name,
+      profileImg,
+      text1,
+      text2,
+      text3,
+    }),
   }).then((data) => data.json());
 }
 

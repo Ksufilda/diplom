@@ -90,29 +90,35 @@ exports.loginUser = async (sendBack, data) => {
 };
 
 exports.postProfile = async (sendBack, data) => {
-  async function putProfile(sendBack, data, id) {
-    const sql = `DELETE FROM profile WHERE id = ${id}`;
-    simpleQuery(sql);
-    insertProfile(sendBack, data);
+  async function putUsersProfileId() {
+    const cookie = document.cookie;
+    const sql = `UPDATE users SET profileId = ${data.id} WHERE timeKey = ${cookie}`;
+    simpleQueryWithResult(sql, sendBack);
   }
 
-  function insertProfile(sendBack, data) {
+  async function putProfile(data, id) {
+    const sql = `DELETE FROM profile WHERE id = ${id}`;
+    simpleQuery(sql);
+    insertProfile(data);
+    putUsersProfileId();
+  }
+
+  function insertProfile(data) {
     const sql = format(
       `INSERT INTO profile (id, name, profileImg, text1, text2, text3) VALUES %L`,
       data
     );
-
-    simpleQueryWithResult(sql, sendBack);
+    simpleQuery(sql);
   }
 
   const sql = `SELECT id from profile WHERE id=${data.id}`;
   callbackQuery(sql, function (err, result) {
     if (result?.rows.length > 0) {
       console.log(`put menu`, data.id);
-      putProfile(sendBack, [Object.values(data)], data.id);
+      putProfile([Object.values(data)], data.id);
     } else {
       console.log(`insert menu`, data.id);
-      insertProfile(sendBack, [Object.values(data)]);
+      insertProfile([Object.values(data)]);
     }
   });
 };

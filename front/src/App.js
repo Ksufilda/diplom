@@ -51,19 +51,7 @@ function App() {
   }, []);
 
   function getProfile() {
-    getMyProfile().then((res) => {
-      console.log(res.rows[0]);
-      if (res.rows.length) setProfile(res.rows[0]);
-      else
-        setProfile({
-          id: 1,
-          name: "",
-          profileImg: "",
-          text1: "",
-          text2: "",
-          text3: "",
-        });
-    });
+    getProfile().then((res) => {});
   }
 
   function changeView() {
