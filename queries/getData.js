@@ -1,4 +1,4 @@
-const { simpleQueryWithResult } = require("./common");
+const { simpleQueryWithResult, callbackQuery } = require("./common");
 
 exports.getMyProfile = (sendBack, data, requestParams) => {
   const callbackSql = `SELECT profileId from users WHERE timeKey=${requestParams.key}`;
