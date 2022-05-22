@@ -3,6 +3,7 @@ import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { getProfile, getMe, getMyProfile, saveProfile } from "./api/queries";
 import "./App.css";
+import AuthModal from "./components/AuthModal/AuthModal";
 import Header from "./components/Header/Header";
 import MainCanvas from "./components/MainCanvas/MainCanvas";
 import Profile from "./components/profile/Profile";
@@ -11,12 +12,30 @@ function App() {
   // {id:1, name:'', profileImg:'', text1:'', text2:'', text3:''}
   const [profile, setProfile] = useState();
   const [loggedIn, setLoggedIn] = useState(false);
+  const [loginModalOpened, setLoginModalOpened] = useState(true);
   const [redact, setRedact] = useState(true);
 
   useEffect(() => {
-    getMyProfile(document.cookie).then((res) => {
-      console.log(res);
-    });
+    getMyProfile(document.cookie)
+      .then((res) => {
+        console.log("a");
+        console.log(res);
+      })
+      .catch((res) => {
+        const randomId = Math.floor(
+          Math.random() * Math.floor(Math.random() * Date.now())
+        );
+        setLoginModalOpened(true);
+
+        setProfile({
+          id: randomId,
+          name: "Гость №" + randomId,
+          profileImg: "",
+          text1: "",
+          text2: "",
+          text3: "",
+        });
+      });
   }, []);
 
   function getProfile() {
@@ -54,6 +73,7 @@ function App() {
   return (
     <DndProvider backend={HTML5Backend}>
       <div className="main-container">
+        {loginModalOpened && <AuthModal />}
         <Header
           redact={redact}
           changeView={changeView}

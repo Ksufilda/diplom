@@ -56,7 +56,7 @@ exports.registerUser = async (sendBack, data) => {
     if (result?.rows.length > 0) {
       sendBack({ message: "Такой логин уже используется" }, null);
     } else {
-      console.log(`insert user`, data.id);
+      console.log(`insert user`, data.id, data);
       insertUser(sendBack, [Object.values(data)]);
     }
   });

@@ -59,7 +59,6 @@ export function postCanvas(data) {
     body: JSON.stringify({ id, userId, text, image, type, link, video, x, y }),
   }).then((data) => data.json());
 }
-
 export function deleteCanvas(id) {
   return fetch(`${SITE}canvas/${id}`, {
     method: "POST",
@@ -68,5 +67,34 @@ export function deleteCanvas(id) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ id }),
+  }).then((data) => data.json());
+}
+
+export function loginUser(data) {
+  console.log(data);
+  return fetch(`${SITE}login`, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  })
+    .then((data) => data.json())
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((err) => console.log(err));
+}
+
+export function registerUser(data) {
+  const { id, login, password, timeKey } = data;
+  return fetch(`${SITE}register`, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
   }).then((data) => data.json());
 }

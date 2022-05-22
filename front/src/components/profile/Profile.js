@@ -50,12 +50,12 @@ const Profile = ({ redact, profile, changeProfile }) => {
         ></img>
         <input
           disabled={!redact}
-          style={{ overflow: "auto" }}
+          style={{ overflow: "auto", width: "100%" }}
           onChange={(e) => {
             setName(e.target.value);
           }}
           value={name}
-          maxLength={14}
+          maxLength={20}
           className="profile-header-nickname"
         ></input>
       </div>
