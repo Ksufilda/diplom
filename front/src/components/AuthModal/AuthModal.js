@@ -21,8 +21,6 @@ export default function AuthModal({ finishAuth }) {
       .then((res) => {
         document.cookie = "timeKey=" + res.rows[0];
         finishAuth();
-
-        console.log(res);
       })
       .catch((err) => {
         console.log(err);
@@ -38,9 +36,11 @@ export default function AuthModal({ finishAuth }) {
     document.cookie = "timeKey=" + cookie;
     const login = event.target[1].value;
     const password = event.target[2].value;
+    const name = event.target[0].value;
 
     registerUser({
       id: Math.floor(Math.random() * Math.floor(Math.random() * Date.now())),
+      name,
       login: login,
       password: password,
       timeKey: cookie,

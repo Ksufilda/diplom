@@ -28,8 +28,10 @@ const SquareCard = ({ redact, id, type, text, link, left, top, image }) => {
         role="DraggableBox"
       >
         <div className="mask square-mask">
+          <div className="mask-text">
+            <p>{text}</p>
+          </div>
           <img src={image || ksuna} alt="test"></img>
-          {text}
         </div>
       </CardContainer>
     </div>

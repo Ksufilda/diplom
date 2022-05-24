@@ -28,8 +28,10 @@ const TriangleCard = ({ redact, id, type, text, left, top, image, link }) => {
         role="DraggableBox"
       >
         <div className="mask triangle-mask">
+          <div className="mask-text">
+            <p>{text}</p>
+          </div>
           <img className="card-image" src={image || ksuna} alt="test"></img>
-          {text}
         </div>
       </CardContainer>
     </div>

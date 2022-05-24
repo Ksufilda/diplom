@@ -1,13 +1,30 @@
 import React, { useEffect, useState } from "react";
 import "./profile.css";
 import defaultPicture from "../../assets/default-picture.png";
+import storage from "../../common/firebase";
 
 const Profile = ({ redact, profile, changeProfile }) => {
+  console.log(profile);
   const [name, setName] = useState(profile.name);
   const [text1, setText1] = useState(profile.text1);
   const [text2, setText2] = useState(profile.text2);
   const [text3, setText3] = useState(profile.text3);
   const [profileImg, setProfileImg] = useState(profile.profileImg || "");
+  const [imageLoading, setImageLoading] = useState(false);
+
+  async function loadImage(image) {
+    setImageLoading(true);
+    const itemImage = Math.random() * Math.floor(Math.random() * Date.now());
+    if (image == null) return;
+    await storage.ref(`/${itemImage}`).put(image);
+    await storage
+      .ref(`/${itemImage}`)
+      .getDownloadURL()
+      .then((url) => {
+        setProfileImg(url);
+        setImageLoading(false);
+      });
+  }
 
   useEffect(() => {
     onChangeProfile();
@@ -43,11 +60,37 @@ const Profile = ({ redact, profile, changeProfile }) => {
   return (
     <div className="profile-container">
       <div className="profile-header">
-        <img
-          className="profile-header-image"
-          src={profileImg || defaultPicture}
-          alt="test"
-        ></img>
+        <div>
+          <input
+            type="file"
+            name="file"
+            id="file"
+            className="file-input-hidden"
+            onChange={(e) => {
+              loadImage(e.target.files[0]);
+            }}
+          />
+          <label htmlFor="file">
+            <div className="opacity-hover-btn">
+              <img
+                className="profile-header-image"
+                src={profileImg || defaultPicture}
+                alt="test"
+              ></img>
+
+              {imageLoading && (
+                <div className="cross">
+                  <div class="lds-ring">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                  </div>
+                </div>
+              )}
+            </div>
+          </label>
+        </div>
         <input
           disabled={!redact}
           style={{ overflow: "auto", width: "100%" }}

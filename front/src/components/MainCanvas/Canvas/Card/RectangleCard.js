@@ -29,8 +29,10 @@ const RectangleCard = ({ redact, id, type, link, text, left, top, image }) => {
         role="DraggableBox"
       >
         <div className="mask rectangle-mask">
+          <div className="mask-text">
+            <p>{text}</p>
+          </div>
           <img src={image || ksuna} alt="test"></img>
-          {text}
         </div>
       </CardContainer>
     </div>

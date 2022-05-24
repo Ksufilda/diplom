@@ -82,9 +82,8 @@ function App() {
   }
 
   function saveLocalProfile() {
-    console.log(profile);
     const { id, name, profileImg, text1, text2, text3 } = profile;
-
+    console.log(profile);
     saveProfile({
       id,
       name,
@@ -94,7 +93,8 @@ function App() {
       text3,
       timeKey: getCookie("timeKey"),
     }).then((res) => {
-      document.location.reload(true);
+      console.log("asdasd");
+      // document.location.reload(true);
     });
   }
 

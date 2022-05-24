@@ -48,9 +48,11 @@
 .profile-header-image {
   width: 100%;
 
-  max-width: 210px;
-  max-height: 210px;
+  width: 210px;
+  height: 210px;
   border-radius: 10px;
+
+  object-fit: cover;
 }
 
 .profile-notes-block {

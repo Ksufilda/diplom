@@ -91,7 +91,7 @@ export function loginUser(data) {
 }
 
 export function registerUser(data) {
-  const { id, login, password, timeKey } = data;
+  const { id, login, password, timeKey, name } = data;
   return fetch(`${SITE}register`, {
     method: "POST",
     headers: {

@@ -116,7 +116,7 @@ exports.postProfile = async (sendBack, data) => {
   callbackQuery(sql, function (err, result) {
     const profileData = JSON.parse(JSON.stringify(data));
     delete profileData.timeKey;
-
+    console.log([Object.values(profileData)]);
     if (result?.rows.length > 0) {
       console.log(`put menu`, data.id);
       putProfile([Object.values(profileData)], data.id);

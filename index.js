@@ -77,6 +77,9 @@ async function connectToDatabase() {
   console.log("Connecting...");
   setGlobalConn(await pool.connect());
   console.log("Connected!");
+  await dropUser();
+  await dropProfile();
+  await dropCanvas();
 
   await createUser();
   await createProfile();
