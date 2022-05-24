@@ -9,7 +9,7 @@ const Profile = ({ redact, profile, changeProfile }) => {
   const [text1, setText1] = useState(profile.text1);
   const [text2, setText2] = useState(profile.text2);
   const [text3, setText3] = useState(profile.text3);
-  const [profileImg, setProfileImg] = useState(profile.profileImg || "");
+  const [profileImg, setProfileImg] = useState(profile.profileimg || "");
   const [imageLoading, setImageLoading] = useState(false);
 
   async function loadImage(image) {

@@ -6,7 +6,7 @@ import update from "immutability-helper";
 import { ItemTypes } from "../itemTypes";
 import { postCanvas } from "../../../api/queries";
 
-export const Canvas = ({ redact, isOverDelete, boxes, setBoxes }) => {
+export const Canvas = ({ redact, isOverDelete, boxes, setBoxes, userId }) => {
   const [{ isOver, canDrop }, drop] = useDrop(() => {
     return {
       accept: ItemTypes,
@@ -36,7 +36,7 @@ export const Canvas = ({ redact, isOverDelete, boxes, setBoxes }) => {
     moveBox(item.id, left, top);
     postCanvas({
       id: item.id,
-      userId: 1,
+      userId,
       y: top,
       x: left,
       type: boxes[item.id].type,

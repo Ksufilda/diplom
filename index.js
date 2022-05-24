@@ -14,6 +14,7 @@ const {
   getCanvas,
   getMyProfile,
   getMyUser,
+  getMyCanvas,
 } = require("./queries/getData");
 
 const {
@@ -53,6 +54,7 @@ app.get(`/profile/:id`, (req, res) => reciever(req, res, getProfile));
 app.get(`/canvas/:id`, (req, res) => reciever(req, res, getCanvas));
 app.get(`/myprofile/:key`, (req, res) => reciever(req, res, getMyProfile));
 app.get(`/myuser/:key`, (req, res) => reciever(req, res, getMyUser));
+app.get(`/mycanvas/:key`, (req, res) => reciever(req, res, getMyCanvas));
 
 app.post(`/profile`, (req, res) => reciever(req, res, postProfile));
 app.post(`/canvas`, (req, res) => reciever(req, res, postCanvas));

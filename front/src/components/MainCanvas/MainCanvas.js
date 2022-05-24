@@ -6,13 +6,15 @@ import BlockPicker from "./BlockPicker";
 import { DndProvider, useDrop } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { Canvas } from "./Canvas/Canvas";
-import { deleteCanvas, getCanvas, postCanvas } from "../../api/queries";
+import { deleteCanvas, getMyCanvas, postCanvas } from "../../api/queries";
 import Garbage from "./Garbage";
 import { ItemTypes } from "./itemTypes";
+import { getCookie } from "../../common/getCookie";
 
 const MainCanvas = ({ redact }) => {
   const [pickerActive, setPickerActive] = useState(false);
   const [boxes, setBoxes] = useState({});
+  const [userId, setUserId] = useState();
 
   const [{ isOver }, garbageBin] = useDrop(() => {
     return {
@@ -35,7 +37,8 @@ const MainCanvas = ({ redact }) => {
   }
 
   useEffect(() => {
-    getCanvas(1).then((res) => {
+    getMyCanvas(getCookie("timeKey")).then((res) => {
+      setUserId(res.rows[0].userid);
       setBoxes(
         res.rows.reduce(function (results, row) {
           results[row.id] = {
@@ -50,12 +53,6 @@ const MainCanvas = ({ redact }) => {
           return results;
         }, {})
       );
-      // setBoxes(
-      //   res.rows.reduce(function (results, row) {
-      //     (results[row.id] = results[row.id] || []).push(row);
-      //     return results;
-      //   }, {})
-      // );
     });
   }, []);
 
@@ -79,7 +76,7 @@ const MainCanvas = ({ redact }) => {
 
     postCanvas({
       id: randomId,
-      userId: 1,
+      userId: userId,
       y: 0,
       x: 0,
       title: "Drag me around",
@@ -114,6 +111,7 @@ const MainCanvas = ({ redact }) => {
       <BlockPicker onAdd={addBlock} active={pickerActive} />
 
       <Canvas
+        userId={userId}
         redact={redact}
         isOverDelete={isOver}
         setBoxes={setBoxes}

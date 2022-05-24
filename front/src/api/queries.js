@@ -18,6 +18,15 @@ export function getMe(key) {
   }).then((data) => data.json());
 }
 
+export function getMyCanvas(key) {
+  return fetch(`${SITE}mycanvas/${key}`, {
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+  }).then((data) => data.json());
+}
+
 export function getMyProfile(key) {
   return fetch(`${SITE}myprofile/${key}`, {
     headers: {

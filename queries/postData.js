@@ -11,21 +11,17 @@ exports.deleteCanvas = async (sendBack, data) => {
 };
 
 exports.postCanvas = async (sendBack, data) => {
-  console.log(data);
-  async function putCanvas(sendBack, data, id) {
+  async function putCanvas(data, id) {
     const sql = `DELETE FROM canvas WHERE id = ${id}`;
     simpleQuery(sql);
-    insertCanvas(sendBack, data);
+    insertCanvas(data);
   }
 
-  function insertCanvas(sendBack, data) {
+  function insertCanvas(data) {
     const sql = format(
       `INSERT INTO canvas (id, userId, text, image, type, link, video, x, y) VALUES %L`,
       data
     );
-
-    console.log(sql);
-
     simpleQueryWithResult(sql, sendBack);
   }
 
@@ -33,10 +29,10 @@ exports.postCanvas = async (sendBack, data) => {
   callbackQuery(sql, function (err, result) {
     if (result?.rows.length > 0) {
       console.log(`put canvas`, data.id);
-      putCanvas(sendBack, [Object.values(data)], data.id);
+      putCanvas([Object.values(data)], data.id);
     } else {
       console.log(`insert canvas`, data.id);
-      insertCanvas(sendBack, [Object.values(data)]);
+      insertCanvas([Object.values(data)]);
     }
   });
 };
