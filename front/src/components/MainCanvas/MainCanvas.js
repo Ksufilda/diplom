@@ -40,6 +40,7 @@ const MainCanvas = ({ redact }) => {
     getMyCanvas(getCookie("timeKey")).then((res) => {
       console.log(res, "crininrgniri");
       setUserId(res.rows[0].userid);
+      if (!res.rows[0].id) return;
       setBoxes(
         res.rows.reduce(function (results, row) {
           results[row.id] = {
