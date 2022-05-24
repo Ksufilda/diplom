@@ -26,7 +26,13 @@ exports.getMyCanvas = (sendBack, data, requestParams) => {
       else {
         const sql = `SELECT id, userId, text, image, type, link, video, x, y from canvas WHERE userId=${id}`;
 
-        simpleQueryWithResult(sql, sendBack);
+        callbackQuery(sql, function (err, result) {
+          if (result?.rows?.length) sendBack(err, result);
+          else {
+            result.rows[0] = { userId: id };
+            sendBack(err, result);
+          }
+        });
       }
     } else sendBack({ message: "no_profile" }, null);
   });
