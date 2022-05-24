@@ -46,7 +46,7 @@ exports.registerUser = async (sendBack, data) => {
     console.log(data);
 
     const sql = format(
-      `INSERT INTO users (id, login, password, timeKey) VALUES %L`,
+      `INSERT INTO users (id, name, login, password, timeKey) VALUES %L`,
       data
     );
 

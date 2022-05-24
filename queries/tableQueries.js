@@ -22,7 +22,7 @@ exports.createCanvas = async () => {
 };
 
 exports.createUser = async () => {
-  const sqlprofile = `CREATE TABLE users (id BIGINT, profileId BIGINT, login VARCHAR(255), password VARCHAR(255), timeKey VARCHAR(255))`;
+  const sqlprofile = `CREATE TABLE users (id BIGINT, name VARCHAR(255),  profileId BIGINT, login VARCHAR(255), password VARCHAR(255), timeKey VARCHAR(255))`;
 
   createTable(sqlprofile, `table users already exist`, `Table users created`);
 };
