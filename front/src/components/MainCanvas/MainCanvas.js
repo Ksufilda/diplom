@@ -38,6 +38,7 @@ const MainCanvas = ({ redact }) => {
 
   useEffect(() => {
     getMyCanvas(getCookie("timeKey")).then((res) => {
+      console.log(res, "crininrgniri");
       setUserId(res.rows[0].userid);
       setBoxes(
         res.rows.reduce(function (results, row) {
@@ -57,6 +58,7 @@ const MainCanvas = ({ redact }) => {
   }, []);
 
   function addBlock(data) {
+    console.log(userId);
     const randomId = Math.floor(
       Math.random() * Math.floor(Math.random() * Date.now())
     );
@@ -80,7 +82,7 @@ const MainCanvas = ({ redact }) => {
       x: 0,
       title: "Drag me around",
       type: data.type,
-      image: data.image,
+      image: data.image || "",
       link: data.link,
       text: data.text,
       video: "none",
