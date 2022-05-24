@@ -40,7 +40,7 @@ export const Canvas = ({ redact, isOverDelete, boxes, setBoxes, userId }) => {
       y: top,
       x: left,
       type: boxes[item.id].type,
-      image: boxes[item.id].image,
+      image: boxes[item.id].image || "",
       link: boxes[item.id].link,
       text: boxes[item.id].text,
       video: "",

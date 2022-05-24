@@ -29,7 +29,7 @@ exports.getMyCanvas = (sendBack, data, requestParams) => {
         callbackQuery(sql, function (err, result) {
           if (result?.rows?.length) sendBack(err, result);
           else {
-            result.rows[0] = { userId: id };
+            result.rows[0] = { userid: id };
             sendBack(err, result);
           }
         });
