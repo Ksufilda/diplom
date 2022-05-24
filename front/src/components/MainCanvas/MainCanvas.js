@@ -39,7 +39,7 @@ const MainCanvas = ({ redact }) => {
   useEffect(() => {
     getMyCanvas(getCookie("timeKey")).then((res) => {
       console.log(res, "crininrgniri");
-      setUserId(res.rows[0].userid);
+      setUserId(res.rows[0].userId);
       if (!res.rows[0].id) return;
       setBoxes(
         res.rows.reduce(function (results, row) {
