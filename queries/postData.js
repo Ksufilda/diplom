@@ -27,6 +27,7 @@ exports.postCanvas = async (sendBack, data) => {
 
   const sql = `SELECT id from canvas WHERE id=${data.id}`;
   callbackQuery(sql, function (err, result) {
+    console.log(data);
     if (result?.rows.length > 0) {
       console.log(`put canvas`, data.id);
       putCanvas([Object.values(data)], data.id);

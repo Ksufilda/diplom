@@ -73,7 +73,6 @@ const MainCanvas = ({ redact }) => {
         text: data.text,
       },
     });
-
     postCanvas({
       id: randomId,
       userId: userId,
@@ -84,7 +83,7 @@ const MainCanvas = ({ redact }) => {
       image: data.image,
       link: data.link,
       text: data.text,
-      video: "",
+      video: "none",
     });
   }
 
