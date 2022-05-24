@@ -16,7 +16,7 @@ exports.dropCanvas = async () => {
 };
 
 exports.createCanvas = async () => {
-  const sqlcanvas = `CREATE TABLE canvas (id BIGINT, text VARCHAR(255), image VARCHAR(255), type VARCHAR(255), link VARCHAR(255), video VARCHAR(255), x BIGINT, y BIGINT)`;
+  const sqlcanvas = `CREATE TABLE canvas (id BIGINT, userId BIGINT, text VARCHAR(255), image VARCHAR(255), type VARCHAR(255), link VARCHAR(255), video VARCHAR(255), x BIGINT, y BIGINT)`;
 
   createTable(sqlcanvas, `table canvas already exist`, `Table canvas created`);
 };
