@@ -56,8 +56,6 @@ exports.getProfile = (sendBack, data, requestParams) => {
       }
     } else sendBack({ message: "no_profile" }, null);
   });
-
-  simpleQueryWithResult(sql, sendBack);
 };
 
 exports.getCanvas = (sendBack, data, requestParams) => {
