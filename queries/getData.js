@@ -8,7 +8,7 @@ exports.getMyProfile = (sendBack, data, requestParams) => {
       const id = result?.rows[0]?.profileid;
       if (!id) sendBack({ message: "no_profile" }, null);
       else {
-        const sql = `SELECT name, profileImg, text1, text2, text3 from profile WHERE id=${id}`;
+        const sql = `SELECT id, name, profileImg, text1, text2, text3 from profile WHERE id=${id}`;
 
         simpleQueryWithResult(sql, sendBack);
       }

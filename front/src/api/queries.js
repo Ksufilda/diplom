@@ -47,6 +47,7 @@ export function getProfile(id) {
 
 export function saveProfile(data) {
   const { id, name, profileImg, text1, text2, text3, timeKey } = data;
+  console.log(data);
   return fetch(`${SITE}profile`, {
     method: "POST",
     headers: {

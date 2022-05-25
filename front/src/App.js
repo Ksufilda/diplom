@@ -47,7 +47,9 @@ function App() {
 
     getMyProfile(getCookie("timeKey"))
       .then((res) => {
-        console.log("no_profile");
+        console.log(res);
+
+        console.log(res?.message);
         if (res?.message === "no_profile") {
           setProfile({
             id: randomId,
@@ -153,6 +155,7 @@ function App() {
 
   function saveLocalProfile() {
     const { id, name, profileImg, text1, text2, text3 } = profile;
+    console.log(profile);
     saveProfile({
       id,
       name,
@@ -162,7 +165,7 @@ function App() {
       text3,
       timeKey: getCookie("timeKey"),
     }).then((res) => {
-      document.location.reload(true);
+      // document.location.reload(true);
     });
   }
 

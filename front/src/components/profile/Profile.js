@@ -39,7 +39,7 @@ const Profile = ({ redact, profile, changeProfile }) => {
 
   function onChangeProfile() {
     const data = {
-      id: 1,
+      id: profile.id,
       name,
       profileImg,
       text1,
