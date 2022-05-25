@@ -50,8 +50,22 @@ export default function Header({
             {redact ? "Редактирование" : "Просмотр"}
           </p>
 
-          <button onClick={changeView} className="round-btn">
+          <button
+            style={{
+              justifyContent: "center",
+              alignItems: "center",
+              display: "flex",
+            }}
+            onClick={changeView}
+            className="round-btn"
+          >
             <img
+              style={{
+                borderRadius: "50%",
+                overflow: "hidden",
+                width: "100%",
+                objectFit: "cover",
+              }}
               src={profile.profileImg ? profile.profileImg : defaultPicture}
             ></img>
           </button>
