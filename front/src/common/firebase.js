@@ -3,19 +3,31 @@ import "firebase/compat/storage";
 
 const firebaseConfig = {
   type: "service_account",
-  project_id: "diploma-dab94",
-  private_key_id: "d2c3f860371b0b8d68bfdce81e1be72f8c2fd5b9",
+  project_id: "diploma-186e3",
+  private_key_id: "c6dc725bb3bffe4c8be85601e149c929e86f4179",
   private_key:
-    "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDXJJlv8vGmgeH3\nfEVB9Hxb/XUV3Brb7xTUwajBpaEqQV3QzRHlNiJX1/b5MCeQNf55Bf3Ai0njI09h\n5t9Y7AU0RMtsrbYUNPPDKwgOpocxdhw+CSfd+6FSAQaKZwgAiMpZ12VShArNn5SM\nT+TFiE1aUb9IVYNbk5g7Zq4u5pr2sD+1o6/LWFXlGGnWS+XQWW2S4w7/XxhuAPDj\ncKlXcxdg90XIAr0rF+zLXWJ+RQWPjSTer2rrSclFF2HJEv+scWxzXOYhSShJZi+9\nYIfWAk6kjYXszAZaFaCnO+fzxO4UubFUYIKXxDrWdE93FS/pUVV2DJpvYDaSvvAr\nFejULYGjAgMBAAECggEAGPrxa+u3/j7fd2Zw/jb+h4nW4fpkDfxlHUz9JLrwCyF6\n3Kcq+EPAWhXD4ewi894pFXFKJOSnaB2t9m6hqUgCVK7WNeC3nwIE+bjR3y2bzfTq\nU5Opkt9IPGbNFR3gcntvj13wsFOPk49/ZolSRVNNs/qA7MutDGGHUAJcoCp7fMAE\njxSj3YAgEwl4sJMDT/NE/gF1j7yX9EgtqL7T3FSvxcmndFCOVTos1mVcaqC8ih8B\nypzUagyCMLz6fzdHij5sHjeWGcKT/fWWyFW4bPoplC7DU3YSFTPE3X0OCBD8HroV\nUDfFBiE+cA3cI5zodejVncQQA/5KNQzDESwh0azMbQKBgQD60iSg8kBRUYSXh9hN\nRl3D4ScOp8wvX0LAhzliToVxX0DgpamgZeYtDkJp5ad94yriQz396Em/n6YbxgT6\n1L4Lwvqy3nsjm1Pqy2PTDTQ7RUj5N1nQQNDNbB1Gsqu6l51hJa25VBv7O09SVu9i\nWz8R5p7jBWLL74KdRqtbFEthPwKBgQDbldw/pCiAAQwm4ZzCxyiYCioX0VYhIF3w\n0BAqNwzUzcV+A3snPYPmpLmVVdjraQwn8ReId8ICo/CRR5uxupWtItga9ayRym3R\nfOmOFtoRNRpHKbM5KvPp2Lxglwlqq+q03P7gadlQMssXJhEthn3vTNPyDOiaJVBn\ne8P93leinQKBgBXlLE9kdlri69kygZ5VSzAjQn6UBU4JWdFmvIqpYhrAfvBdZc5b\nttkuCnwmERX7M64mwo2crnts21pHUf33flOWhL4Cj+tOzueLM76jw3B9Ht6qh0uX\nrOKR0ohuZnFWdOWbHWw1PHAVAFqmviTu5DWS1UHqIXK+CL/kAGdmASKPAoGAUXZK\nLE4BPGOnF3GRj20FMUpsDUP6+PUiBKmbpZ2go/3mq3YtJQScP1+S/cTIYaUp/lNh\n0J3lGsepAqyXJRs8VevcUjwcFkYL8bCukKkHo2SY6BefRrEZpgJi+E5wDuPSgeCO\nqcB6/1aoo2Da9JG1fKZ65oxFapI3PvzaW/81cb0CgYAA8UUr8d2yILuSDTN/xbF4\nkPL6qJwaYphJGwsj8wTKnGdngPJQsRiQWlhAhy8YPTY+EBe/pwisH6Hli+BnhKKH\nmOmcE4VQKuHHfJvVYzprQL+93jLsPS7njLXp9EKlK3tKhWj/895CRZiyPNZg2FfT\nynrThJShAkmi6lD0XaKQNw==\n-----END PRIVATE KEY-----\n",
-  client_email: "firebase-adminsdk-dmqv1@diploma-dab94.iam.gserviceaccount.com",
-  client_id: "100447457766989799765",
+    "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCf3duxzQ/LJYAR\nL2v9aJesTembeYoqvIRt7WXS6zatICYmZcZot8mki2Ny9uAgvLo/rYvo2oLbA56v\nXrB9a+V2N03bYgBofIyUdvc/NppCYm8z2ONCO9Ot4LrVeXz4WNxTLhmwr+kVtSs8\nicjJsbLxpYMmsnBf9sn/OgzUIcJeAZMTnXl9F5Ed5A09x7foYstgubcXE9faexct\nKdTG3YJJxx3H45L0sFgV0Ps+b9R0GcjeVILAIz6BIyhe2DeaqejNyqpmYTXUQl6D\njpRFB0qgp8M39h+VB3U/5VNRJltL5om6Zt2S1OHiu14D1H/zA4ywmju6eBQSlOEU\n3QZSlePDAgMBAAECggEACJCOmst1S13QKySsCewiOBS97Wztk/og2LqI2n4jWPfO\nLJG9JRvJ2PsdUg5bupVEH7rMRJRGnSNVuR8RV17UXp/Dc0TE6B1IF6WMRQujDMNH\na3LisWyjiX8BM3HqIyMd4hhe0dSuO1H97u4kOjBReZAF0PIh8Bo4bOhBVB6oUi8L\nBLAChpIjrY7bru7AlPN9heeYcKGjkaV+VekjSovB4sExYEz3Hi0nTOlBXfG83DK4\na8qi66IeGqLLruy9qs2W/ltRZj/2KM6atOqaJMn/t3To821uTOTdDnRqSixgvkhm\n9zRFMbjTH7f3ddxhqLESDKE819jP1+sAvNd9/3rHPQKBgQDM+yUiwThU5NVvkc+l\n0q5usfZKU7lEpky4tdir9mgVqOWjbsf7/TYskYaULASyk91U9XG9jt9Q06iiwEHw\nzo98QsGXdAtboVisGoSjWEVILUCNBagB5XSzL3o0UAF9cqEdLkZQk43babUK3Dbb\nvnrqZxrDJjyHd3N1N7nICV02ZwKBgQDHqCQ8EXLRRbW+jgcS6eUIZ1+pONdELsFJ\n1sLUmlgHsju9KYSgLgWVxWxYBEK7fbMn1ISutJUqpSCGZnXm63J4S9mUPbdFCZAW\nOGzvls9beCzGKxcaSuVFsxZxGOAIevAukxwJoXl4j8RHgwR/j72XoJdrYDF34H80\n05Bvkk+2RQKBgGTwBwlmPGcRiEi4dJgjduHroGxZbhHwEjei1F9Zp0eDNBGWq8Pa\nnKK1xp+QTX/icEs10hyWDkGu+IusQMxj6yQ1ez8pVa55dUDKjiYhgXxZTEAlWOYW\nJ7FU38iC3Tj5CX1lHBrxjhlNpGkEp77tvXlP7E3MtmG+4IwINOPcOJphAoGBALl1\n0brOhnYop+tLKP0DsVF+HNknSKc4OynoyXANswnrIRzUzTKxrVRzX/Hee1KIL/wm\np91VN162pqDR2mFXgiyGYKUYMv55JJPPdDmWQCV6WzT1X+93dMOq2ITUE38tG6BX\n3GqByUEZYrz+0hXgIsAPV7hRUYJGUkNy5q8NHOh1AoGATk6vJ6fNSt+lpm9OrjMo\noHWsk1ZoYQT7SMJxOgNdCt1pk1HCJUHbUXeaNIq9Nk5nkYW46p20QE/17LuvGVt2\n8mZP6fVoERGKLjz0BxxdYrUfHFbSXMZKi+eV97DDLuzBAyDM7V9RJW2m4TWsTMOH\n+7ZUhEsodwOjRs+L0zcaWdM=\n-----END PRIVATE KEY-----\n",
+  client_email: "firebase-adminsdk-6yjvg@diploma-186e3.iam.gserviceaccount.com",
+  client_id: "106103305573486518836",
   auth_uri: "https://accounts.google.com/o/oauth2/auth",
   token_uri: "https://oauth2.googleapis.com/token",
   auth_provider_x509_cert_url: "https://www.googleapis.com/oauth2/v1/certs",
   client_x509_cert_url:
-    "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-dmqv1%40diploma-dab94.iam.gserviceaccount.com",
-  storageBucket: "diploma-dab94.appspot.com",
+    "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-6yjvg%40diploma-186e3.iam.gserviceaccount.com",
 };
+
+// {
+//   "type": "service_account",
+//   "project_id": "diploma-186e3",
+//   "private_key_id": "c6dc725bb3bffe4c8be85601e149c929e86f4179",
+//   "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCf3duxzQ/LJYAR\nL2v9aJesTembeYoqvIRt7WXS6zatICYmZcZot8mki2Ny9uAgvLo/rYvo2oLbA56v\nXrB9a+V2N03bYgBofIyUdvc/NppCYm8z2ONCO9Ot4LrVeXz4WNxTLhmwr+kVtSs8\nicjJsbLxpYMmsnBf9sn/OgzUIcJeAZMTnXl9F5Ed5A09x7foYstgubcXE9faexct\nKdTG3YJJxx3H45L0sFgV0Ps+b9R0GcjeVILAIz6BIyhe2DeaqejNyqpmYTXUQl6D\njpRFB0qgp8M39h+VB3U/5VNRJltL5om6Zt2S1OHiu14D1H/zA4ywmju6eBQSlOEU\n3QZSlePDAgMBAAECggEACJCOmst1S13QKySsCewiOBS97Wztk/og2LqI2n4jWPfO\nLJG9JRvJ2PsdUg5bupVEH7rMRJRGnSNVuR8RV17UXp/Dc0TE6B1IF6WMRQujDMNH\na3LisWyjiX8BM3HqIyMd4hhe0dSuO1H97u4kOjBReZAF0PIh8Bo4bOhBVB6oUi8L\nBLAChpIjrY7bru7AlPN9heeYcKGjkaV+VekjSovB4sExYEz3Hi0nTOlBXfG83DK4\na8qi66IeGqLLruy9qs2W/ltRZj/2KM6atOqaJMn/t3To821uTOTdDnRqSixgvkhm\n9zRFMbjTH7f3ddxhqLESDKE819jP1+sAvNd9/3rHPQKBgQDM+yUiwThU5NVvkc+l\n0q5usfZKU7lEpky4tdir9mgVqOWjbsf7/TYskYaULASyk91U9XG9jt9Q06iiwEHw\nzo98QsGXdAtboVisGoSjWEVILUCNBagB5XSzL3o0UAF9cqEdLkZQk43babUK3Dbb\nvnrqZxrDJjyHd3N1N7nICV02ZwKBgQDHqCQ8EXLRRbW+jgcS6eUIZ1+pONdELsFJ\n1sLUmlgHsju9KYSgLgWVxWxYBEK7fbMn1ISutJUqpSCGZnXm63J4S9mUPbdFCZAW\nOGzvls9beCzGKxcaSuVFsxZxGOAIevAukxwJoXl4j8RHgwR/j72XoJdrYDF34H80\n05Bvkk+2RQKBgGTwBwlmPGcRiEi4dJgjduHroGxZbhHwEjei1F9Zp0eDNBGWq8Pa\nnKK1xp+QTX/icEs10hyWDkGu+IusQMxj6yQ1ez8pVa55dUDKjiYhgXxZTEAlWOYW\nJ7FU38iC3Tj5CX1lHBrxjhlNpGkEp77tvXlP7E3MtmG+4IwINOPcOJphAoGBALl1\n0brOhnYop+tLKP0DsVF+HNknSKc4OynoyXANswnrIRzUzTKxrVRzX/Hee1KIL/wm\np91VN162pqDR2mFXgiyGYKUYMv55JJPPdDmWQCV6WzT1X+93dMOq2ITUE38tG6BX\n3GqByUEZYrz+0hXgIsAPV7hRUYJGUkNy5q8NHOh1AoGATk6vJ6fNSt+lpm9OrjMo\noHWsk1ZoYQT7SMJxOgNdCt1pk1HCJUHbUXeaNIq9Nk5nkYW46p20QE/17LuvGVt2\n8mZP6fVoERGKLjz0BxxdYrUfHFbSXMZKi+eV97DDLuzBAyDM7V9RJW2m4TWsTMOH\n+7ZUhEsodwOjRs+L0zcaWdM=\n-----END PRIVATE KEY-----\n",
+//   "client_email": "firebase-adminsdk-6yjvg@diploma-186e3.iam.gserviceaccount.com",
+//   "client_id": "106103305573486518836",
+//   "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+//   "token_uri": "https://oauth2.googleapis.com/token",
+//   "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+//   "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-6yjvg%40diploma-186e3.iam.gserviceaccount.com"
+// }
 
 firebase.initializeApp(firebaseConfig);
 const storage = firebase.storage();
