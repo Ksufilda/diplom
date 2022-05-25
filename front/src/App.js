@@ -114,7 +114,7 @@ function App() {
   function getUserProfile(id) {
     getProfile(id).then((res) => {
       console.log(res);
-      if (res.rows.length) setProfile(res.rows[0]);
+      if (res.rows?.length) setProfile(res.rows[0]);
       else goToBlank();
     });
   }
