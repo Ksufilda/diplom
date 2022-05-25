@@ -46,9 +46,10 @@ const MainCanvas = ({ redact, userId, boxes, setBoxes }) => {
         left: 0,
         title: "Drag me around",
         type: data.type,
-        image: data.image,
+        image: data.image || "",
         link: data.link,
         text: data.text,
+        video: "none",
       },
     });
     postCanvas({

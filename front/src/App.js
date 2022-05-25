@@ -200,7 +200,12 @@ function App() {
               changeProfile={changeProfile}
             ></Profile>
           )}
-          <MainCanvas userId={userId} redact={redact} />
+          <MainCanvas
+            setBoxes={setBoxes}
+            boxes={boxes}
+            userId={userId}
+            redact={redact}
+          />
           {notFound && (
             <div className="lottie-container">
               <Lottie options={lottieOptions} height={400} width={400} />
