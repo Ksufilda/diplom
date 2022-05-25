@@ -40,22 +40,10 @@ app.use(bodyParser.urlencoded({ extended: true, limit: `50mb` }));
 app.use(express.static(path.resolve(__dirname, "./front/build")));
 
 app.use((err, req, res, next) => {
-  res.status(404);
-
-  // respond with html page
-  if (req.accepts("html")) {
-    res.render("404", { url: req.url });
-    return;
-  }
-
-  // respond with json
-  if (req.accepts("json")) {
-    res.json({ error: "Not found" });
-    return;
-  }
-
-  // default to plain-text. send()
-  res.type("txt").send("Not found");
+  res.locals.error = err;
+  const status = err.status || 500;
+  res.status(status);
+  res.render("error");
 });
 
 app.get(`/`, (req, res) => {
@@ -67,6 +55,9 @@ app.get(`/canvas/:id`, (req, res) => reciever(req, res, getCanvas));
 app.get(`/myprofile/:key`, (req, res) => reciever(req, res, getMyProfile));
 app.get(`/myuser/:key`, (req, res) => reciever(req, res, getMyUser));
 app.get(`/mycanvas/:key`, (req, res) => reciever(req, res, getMyCanvas));
+app.get("*", function (req, res) {
+  res.sendFile(path.resolve(__dirname, "./front/build", "index.html"));
+});
 
 app.post(`/profile`, (req, res) => reciever(req, res, postProfile));
 app.post(`/canvas`, (req, res) => reciever(req, res, postCanvas));
