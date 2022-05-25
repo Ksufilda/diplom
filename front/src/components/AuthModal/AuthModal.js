@@ -93,7 +93,7 @@ export default function AuthModal({ finishAuth }) {
           <div class="card-info">
             <p>
               При регистрации вы соглашаетесь с нашими условиями{" "}
-              <a href="#">а их у нас и нет</a>
+              <a href="">а их у нас и нет</a>
             </p>
             <a className="link-button" onClick={switchLogin}>
               {authState === "login" ? "Регистрация" : "Логин"}
