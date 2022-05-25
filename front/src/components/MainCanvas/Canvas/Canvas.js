@@ -66,16 +66,17 @@ export const Canvas = ({ redact, isOverDelete, boxes, setBoxes, userId }) => {
       className="canvas"
       style={{ backgroundColor }}
     >
-      {Object.keys(boxes).map((key) => {
-        return (
-          <Card
-            redact={redact}
-            id={key}
-            {...boxes[key]}
-            type={boxes[key].type}
-          ></Card>
-        );
-      })}
+      {boxes &&
+        Object.keys(boxes).map((key) => {
+          return (
+            <Card
+              redact={redact}
+              id={key}
+              {...boxes[key]}
+              type={boxes[key].type}
+            ></Card>
+          );
+        })}
     </div>
   );
 };

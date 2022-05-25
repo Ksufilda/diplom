@@ -4,7 +4,6 @@ import defaultPicture from "../../assets/default-picture.png";
 import storage from "../../common/firebase";
 
 const Profile = ({ redact, profile, changeProfile }) => {
-  console.log(profile);
   const [name, setName] = useState(profile.name);
   const [text1, setText1] = useState(profile.text1);
   const [text2, setText2] = useState(profile.text2);
@@ -13,6 +12,7 @@ const Profile = ({ redact, profile, changeProfile }) => {
   const [imageLoading, setImageLoading] = useState(false);
 
   async function loadImage(image) {
+    console.log("asdasd");
     setImageLoading(true);
     const itemImage = Math.random() * Math.floor(Math.random() * Date.now());
     if (image == null) return;
@@ -63,14 +63,14 @@ const Profile = ({ redact, profile, changeProfile }) => {
         <div>
           <input
             type="file"
-            name="file"
-            id="file"
+            name="profile-img-file"
+            id="profile-img-file"
             className="file-input-hidden"
             onChange={(e) => {
               loadImage(e.target.files[0]);
             }}
           />
-          <label htmlFor="file">
+          <label htmlFor="profile-img-file">
             <div className="opacity-hover-btn">
               <img
                 className="profile-header-image"

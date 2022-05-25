@@ -44,7 +44,19 @@ exports.getMyUser = (sendBack, data, requestParams) => {
 };
 
 exports.getProfile = (sendBack, data, requestParams) => {
-  const sql = `SELECT name, profileImg, text1, text2, text3 from profile WHERE id=${requestParams.id}`;
+  const callbackSql = `SELECT profileId from users WHERE id='${requestParams.id}'`;
+  callbackQuery(callbackSql, function (err, result) {
+    if (result?.rows.length > 0) {
+      const id = result?.rows[0]?.profileid;
+      if (!id) sendBack({ message: "no_profile" }, null);
+      else {
+        const sql = `SELECT name, profileImg, text1, text2, text3 from profile WHERE id=${id}`;
+
+        simpleQueryWithResult(sql, sendBack);
+      }
+    } else sendBack({ message: "no_profile" }, null);
+  });
+
   simpleQueryWithResult(sql, sendBack);
 };
 

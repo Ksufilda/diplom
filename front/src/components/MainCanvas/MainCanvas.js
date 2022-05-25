@@ -11,10 +11,8 @@ import Garbage from "./Garbage";
 import { ItemTypes } from "./itemTypes";
 import { getCookie } from "../../common/getCookie";
 
-const MainCanvas = ({ redact }) => {
+const MainCanvas = ({ redact, userId, boxes, setBoxes }) => {
   const [pickerActive, setPickerActive] = useState(false);
-  const [boxes, setBoxes] = useState({});
-  const [userId, setUserId] = useState();
 
   const [{ isOver }, garbageBin] = useDrop(() => {
     return {
@@ -36,30 +34,7 @@ const MainCanvas = ({ redact }) => {
     deleteCanvas(item.id);
   }
 
-  useEffect(() => {
-    getMyCanvas(getCookie("timeKey")).then((res) => {
-      console.log(res, "crininrgniri");
-      setUserId(res.rows[0].userid);
-      if (!res.rows[0].id) return;
-      setBoxes(
-        res.rows.reduce(function (results, row) {
-          results[row.id] = {
-            top: Number(row.y),
-            left: Number(row.x),
-            title: "Drag me around",
-            type: row.type,
-            image: row.image,
-            link: row.link,
-            text: row.text,
-          };
-          return results;
-        }, {})
-      );
-    });
-  }, []);
-
   function addBlock(data) {
-    console.log(userId);
     const randomId = Math.floor(
       Math.random() * Math.floor(Math.random() * Date.now())
     );
@@ -107,10 +82,10 @@ const MainCanvas = ({ redact }) => {
             ></img>
           </button>
           <Garbage drop={garbageBin}></Garbage>
+
+          <BlockPicker onAdd={addBlock} active={pickerActive} />
         </>
       )}
-
-      <BlockPicker onAdd={addBlock} active={pickerActive} />
 
       <Canvas
         userId={userId}

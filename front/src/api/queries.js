@@ -88,7 +88,6 @@ export function deleteCanvas(id) {
 }
 
 export function loginUser(data) {
-  console.log(data);
   return fetch(`${SITE}login`, {
     method: "POST",
     headers: {

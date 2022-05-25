@@ -7,7 +7,6 @@ import TriangleCard from "./TriangleCard";
 import RectangleCard from "./RectangleCard";
 
 const Card = (props) => {
-  console.log(props);
   const cardTypes = {
     polygon: {
       jsx: <PolygonCard {...props}></PolygonCard>,

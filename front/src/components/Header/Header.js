@@ -1,12 +1,20 @@
 import React from "react";
 import "./header.css";
 import defaultPicture from "../../assets/default-picture.png";
+import share from "../../assets/share.png";
+
 import { getCookie } from "../../common/getCookie";
 
-export default function Header({ redact, profile, saveProfile, changeView }) {
+export default function Header({
+  redact,
+  profile,
+  saveProfile,
+  changeView,
+  userId,
+  loggedIn,
+}) {
   function deleteAllCookies() {
     var cookies = document.cookie.split(";");
-    console.log(cookies);
 
     for (var i = 0; i < cookies.length; i++) {
       var cookie = cookies[i];
@@ -15,6 +23,10 @@ export default function Header({ redact, profile, saveProfile, changeView }) {
       document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
     }
     document.location.reload(true);
+  }
+
+  function sharePageLink() {
+    navigator.clipboard.writeText(window.location.href + userId);
   }
   return (
     <div className="header-container">
@@ -26,6 +38,12 @@ export default function Header({ redact, profile, saveProfile, changeView }) {
       >
         Сохранить страничку
       </button>
+      {loggedIn && (
+        <button className="round-btn" onClick={sharePageLink}>
+          <img src={share}></img>
+        </button>
+      )}
+
       {profile && (
         <div className="profile-mini-container">
           <p style={{ marginRight: 10 }}>

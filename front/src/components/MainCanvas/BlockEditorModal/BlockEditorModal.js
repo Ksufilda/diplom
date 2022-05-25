@@ -38,7 +38,8 @@ export default function BlockEditorModal({
     });
   }
 
-  async function loadImage(image) {
+  async function loadCanvasImage(image) {
+    console.log("loading");
     setImageLoading(true);
     const itemImage = Math.random() * Math.floor(Math.random() * Date.now());
     if (image == null) return;
@@ -116,7 +117,8 @@ export default function BlockEditorModal({
                   id="file"
                   className="file-input-hidden"
                   onChange={(e) => {
-                    loadImage(e.target.files[0]);
+                    console.log("asdasd");
+                    loadCanvasImage(e.target.files[0]);
                   }}
                 />
                 <label htmlFor="file">
@@ -148,7 +150,7 @@ export default function BlockEditorModal({
           )}
         </div>
         <button className="save-btn" onClick={onAddBlock}>
-          submit
+          Принять
         </button>
       </button>
     </button>

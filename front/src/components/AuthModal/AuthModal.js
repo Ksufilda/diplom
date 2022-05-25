@@ -13,7 +13,6 @@ export default function AuthModal({ finishAuth }) {
     event.preventDefault();
     const login = event.target[0].value;
     const password = event.target[1].value;
-    console.log("a");
     loginUser({
       password,
       login,
