@@ -40,10 +40,22 @@ app.use(bodyParser.urlencoded({ extended: true, limit: `50mb` }));
 app.use(express.static(path.resolve(__dirname, "./front/build")));
 
 app.use((err, req, res, next) => {
-  res.locals.error = err;
-  const status = err.status || 500;
-  res.status(status);
-  res.render("error");
+  res.status(404);
+
+  // respond with html page
+  if (req.accepts("html")) {
+    res.render("404", { url: req.url });
+    return;
+  }
+
+  // respond with json
+  if (req.accepts("json")) {
+    res.json({ error: "Not found" });
+    return;
+  }
+
+  // default to plain-text. send()
+  res.type("txt").send("Not found");
 });
 
 app.get(`/`, (req, res) => {
