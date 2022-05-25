@@ -62,6 +62,7 @@ const Profile = ({ redact, profile, changeProfile }) => {
       <div className="profile-header">
         <div>
           <input
+            disabled={!redact}
             type="file"
             name="profile-img-file"
             id="profile-img-file"
@@ -71,7 +72,9 @@ const Profile = ({ redact, profile, changeProfile }) => {
             }}
           />
           <label htmlFor="profile-img-file">
-            <div className="opacity-hover-btn">
+            <div
+              className={`${"opacity-hover-btn"}${!redact ? " disabled" : ""}`}
+            >
               <img
                 className="profile-header-image"
                 src={profileImg || defaultPicture}

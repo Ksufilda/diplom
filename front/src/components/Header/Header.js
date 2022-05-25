@@ -26,6 +26,7 @@ export default function Header({
   }
 
   function sharePageLink() {
+    const url = window.location.href + userId;
     navigator.clipboard.writeText(window.location.href + userId);
   }
   return (

@@ -98,7 +98,9 @@ function App() {
   }
 
   useEffect(() => {
-    const location = window.location.pathname.replace("/", "");
+    const location = window.location.hash
+      ? window.location.hash.replace("#", "")
+      : window.location.pathname.replace("/", "");
 
     if (location) {
       if (location === "not_found") return setNotFound(true);

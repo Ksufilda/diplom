@@ -93,7 +93,7 @@ export default function BlockEditorModal({
             <div className="canvas-blocks-picker-el-container">
               <p className="canvas-blocks-picker-el-title">Видео</p>
               <div className="canvas-blocks-picker-el">
-                <button className="opacity-hover-btn">
+                <button className="opacity-hover-btn disabled">
                   <img
                     src={videoPlaceholder}
                     className="canvas-blocks-picker-el-addmedia photo"
