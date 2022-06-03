@@ -50,7 +50,7 @@ function App() {
         console.log(res);
 
         console.log(res?.message);
-        if (res?.message === "no_profile") {
+        if (res?.message === "no_profile" || !res?.rows[0]) {
           setProfile({
             id: randomId,
             name: "Гость №" + randomId,
@@ -149,6 +149,7 @@ function App() {
 
   function changeView() {
     if (loggedIn) setRedact(!redact);
+    else goToMain();
   }
 
   function changeProfile(data) {
@@ -167,7 +168,7 @@ function App() {
       text3,
       timeKey: getCookie("timeKey"),
     }).then((res) => {
-      // document.location.reload(true);
+      document.location.reload(true);
     });
   }
 

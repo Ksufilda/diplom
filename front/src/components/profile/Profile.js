@@ -108,6 +108,9 @@ const Profile = ({ redact, profile, changeProfile }) => {
       <div className="profile-notes-block">
         <div className="profile-notes-block-el">
           <textarea
+            placeholder={
+              redact ? "Сюда вы можете ввести любую информацию о себе" : ""
+            }
             disabled={!redact}
             onChange={(e) => {
               adjustTextarea(e);

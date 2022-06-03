@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./header.css";
 import defaultPicture from "../../assets/default-picture.png";
 import share from "../../assets/share.png";
@@ -13,6 +13,8 @@ export default function Header({
   userId,
   loggedIn,
 }) {
+  const [showLinkCopy, setShowLinkCopy] = useState(false);
+
   function deleteAllCookies() {
     var cookies = document.cookie.split(";");
 
@@ -27,7 +29,12 @@ export default function Header({
 
   function sharePageLink() {
     const url = window.location.href + userId;
-    navigator.clipboard.writeText(window.location.href + userId);
+    navigator.clipboard.writeText(url);
+
+    setShowLinkCopy(true);
+    setTimeout(() => {
+      setShowLinkCopy(false);
+    }, 1000);
   }
   return (
     <div className="header-container">
@@ -77,6 +84,11 @@ export default function Header({
           Выход
         </button>
       )}
+
+      <div className={`link-copy-modal${showLinkCopy ? " visible" : ""}`}>
+        <img src={share}></img>
+        <p>Ссылка скопирована</p>
+      </div>
     </div>
   );
 }

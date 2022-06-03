@@ -39,3 +39,38 @@
 .save-btn:hover {
   opacity: 0.7;
 }
+
+.link-copy-modal {
+  z-index: -1;
+  opacity: 0;
+
+  position: absolute;
+  bottom: 100px;
+  transition: 0.3s;
+  padding: 5px 10px;
+
+  background-color: #fff;
+
+  border-radius: 15px;
+
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+}
+.link-copy-modal > img {
+  width: 20px;
+  margin-right: 6px;
+}
+
+.link-copy-modal > p {
+  margin: 0;
+  color: #000;
+  font-size: 16px;
+}
+
+.link-copy-modal.visible {
+  z-index: 20;
+
+  opacity: 1;
+}
