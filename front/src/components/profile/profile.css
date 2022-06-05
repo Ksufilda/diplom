@@ -1,7 +1,6 @@
 .profile-container {
   display: flex;
   width: 40%;
-  background-color: wheat;
   flex-direction: column;
   align-items: center;
   padding: 16px;
@@ -75,6 +74,7 @@
 }
 
 .profile-notes-block-el-textarea {
+  background-color: #ffffff;
   padding: 5px;
   display: inline-block;
   margin: 0;
@@ -85,9 +85,21 @@
   overflow: auto;
   border-radius: 10px;
   flex: 1;
+  box-shadow: 0px 8px 31px -12px rgba(0, 0, 0, 0.5) inset,
+    -18px -16px 14px -7px rgba(224, 212, 234, 0.25) inset;
 }
 
 .profile-notes-block-el-textarea:disabled,
 .profile-notes-block-el-textarea[disabled] {
   background-color: #fff;
+}
+
+.social-links-container {
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+}
+
+.social-network-img {
+  object-fit: contain;
 }

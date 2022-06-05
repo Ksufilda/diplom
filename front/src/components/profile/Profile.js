@@ -50,12 +50,31 @@ const Profile = ({ redact, profile, changeProfile }) => {
     changeProfile(data);
   }
 
+  function getSocialSrc(type) {
+    switch (type) {
+      case "telegram":
+        return require("../../assets/Telegram.png");
+      case "instagram":
+        return require("../../assets/Instagram.png");
+
+      default:
+        break;
+    }
+  }
+
+  function addNewLink() {}
+
   function adjustTextarea(e) {
     const el = e.target;
     el.style.height = "1px";
 
     el.style.height = el.scrollHeight + "px";
   }
+
+  const links = [
+    { link: "adasdasdas", type: "telegram" },
+    { link: "adasdasdas", type: "instagram" },
+  ];
 
   return (
     <div className="profile-container">
@@ -142,6 +161,22 @@ const Profile = ({ redact, profile, changeProfile }) => {
             className="profile-notes-block-el-textarea"
           ></textarea>
         </div>
+      </div>
+      <div className="social-links-container">
+        {links.map((item) => (
+          <a href={item.link} className="square-btn">
+            <img
+              className="social-network-img"
+              src={getSocialSrc(item.type)}
+            ></img>
+          </a>
+        ))}
+        <button onClick={addNewLink} className="square-btn">
+          <img
+            className="social-network-img"
+            src={require("../../assets/plusIcon.png")}
+          ></img>
+        </button>
       </div>
     </div>
   );

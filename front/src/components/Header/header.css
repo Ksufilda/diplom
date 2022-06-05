@@ -4,9 +4,27 @@
   height: 50px;
 
   background-color: #f3f3f3;
+  box-shadow: 4px 4px 8px 0px rgba(28, 10, 47, 0.25),
+    -4px -4px 8px 0px rgba(237, 236, 238, 0.55);
 }
 
 .round-btn:hover {
+  opacity: 0.7;
+}
+
+.square-btn {
+  box-sizing: content-box;
+  padding: 5px;
+  border-radius: 16px;
+  width: 50px;
+  height: 50px;
+
+  background-color: #f3f3f3;
+  box-shadow: 4px 4px 8px 0px rgba(28, 10, 47, 0.25),
+    -4px -4px 8px 0px rgba(237, 236, 238, 0.55);
+}
+
+.square-btn:hover {
   opacity: 0.7;
 }
 
@@ -34,6 +52,8 @@
   border-radius: 16px;
 
   background-color: #fff;
+  box-shadow: 20px 20px 40px 0px rgba(28, 10, 47, 0.25),
+    -20px -20px 40px 0px rgba(237, 236, 238, 0.47);
 }
 
 .save-btn:hover {

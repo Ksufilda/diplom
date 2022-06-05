@@ -3,8 +3,6 @@ import "./header.css";
 import defaultPicture from "../../assets/default-picture.png";
 import share from "../../assets/share.png";
 
-import { getCookie } from "../../common/getCookie";
-
 export default function Header({
   redact,
   profile,

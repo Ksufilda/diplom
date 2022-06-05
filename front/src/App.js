@@ -183,7 +183,7 @@ function App() {
 
   return (
     <DndProvider backend={HTML5Backend}>
-      <div className="main-container">
+      <div className="main-container background-color">
         {loginModalOpened && <AuthModal finishAuth={finishAuth} />}
         {!notFound && (
           <Header
