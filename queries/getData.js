@@ -11,8 +11,6 @@ exports.getMyProfile = (sendBack, data, requestParams) => {
 
   promiseQuery(callbackSql)
     .then((result) => {
-      console.log(result);
-
       if (result?.rows.length > 0) {
         console.log(result?.rows[0]?.profileid);
         profileId = result?.rows[0]?.profileid;
@@ -31,6 +29,8 @@ exports.getMyProfile = (sendBack, data, requestParams) => {
     .then((res) => {
       const sql = `SELECT link, type from link WHERE profileid=${profileId}`;
       callbackQuery(sql, (err, linksResult) => {
+        console.log(res, linksResult);
+
         const newResult = res;
         newResult.rows[0].links = linksResult.rows;
         sendBack(err, newResult);
