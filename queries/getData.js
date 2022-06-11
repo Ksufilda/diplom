@@ -27,6 +27,7 @@ exports.getMyProfile = (sendBack, data, requestParams) => {
       return await promiseQuery(sql);
     })
     .then((res) => {
+      if (!res) return;
       const sql = `SELECT link, type from link WHERE profileid=${profileId}`;
       callbackQuery(sql, (err, linksResult) => {
         console.log(res, linksResult);
