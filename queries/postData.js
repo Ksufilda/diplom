@@ -5,6 +5,39 @@ const {
   callbackQuery,
 } = require("./common");
 
+exports.deleteLink = async (sendBack, data) => {
+  const sql = `DELETE FROM link WHERE id = ${data.id}`;
+  simpleQueryWithResult(sql, sendBack);
+};
+
+exports.postLink = async (sendBack, data) => {
+  async function putLink(data, id) {
+    const sql = `DELETE FROM link WHERE id = ${id}`;
+    simpleQuery(sql);
+    insertLink(data);
+  }
+
+  function insertLink(data) {
+    const sql = format(
+      `INSERT INTO link (link, type, profileid) VALUES %L`,
+      data
+    );
+    simpleQueryWithResult(sql, sendBack);
+  }
+
+  const sql = `SELECT id from link WHERE id=${data.id}`;
+  callbackQuery(sql, function (err, result) {
+    console.log(data);
+    if (result?.rows.length > 0) {
+      console.log(`put link`, data.id);
+      putLink([Object.values(data)], data.id);
+    } else {
+      console.log(`insert link`, data.id);
+      insertLink([Object.values(data)]);
+    }
+  });
+};
+
 exports.deleteCanvas = async (sendBack, data) => {
   const sql = `DELETE FROM canvas WHERE id = ${data.id}`;
   simpleQueryWithResult(sql, sendBack);
