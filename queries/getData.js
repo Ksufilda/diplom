@@ -29,7 +29,12 @@ exports.getMyProfile = (sendBack, data, requestParams) => {
       return await promiseQuery(sql);
     })
     .then((res) => {
-      `SELECT link, type from link WHERE profileid=${profileId}`;
+      const sql = `SELECT link, type from link WHERE profileid=${profileId}`;
+      callbackQuery(sql, (err, linksResult) => {
+        const newResult = res;
+        newResult.rows[0].links = linksResult.rows;
+        sendBack(err, newResult);
+      });
     });
 };
 
