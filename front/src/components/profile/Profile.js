@@ -85,6 +85,7 @@ const Profile = ({ redact, profile, changeProfile }) => {
     } else {
       id = links[chosenLink].id;
     }
+    console.log(links[chosenLink]);
     const linkType = getLinkType(linkText);
 
     const newLinks = links;
