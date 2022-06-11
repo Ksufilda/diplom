@@ -7,7 +7,10 @@ const {
 
 exports.getMyProfile = (sendBack, data, requestParams) => {
   const callbackSql = `SELECT profileId from users WHERE timeKey='${requestParams.key}'`;
-  callbackQuery(callbackSql, function (err, result) {
+
+  promiseQuery(callbackSql).then((result) => {
+    console.log(result);
+
     if (result?.rows.length > 0) {
       console.log(result?.rows[0]?.profileid);
       const id = result?.rows[0]?.profileid;
@@ -22,10 +25,34 @@ exports.getMyProfile = (sendBack, data, requestParams) => {
 };
 
 exports.getMyCanvas = (sendBack, data, requestParams) => {
-  // а вот и колбэк хелл
   const callbackSql = `SELECT id from users WHERE timeKey='${requestParams.key}'`;
 
-  console.log(promiseQuery(callbackSql), "ccriegngeineniengi");
+  promiseQuery(callbackSql)
+    .then((result) => {
+      if (result?.rows.length > 0) {
+        console.log(result?.rows[0]?.id);
+        const id = result?.rows[0]?.id;
+        if (!id) sendBack({ message: "no_profile" }, null);
+        else {
+          return id;
+        }
+      } else sendBack({ message: "no_profile" }, null);
+
+      return null;
+    })
+    .then((id) => {
+      if (!id) return;
+      const sql = `SELECT id, userId, text, image, type, link, video, x, y, rotation, scale from canvas WHERE userId=${id}`;
+
+      callbackQuery(sql, function (err, result) {
+        if (result?.rows?.length) sendBack(err, result);
+        else {
+          result.rows[0] = { userid: id };
+          sendBack(err, result);
+        }
+      });
+    });
+
   callbackQuery(callbackSql, function (err, result) {
     if (result?.rows.length > 0) {
       console.log(result?.rows[0]?.id);
