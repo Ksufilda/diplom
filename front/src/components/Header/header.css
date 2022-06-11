@@ -12,6 +12,20 @@
   opacity: 0.7;
 }
 
+.small-square-btn {
+  box-sizing: content-box;
+  padding: 5px;
+  border-radius: 16px;
+  width: 40px !important;
+  height: 40px !important;
+
+  background-color: #f3f3f3;
+}
+
+.small-square-btn:hover {
+  opacity: 0.7;
+}
+
 .square-btn {
   box-sizing: content-box;
   padding: 5px;

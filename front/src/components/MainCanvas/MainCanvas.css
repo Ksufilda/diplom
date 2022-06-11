@@ -183,3 +183,32 @@ button {
   border-radius: 10px;
   flex: 1;
 }
+
+.card-redact-container {
+  position: relative;
+}
+
+.card-redact-menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding: 5px;
+  z-index: 10;
+  position: absolute;
+  border-radius: 16px;
+  right: 10px;
+  top: 70px;
+  transition: 0.3s;
+  width: 200px;
+  height: 100px;
+  background-color: white;
+}
+
+.card-redact-menu-block > input {
+  width: 100px;
+}
+
+.card-redact-menu-block {
+  display: flex;
+  align-items: center;
+}

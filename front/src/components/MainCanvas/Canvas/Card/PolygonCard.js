@@ -4,41 +4,32 @@ import { useDrag } from "react-dnd";
 import { getStyles } from "../../../../common/cardFunctions";
 import CardContainer from "./CardContainer";
 
-const PolygonCard = ({ redact, id, type, text, link, left, top, image }) => {
-  const [{ isDragging }, dragRef, preview] = useDrag(
-    () => ({
-      type,
-      item: { id, left, top, text },
-      collect: (monitor) => ({
-        isDragging: monitor.isDragging(),
-      }),
-    }),
-    [id, left, top, text]
-  );
-
-  useEffect(() => {
-    preview(null, { captureDraggingState: true });
-  }, []);
-
+const PolygonCard = ({
+  redact,
+  rotation,
+  scale,
+  id,
+  type,
+  text,
+  link,
+  left,
+  top,
+  image,
+}) => {
   return (
-    <div ref={redact ? dragRef : null}>
-      <CardContainer
-        href={link}
-        style={getStyles(left, top, isDragging)}
-        role="DraggableBox"
-      >
-        <div className="mask polygon-mask">
-          <div>
-            <img src={image || placeholderImage} alt="test"></img>
+    <div
+      className="mask polygon-mask"
+      style={{ transform: `rotate(${rotation}deg) scale(${scale / 100})` }}
+    >
+      <div>
+        <img src={image || placeholderImage} alt="test"></img>
 
-            {text && (
-              <div className="mask-text">
-                <p>{text}</p>
-              </div>
-            )}
+        {text && (
+          <div className="mask-text">
+            <p>{text}</p>
           </div>
-        </div>
-      </CardContainer>
+        )}
+      </div>
     </div>
   );
 };

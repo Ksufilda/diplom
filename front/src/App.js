@@ -90,6 +90,8 @@ function App() {
             image: row.image,
             link: row.link,
             text: row.text,
+            rotation: Number(row.rotation),
+            scale: Number(row.scale),
           };
           return results;
         }, {})
@@ -130,6 +132,8 @@ function App() {
           results[row.id] = {
             top: Number(row.y),
             left: Number(row.x),
+            rotation: Number(row.rotation),
+            scale: Number(row.scale),
             title: "Drag me around",
             type: row.type,
             image: row.image,
