@@ -24,7 +24,7 @@ exports.getMyProfile = (sendBack, data, requestParams) => {
 
       return null;
     })
-    .then(async (res) => {
+    .then(async (sql) => {
       if (!sql) return;
       return await promiseQuery(sql);
     })
