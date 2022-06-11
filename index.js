@@ -63,7 +63,7 @@ app.get("*", function (req, res) {
 });
 
 app.post(`/profile`, (req, res) => reciever(req, res, postProfile));
-app.post(`/canvas`, (req, res) => reciever(req, res, postLink));
+app.post(`/canvas`, (req, res) => reciever(req, res, postCanvas));
 app.post(`/link`, (req, res) => reciever(req, res, postLink));
 
 app.post(`/canvas/:id`, (req, res) => reciever(req, res, deleteCanvas));
