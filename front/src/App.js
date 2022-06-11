@@ -78,6 +78,7 @@ function App() {
 
   function getLoggedInCanvas() {
     getMyCanvas(getCookie("timeKey")).then((res) => {
+      console.log(res.rows);
       setUserId(res.rows[0].userid);
       if (!res.rows[0].id) return;
       setBoxes(

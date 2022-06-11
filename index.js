@@ -5,6 +5,8 @@ const {
   dropUser,
   dropCanvas,
   dropProfile,
+  createLink,
+  dropLink,
 } = require("./queries/tableQueries");
 
 const { setGlobalConn, reciever } = require("./queries/common");
@@ -85,10 +87,12 @@ async function connectToDatabase() {
   await dropUser();
   await dropProfile();
   await dropCanvas();
+  await dropLink();
 
   await createUser();
   await createProfile();
   await createCanvas();
+  await createLink();
 }
 
 connectToDatabase();

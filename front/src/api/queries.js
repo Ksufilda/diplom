@@ -1,5 +1,5 @@
-const SITE = "https://your-space-diploma.herokuapp.com/";
-// const SITE = "https://ksun-diploma.herokuapp.com/";
+// const SITE = "https://your-space-diploma.herokuapp.com/";
+const SITE = "https://ksun-diploma.herokuapp.com/";
 
 export function getCanvas(id) {
   return fetch(`${SITE}canvas/${id}`, {
@@ -68,14 +68,27 @@ export function saveProfile(data) {
 }
 
 export function postCanvas(data) {
-  const { userId, text, image, type, link, video, x, y, id } = data;
+  const { userId, text, image, type, link, video, x, y, scale, rotation, id } =
+    data;
   return fetch(`${SITE}canvas`, {
     method: "POST",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ id, userId, text, image, type, link, video, x, y }),
+    body: JSON.stringify({
+      id,
+      userId,
+      text,
+      image,
+      type,
+      link,
+      video,
+      x,
+      y,
+      rotation,
+      scale,
+    }),
   }).then((data) => data.json());
 }
 export function deleteCanvas(id) {

@@ -25,6 +25,8 @@ const Card = (props) => {
     scale,
   } = props;
 
+  console.log(rotation, !isNaN(scale) ? scale : 100);
+
   const [scaleState, setScaleState] = useState(!isNaN(scale) ? scale : 100);
   const [rotationState, setRotationState] = useState(
     !isNaN(rotation) ? rotation : 0
@@ -111,7 +113,7 @@ const Card = (props) => {
                     id="scale"
                     name="scale"
                     min="0"
-                    max="100"
+                    max="300"
                     onChange={(e) => setScaleState(e.target.value)}
                     value={scaleState}
                   />

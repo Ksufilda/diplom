@@ -49,6 +49,8 @@ const MainCanvas = ({ redact, userId, boxes, setBoxes }) => {
         image: data.image || "",
         link: data.link,
         text: data.text,
+        rotation: 0,
+        scale: 100,
         video: "none",
       },
     });
@@ -57,6 +59,8 @@ const MainCanvas = ({ redact, userId, boxes, setBoxes }) => {
       userId: userId,
       y: 0,
       x: 0,
+      rotation: 0,
+      scale: 100,
       title: "Drag me around",
       type: data.type,
       image: data.image || "",

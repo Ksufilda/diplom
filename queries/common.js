@@ -43,6 +43,10 @@ exports.dropTable = async (sql, errLog, successLog) => {
   });
 };
 
+exports.promiseQuery = (sql) => {
+  return conn.query(sql);
+};
+
 exports.simpleQuery = (sql) => {
   conn.query(sql, function (err, result) {
     console.log(result, err, "cringe");

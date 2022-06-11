@@ -4,9 +4,23 @@ import { useDrag } from "react-dnd";
 import { getStyles } from "../../../../common/cardFunctions";
 import CardContainer from "./CardContainer";
 
-const TriangleCard = ({ redact, id, type, text, left, top, image, link }) => {
+const TriangleCard = ({
+  redact,
+  id,
+  type,
+  text,
+  left,
+  top,
+  image,
+  link,
+  scale,
+  rotation,
+}) => {
   return (
-    <div className="mask triangle-mask">
+    <div
+      className="mask triangle-mask"
+      style={{ transform: `rotate(${rotation}deg) scale(${scale / 100})` }}
+    >
       <div>
         <img src={image || placeholderImage} alt="test"></img>
 

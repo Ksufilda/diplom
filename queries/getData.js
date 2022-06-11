@@ -1,4 +1,9 @@
-const { simpleQueryWithResult, callbackQuery } = require("./common");
+const {
+  simpleQueryWithResult,
+  callbackQuery,
+  simpleQuery,
+  promiseQuery,
+} = require("./common");
 
 exports.getMyProfile = (sendBack, data, requestParams) => {
   const callbackSql = `SELECT profileId from users WHERE timeKey='${requestParams.key}'`;
@@ -17,7 +22,10 @@ exports.getMyProfile = (sendBack, data, requestParams) => {
 };
 
 exports.getMyCanvas = (sendBack, data, requestParams) => {
+  // а вот и колбэк хелл
   const callbackSql = `SELECT id from users WHERE timeKey='${requestParams.key}'`;
+
+  console.log(promiseQuery(callbackSql), "ccriegngeineniengi");
   callbackQuery(callbackSql, function (err, result) {
     if (result?.rows.length > 0) {
       console.log(result?.rows[0]?.id);

@@ -9,6 +9,7 @@ const Profile = ({ redact, profile, changeProfile }) => {
   const [text2, setText2] = useState(profile.text2);
   const [text3, setText3] = useState(profile.text3);
   const [profileImg, setProfileImg] = useState(profile.profileimg || "");
+  const [linkModalOpened, setLinkModalOpened] = useState(false);
   const [imageLoading, setImageLoading] = useState(false);
 
   async function loadImage(image) {
@@ -36,6 +37,10 @@ const Profile = ({ redact, profile, changeProfile }) => {
     setText3(profile.text3);
     setName(profile.name);
   }, [profile]);
+
+  function redirectToLink(location) {
+    window.location.replace(location);
+  }
 
   function onChangeProfile() {
     const data = {
@@ -73,7 +78,10 @@ const Profile = ({ redact, profile, changeProfile }) => {
 
   const links = [
     { link: "adasdasdas", type: "telegram" },
-    { link: "adasdasdas", type: "instagram" },
+    {
+      link: "https://www.instagram.com/stories/highlights/18019426816318829/?hl=ru",
+      type: "instagram",
+    },
   ];
 
   return (
@@ -163,20 +171,49 @@ const Profile = ({ redact, profile, changeProfile }) => {
         </div>
       </div>
       <div className="social-links-container">
+        {linkModalOpened && redact && (
+          <div className="link-modal">
+            <input
+              placeholder="Ссылка"
+              className="profile-notes-block-el-textarea"
+              type={"text"}
+            ></input>
+            <button className="round-btn">
+              <img src={require("../../assets/check.png")}></img>
+            </button>
+          </div>
+        )}
         {links.map((item) => (
-          <a href={item.link} className="square-btn">
+          <button
+            onClick={
+              redact
+                ? () => {
+                    setLinkModalOpened(!linkModalOpened);
+                  }
+                : () => redirectToLink(item.link)
+            }
+            className="square-btn"
+          >
             <img
               className="social-network-img"
               src={getSocialSrc(item.type)}
             ></img>
-          </a>
+          </button>
         ))}
-        <button onClick={addNewLink} className="square-btn">
-          <img
-            className="social-network-img"
-            src={require("../../assets/plusIcon.png")}
-          ></img>
-        </button>
+
+        {redact && (
+          <button
+            onClick={() => {
+              setLinkModalOpened(!linkModalOpened);
+            }}
+            className="square-btn"
+          >
+            <img
+              className="social-network-img"
+              src={require("../../assets/plusIcon.png")}
+            ></img>
+          </button>
+        )}
       </div>
     </div>
   );

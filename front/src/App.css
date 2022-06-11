@@ -42,6 +42,7 @@ body {
   flex: 1;
   align-self: stretch;
   padding: 0 25px 25px 25px;
+  height: calc(100vh - 100px);
 }
 
 .lottie-container {
