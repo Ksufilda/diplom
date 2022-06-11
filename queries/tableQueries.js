@@ -43,7 +43,7 @@ exports.createProfile = async () => {
 };
 
 exports.createLink = async () => {
-  const sqlprofile = `CREATE TABLE link (id BIGINT, link VARCHAR(255), type VARCHAR(255))`;
+  const sqlprofile = `CREATE TABLE link (id BIGINT, profileid BIGINT, link VARCHAR(255), type VARCHAR(255))`;
 
   createTable(sqlprofile, `table link already exist`, `Table link created`);
 };

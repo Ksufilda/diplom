@@ -7,21 +7,30 @@ const {
 
 exports.getMyProfile = (sendBack, data, requestParams) => {
   const callbackSql = `SELECT profileId from users WHERE timeKey='${requestParams.key}'`;
+  let profileId;
 
-  promiseQuery(callbackSql).then((result) => {
-    console.log(result);
+  promiseQuery(callbackSql)
+    .then((result) => {
+      console.log(result);
 
-    if (result?.rows.length > 0) {
-      console.log(result?.rows[0]?.profileid);
-      const id = result?.rows[0]?.profileid;
-      if (!id) sendBack({ message: "no_profile" }, null);
-      else {
-        const sql = `SELECT id, name, profileImg, text1, text2, text3 from profile WHERE id=${id}`;
+      if (result?.rows.length > 0) {
+        console.log(result?.rows[0]?.profileid);
+        profileId = result?.rows[0]?.profileid;
+        if (!profileId) sendBack({ message: "no_profile" }, null);
+        else {
+          return `SELECT id, name, profileImg, text1, text2, text3 from profile WHERE id=${profileId}`;
+        }
+      } else sendBack({ message: "no_profile" }, null);
 
-        simpleQueryWithResult(sql, sendBack);
-      }
-    } else sendBack({ message: "no_profile" }, null);
-  });
+      return null;
+    })
+    .then(async (res) => {
+      if (!sql) return;
+      return await promiseQuery(sql);
+    })
+    .then((res) => {
+      `SELECT link, type from link WHERE profileid=${profileId}`;
+    });
 };
 
 exports.getMyCanvas = (sendBack, data, requestParams) => {
