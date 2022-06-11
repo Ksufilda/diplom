@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./profile.css";
 import defaultPicture from "../../assets/default-picture.png";
 import storage from "../../common/firebase";
+import { postLink } from "../../api/queries";
 
 const Profile = ({ redact, profile, changeProfile }) => {
   const [name, setName] = useState(profile.name);
@@ -11,6 +12,9 @@ const Profile = ({ redact, profile, changeProfile }) => {
   const [profileImg, setProfileImg] = useState(profile.profileimg || "");
   const [linkModalOpened, setLinkModalOpened] = useState(false);
   const [imageLoading, setImageLoading] = useState(false);
+  const [chosenLink, setChosenLink] = useState();
+  const [linkText, setLinkText] = useState("");
+  const [links, setLinks] = useState(profile.links || []);
 
   async function loadImage(image) {
     console.log("asdasd");
@@ -61,13 +65,50 @@ const Profile = ({ redact, profile, changeProfile }) => {
         return require("../../assets/Telegram.png");
       case "instagram":
         return require("../../assets/Instagram.png");
+      case "none":
+        return require("../../assets/link.png");
 
       default:
         break;
     }
   }
 
-  function addNewLink() {}
+  function getLinkType(text) {
+    if (text.includes("www.instagram.com")) return "instagram";
+    return "none";
+  }
+
+  function addNewLink() {
+    let id;
+    if (chosenLink === -1) {
+      id = Math.floor(Math.random() * Math.floor(Math.random() * Date.now()));
+    } else {
+      id = links[chosenLink].id;
+    }
+    const linkType = getLinkType(linkText);
+
+    const newLinks = links;
+
+    if (newLinks.findIndex((item) => item.id === id) !== -1) {
+      newLinks[newLinks.findIndex((item) => item.id === id)] = {
+        id,
+        profileId: profile.id,
+        link: linkText,
+        type: linkType,
+      };
+      setLinks([...newLinks]);
+    } else
+      setLinks([
+        ...newLinks,
+        { id, profileId: profile.id, link: linkText, type: linkType },
+      ]);
+    postLink({
+      id,
+      profileId: profile.id,
+      link: linkText,
+      type: linkType,
+    });
+  }
 
   function adjustTextarea(e) {
     const el = e.target;
@@ -75,14 +116,6 @@ const Profile = ({ redact, profile, changeProfile }) => {
 
     el.style.height = el.scrollHeight + "px";
   }
-
-  const links = [
-    { link: "adasdasdas", type: "telegram" },
-    {
-      link: "https://www.instagram.com/stories/highlights/18019426816318829/?hl=ru",
-      type: "instagram",
-    },
-  ];
 
   return (
     <div className="profile-container">
@@ -176,23 +209,34 @@ const Profile = ({ redact, profile, changeProfile }) => {
             <input
               placeholder="Ссылка"
               className="profile-notes-block-el-textarea"
+              value={linkText}
+              onChange={(e) => setLinkText(e.target.value)}
               type={"text"}
             ></input>
-            <button className="round-btn">
+            <button className="round-btn" onClick={() => addNewLink()}>
               <img src={require("../../assets/check.png")}></img>
             </button>
           </div>
         )}
-        {links.map((item) => (
+        {links.map((item, index) => (
           <button
             onClick={
               redact
                 ? () => {
-                    setLinkModalOpened(!linkModalOpened);
+                    setLinkText(item.link);
+
+                    setLinkModalOpened(
+                      linkModalOpened && chosenLink === index ? false : true
+                    );
+                    setChosenLink(
+                      linkModalOpened && chosenLink === index
+                        ? undefined
+                        : index
+                    );
                   }
                 : () => redirectToLink(item.link)
             }
-            className="square-btn"
+            className={`square-btn${chosenLink === index ? " pressed" : ""}`}
           >
             <img
               className="social-network-img"
@@ -204,9 +248,16 @@ const Profile = ({ redact, profile, changeProfile }) => {
         {redact && (
           <button
             onClick={() => {
-              setLinkModalOpened(!linkModalOpened);
+              setLinkText("");
+
+              setLinkModalOpened(
+                linkModalOpened && chosenLink === -1 ? false : true
+              );
+              setChosenLink(
+                linkModalOpened && chosenLink === -1 ? undefined : -1
+              );
             }}
-            className="square-btn"
+            className={`square-btn${chosenLink === -1 ? " pressed" : ""}`}
           >
             <img
               className="social-network-img"

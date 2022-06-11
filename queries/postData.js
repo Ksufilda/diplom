@@ -19,7 +19,7 @@ exports.postLink = async (sendBack, data) => {
 
   function insertLink(data) {
     const sql = format(
-      `INSERT INTO link (link, type, profileid) VALUES %L`,
+      `INSERT INTO link (id, link, type, profileid) VALUES %L`,
       data
     );
     simpleQueryWithResult(sql, sendBack);

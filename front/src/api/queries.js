@@ -67,6 +67,23 @@ export function saveProfile(data) {
   }).then((data) => data.json());
 }
 
+export function postLink(data) {
+  const { profileId, type, link, id } = data;
+  return fetch(`${SITE}link`, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      id,
+      link,
+      type,
+      profileId,
+    }),
+  }).then((data) => data.json());
+}
+
 export function postCanvas(data) {
   const { userId, text, image, type, link, video, x, y, scale, rotation, id } =
     data;
