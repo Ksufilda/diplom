@@ -52,25 +52,6 @@ exports.getMyCanvas = (sendBack, data, requestParams) => {
         }
       });
     });
-
-  callbackQuery(callbackSql, function (err, result) {
-    if (result?.rows.length > 0) {
-      console.log(result?.rows[0]?.id);
-      const id = result?.rows[0]?.id;
-      if (!id) sendBack({ message: "no_profile" }, null);
-      else {
-        const sql = `SELECT id, userId, text, image, type, link, video, x, y, rotation, scale from canvas WHERE userId=${id}`;
-
-        callbackQuery(sql, function (err, result) {
-          if (result?.rows?.length) sendBack(err, result);
-          else {
-            result.rows[0] = { userid: id };
-            sendBack(err, result);
-          }
-        });
-      }
-    } else sendBack({ message: "no_profile" }, null);
-  });
 };
 
 exports.getMyUser = (sendBack, data, requestParams) => {
