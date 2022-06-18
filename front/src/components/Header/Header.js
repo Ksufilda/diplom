@@ -10,6 +10,7 @@ export default function Header({
   changeView,
   userId,
   loggedIn,
+  newProfileHint,
 }) {
   const [showLinkCopy, setShowLinkCopy] = useState(false);
 
@@ -36,14 +37,23 @@ export default function Header({
   }
   return (
     <div className="header-container">
-      <button
-        className="save-btn"
-        onClick={() => {
-          saveProfile();
-        }}
-      >
-        Сохранить страничку
-      </button>
+      {redact && (
+        <div style={{ position: "relative" }}>
+          {newProfileHint === 2 && (
+            <div className="new-profile-hint bottom">
+              <p>Сохраните свой профиль</p>
+            </div>
+          )}
+          <button
+            className="save-btn"
+            onClick={() => {
+              saveProfile();
+            }}
+          >
+            Сохранить страничку
+          </button>
+        </div>
+      )}
       {loggedIn && (
         <button className="round-btn" onClick={sharePageLink}>
           <img src={share}></img>

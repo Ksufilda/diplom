@@ -2,9 +2,15 @@ import React, { useEffect, useState } from "react";
 import "./profile.css";
 import defaultPicture from "../../assets/default-picture.png";
 import storage from "../../common/firebase";
-import { postLink } from "../../api/queries";
+import { deleteLink, postLink } from "../../api/queries";
 
-const Profile = ({ redact, profile, changeProfile }) => {
+const Profile = ({
+  redact,
+  profile,
+  changeProfile,
+  newProfileHint,
+  setNewProfileHint,
+}) => {
   const [name, setName] = useState(profile.name);
   const [text1, setText1] = useState(profile.text1);
   const [text2, setText2] = useState(profile.text2);
@@ -44,6 +50,7 @@ const Profile = ({ redact, profile, changeProfile }) => {
 
   function redirectToLink(location) {
     window.location.replace(location);
+    window.location.href = location;
   }
 
   function onChangeProfile() {
@@ -78,6 +85,19 @@ const Profile = ({ redact, profile, changeProfile }) => {
     return "none";
   }
 
+  function deleteExistingLink() {
+    const id = links[chosenLink].id;
+    if (!id) return;
+
+    const newLinks = links;
+
+    setLinks(newLinks.filter((item) => item.id !== id));
+    setLinkModalOpened(false);
+    setChosenLink(undefined);
+
+    deleteLink(links[chosenLink].id);
+  }
+
   function addNewLink() {
     let id;
     if (chosenLink === -1) {
@@ -103,6 +123,9 @@ const Profile = ({ redact, profile, changeProfile }) => {
         ...newLinks,
         { id, profileId: profile.id, link: linkText, type: linkType },
       ]);
+
+    setLinkModalOpened(false);
+    setChosenLink(undefined);
     postLink({
       id,
       profileId: profile.id,
@@ -155,16 +178,24 @@ const Profile = ({ redact, profile, changeProfile }) => {
             </div>
           </label>
         </div>
-        <input
-          disabled={!redact}
-          style={{ overflow: "auto", width: "100%" }}
-          onChange={(e) => {
-            setName(e.target.value);
-          }}
-          value={name}
-          maxLength={20}
-          className="profile-header-nickname"
-        ></input>
+        <div style={{ position: "relative" }}>
+          {newProfileHint === 1 && (
+            <div className="new-profile-hint">
+              <p>Введите свой никнейм</p>
+            </div>
+          )}
+          <input
+            disabled={!redact}
+            style={{ overflow: "auto", width: "100%" }}
+            onFocus={() => setNewProfileHint(2)}
+            onChange={(e) => {
+              setName(e.target.value);
+            }}
+            value={name}
+            maxLength={20}
+            className="profile-header-nickname"
+          ></input>
+        </div>
       </div>
       <div className="profile-notes-block">
         <div className="profile-notes-block-el">
@@ -207,6 +238,15 @@ const Profile = ({ redact, profile, changeProfile }) => {
       <div className="social-links-container">
         {linkModalOpened && redact && (
           <div className="link-modal">
+            <button
+              className="close-btn"
+              onClick={() => {
+                setChosenLink(undefined);
+                setLinkModalOpened(false);
+              }}
+            >
+              x
+            </button>
             <input
               placeholder="Ссылка"
               className="profile-notes-block-el-textarea"
@@ -217,6 +257,12 @@ const Profile = ({ redact, profile, changeProfile }) => {
             <button className="round-btn" onClick={() => addNewLink()}>
               <img src={require("../../assets/check.png")}></img>
             </button>
+
+            {chosenLink !== -1 && (
+              <button className="round-btn" onClick={deleteExistingLink}>
+                <img src={require("../../assets/garbage.png")}></img>
+              </button>
+            )}
           </div>
         )}
         {links.map((item, index) => (
@@ -246,7 +292,7 @@ const Profile = ({ redact, profile, changeProfile }) => {
           </button>
         ))}
 
-        {redact && (
+        {links.length < 5 && redact && (
           <button
             onClick={() => {
               setLinkText("");

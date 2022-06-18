@@ -27,12 +27,16 @@ function App() {
   const [userId, setUserId] = useState();
   const [boxes, setBoxes] = useState({});
   const [notFound, setNotFound] = useState(false);
+  const [newProfileHint, setNewProfileHint] = useState(-1);
 
   function goToBlank() {
+    window.location.href = "not_found";
     window.location.replace("not_found");
   }
 
   function goToMain() {
+    window.location.href = window.location.origin;
+
     window.location.replace(window.location.origin);
   }
 
@@ -51,6 +55,8 @@ function App() {
 
         console.log(res?.message);
         if (res?.message === "no_profile" || !res?.rows[0]) {
+          setNewProfileHint(1);
+
           setProfile({
             id: randomId,
             name: "Гость №" + randomId,
@@ -65,6 +71,7 @@ function App() {
       })
       .catch((res) => {
         setLoginModalOpened(true);
+        setNewProfileHint(1);
         setProfile({
           id: randomId,
           name: "Гость №" + randomId,
@@ -192,6 +199,7 @@ function App() {
         {loginModalOpened && <AuthModal finishAuth={finishAuth} />}
         {!notFound && (
           <Header
+            newProfileHint={newProfileHint}
             loggedIn={loggedIn}
             userId={userId}
             redact={redact}
@@ -203,6 +211,8 @@ function App() {
         <div className="container" style={notFound ? { padding: 0 } : null}>
           {profile && (
             <Profile
+              newProfileHint={newProfileHint}
+              setNewProfileHint={setNewProfileHint}
               redact={redact}
               profile={profile}
               changeProfile={changeProfile}

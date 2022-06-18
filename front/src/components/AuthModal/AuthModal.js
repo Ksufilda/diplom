@@ -144,7 +144,7 @@ export default function AuthModal({ finishAuth }) {
             },
           ]);
 
-        // finishAuth();
+        finishAuth();
       })
       .catch((err) => {
         console.log(err);
