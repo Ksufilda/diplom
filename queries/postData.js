@@ -86,8 +86,11 @@ exports.registerUser = async (sendBack, data) => {
   }
 
   const sql = `SELECT id from users WHERE login=${data.login}`;
+  console.log(sql, "ijdofopsdopsopspsodojsdfjiosoidf");
+
   callbackQuery(sql, function (err, result) {
-    if (result?.rows.length) {
+    console.log(result, "ijdofojsdfjiosoidf");
+    if (result?.rows.length > 0) {
       sendBack({ message: "Такой логин уже используется" }, null);
     } else {
       console.log(`insert users`, data.id, data);

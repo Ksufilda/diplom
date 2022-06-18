@@ -16,7 +16,7 @@ export default function AuthModal({ finishAuth }) {
   }
 
   function checkField(type, value) {
-    console.log(type === "password", value);
+    console.log(type, value);
     setError(error?.filter((el) => el.type !== type));
     if (!value.length) return true;
     const newErr = error?.filter((el) => el.type !== type);
@@ -94,6 +94,16 @@ export default function AuthModal({ finishAuth }) {
       login: loginLocal,
     })
       .then((res) => {
+        const newErr = error?.filter((el) => el.type !== "email");
+        if (res?.message)
+          setError([
+            ...newErr,
+            {
+              msg: res?.message,
+              type: "email",
+            },
+          ]);
+
         document.cookie = "timeKey=" + res.rows[0];
         finishAuth();
       })
@@ -123,6 +133,16 @@ export default function AuthModal({ finishAuth }) {
       timeKey: cookie,
     })
       .then((res) => {
+        const newErr = error?.filter((el) => el.type !== "email");
+        if (res?.message)
+          setError([
+            ...newErr,
+            {
+              msg: res.message,
+              type: "email",
+            },
+          ]);
+
         finishAuth();
       })
       .catch((err) => {
