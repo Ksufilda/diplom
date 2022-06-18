@@ -1,5 +1,5 @@
-const SITE = "https://your-space-diploma.herokuapp.com/";
-// const SITE = "https://ksun-diploma.herokuapp.com/";
+// const SITE = "https://your-space-diploma.herokuapp.com/";
+const SITE = "https://ksun-diploma.herokuapp.com/";
 
 export function getCanvas(id) {
   return fetch(`${SITE}canvas/${id}`, {
@@ -131,6 +131,7 @@ export function loginUser(data) {
 }
 
 export function registerUser(data) {
+  console.log(data);
   const { id, login, password, timeKey, name } = data;
   return fetch(`${SITE}register`, {
     method: "POST",

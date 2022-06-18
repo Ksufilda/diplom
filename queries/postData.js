@@ -85,11 +85,9 @@ exports.registerUser = async (sendBack, data) => {
     simpleQueryWithResult(sql, sendBack);
   }
 
-  const sql = `SELECT id from users WHERE login=${data.login}`;
-  console.log(sql, "ijdofopsdopsopspsodojsdfjiosoidf");
+  const sql = `SELECT id from users WHERE login='${data.login}'`;
 
   callbackQuery(sql, function (err, result) {
-    console.log(result, "ijdofojsdfjiosoidf");
     if (result?.rows.length > 0) {
       sendBack({ message: "Такой логин уже используется" }, null);
     } else {

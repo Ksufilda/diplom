@@ -133,6 +133,7 @@ export default function AuthModal({ finishAuth }) {
       timeKey: cookie,
     })
       .then((res) => {
+        console.log(res);
         const newErr = error?.filter((el) => el.type !== "email");
         if (res?.message)
           setError([
@@ -143,7 +144,7 @@ export default function AuthModal({ finishAuth }) {
             },
           ]);
 
-        finishAuth();
+        // finishAuth();
       })
       .catch((err) => {
         console.log(err);
