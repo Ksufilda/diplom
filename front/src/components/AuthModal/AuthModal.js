@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { loginUser, registerUser } from "../../api/queries";
 import "./AuthModal.css";
-
+import logo from "../../assets/logo.svg";
 export default function AuthModal({ finishAuth }) {
   const [authState, setAuthState] = useState("login");
   const [error, setError] = useState([]);
@@ -239,6 +239,9 @@ export default function AuthModal({ finishAuth }) {
             </a>
           </div>
         </div>
+      </div>
+      <div className="logo-animation">
+        <img src={logo}></img>
       </div>
     </div>
   );

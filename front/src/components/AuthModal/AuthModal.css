@@ -10,6 +10,15 @@
   align-items: center;
 }
 
+@keyframes opacity-appear {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 .auth-modal {
   padding: 16px;
   border-radius: 16px;
@@ -18,6 +27,10 @@
   background-color: #fff;
   display: flex;
   flex-direction: column;
+
+  animation-name: opacity-appear;
+  animation-duration: 2s;
+  animation-fill-mode: both;
 }
 
 .form-container {
@@ -177,4 +190,37 @@ input {
 .link-button {
   cursor: pointer;
   font-size: 1rem;
+}
+
+@keyframes opacity-dissapear {
+  from {
+    opacity: 1;
+    z-index: 10;
+    transform: rotate(720deg);
+    height: 70vh;
+    width: 70vw;
+  }
+  to {
+    opacity: 0;
+    z-index: -1;
+    transform: rotate(0deg);
+    height: 10vh;
+    width: 10vw;
+  }
+}
+.logo-animation {
+  z-index: 10;
+
+  display: flex;
+  position: absolute;
+  animation-name: opacity-dissapear;
+  animation-duration: 2s;
+  animation-delay: 0.3s;
+
+  animation-fill-mode: both;
+  height: 70vh;
+  width: 70vw;
+
+  align-items: center;
+  justify-content: center;
 }
