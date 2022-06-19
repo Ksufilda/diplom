@@ -28,6 +28,7 @@ exports.getMyProfile = (sendBack, data, requestParams) => {
     })
     .then((res) => {
       if (!res) return;
+      if (!res.rows[0]) return sendBack(err, res);
       const sql = `SELECT id, link, type from link WHERE profileid=${profileId}`;
       callbackQuery(sql, (err, linksResult) => {
         console.log(res, linksResult);
@@ -94,6 +95,8 @@ exports.getProfile = (sendBack, data, requestParams) => {
     })
     .then((res) => {
       if (!res) return;
+      if (!res.rows[0]) return sendBack(err, res);
+
       const sql = `SELECT id, link, type from link WHERE profileid=${profileId}`;
       callbackQuery(sql, (err, linksResult) => {
         console.log(res, linksResult);
