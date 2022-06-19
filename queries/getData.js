@@ -28,13 +28,13 @@ exports.getMyProfile = (sendBack, data, requestParams) => {
     })
     .then((res) => {
       if (!res) return;
-      if (!res.rows[0]) return sendBack(err, res);
+      if (!res.rows[0]) return sendBack(null, res);
       const sql = `SELECT id, link, type from link WHERE profileid=${profileId}`;
       callbackQuery(sql, (err, linksResult) => {
         console.log(res, linksResult);
 
         const newResult = res;
-        newResult.rows[0]?.links = linksResult?.rows || [];
+        newResult.rows[0].links = linksResult?.rows || [];
         sendBack(err, newResult);
       });
     });
@@ -95,14 +95,14 @@ exports.getProfile = (sendBack, data, requestParams) => {
     })
     .then((res) => {
       if (!res) return;
-      if (!res.rows[0]) return sendBack(err, res);
+      if (!res.rows[0]) return sendBack(null, res);
 
       const sql = `SELECT id, link, type from link WHERE profileid=${profileId}`;
       callbackQuery(sql, (err, linksResult) => {
         console.log(res, linksResult);
 
         const newResult = res;
-        newResult.rows[0]?.links = linksResult?.rows || [];
+        newResult.rows[0].links = linksResult?.rows || [];
         sendBack(err, newResult);
       });
     });

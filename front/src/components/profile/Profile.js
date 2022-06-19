@@ -61,7 +61,7 @@ const Profile = ({
     const data = {
       id: profile.id,
       name,
-      profileimg: profileImg,
+      profileImg: profileImg,
       text1,
       text2,
       text3,
