@@ -12,9 +12,9 @@ export default function BlockEditorModal({
 }) {
   const [text, setText] = useState("");
   const [link, setLink] = useState("");
-  const [video, setVideo] = useState("");
+  const [mediaType, setMediaType] = useState("");
 
-  const [imageLoading, setImageLoading] = useState(false);
+  const [mediaLoading, setMediaLoading] = useState(false);
   const [loadedImage, setLoadedImage] = useState();
 
   function changeInput(e, noSpaces, set) {
@@ -29,27 +29,30 @@ export default function BlockEditorModal({
   }
 
   function onAddBlock() {
+    const media = {
+      video: mediaType === "video" ? loadedImage : "",
+      image: mediaType === "photo" ? loadedImage : "",
+    };
     addBlock({
       type: chosenBlock,
       text,
       link,
-      image: loadedImage,
-      video,
+      ...media,
     });
   }
 
-  async function loadCanvasImage(image) {
+  async function loadCanvasMedia(media) {
     console.log("loading");
-    setImageLoading(true);
+    setMediaLoading(true);
     const itemImage = Math.random() * Math.floor(Math.random() * Date.now());
-    if (image == null) return;
-    await storage.ref(`/${itemImage}`).put(image);
+    if (media == null) return;
+    await storage.ref(`/${itemImage}`).put(media);
     await storage
       .ref(`/${itemImage}`)
       .getDownloadURL()
       .then((url) => {
         setLoadedImage(url);
-        setImageLoading(false);
+        setMediaLoading(false);
       });
   }
 
@@ -93,17 +96,50 @@ export default function BlockEditorModal({
             <div className="canvas-blocks-picker-el-container">
               <p className="canvas-blocks-picker-el-title">Видео</p>
               <div className="canvas-blocks-picker-el">
-                <button className="opacity-hover-btn disabled">
-                  <img
-                    src={videoPlaceholder}
-                    className="canvas-blocks-picker-el-addmedia photo"
-                  />
+                <input
+                  type="file"
+                  accept="video/mp4,video/x-m4v,video/*"
+                  name="video"
+                  id="video"
+                  className="file-input-hidden"
+                  onChange={(e) => {
+                    console.log("asdasd");
+                    setMediaType("video");
+                    loadCanvasMedia(e.target.files[0]);
+                  }}
+                />
+                <label htmlFor="video">
+                  <div className="opacity-hover-btn">
+                    {!!loadedImage && mediaType === "video" ? (
+                      <video width="320" height="240" controls>
+                        <source src={loadedImage} type="video/mp4" />
+                        <source src={loadedImage} type="video/ogg" />
+                        Your browser does not support the video tag.
+                      </video>
+                    ) : (
+                      <img
+                        src={videoPlaceholder}
+                        className="canvas-blocks-picker-el-addmedia video"
+                      />
+                    )}
 
-                  <div className="cross">
-                    <div className="cross-vertical"></div>
-                    <div className="cross-horizontal"></div>
+                    {!mediaLoading ? (
+                      <div className="cross">
+                        <div className="cross-vertical"></div>
+                        <div className="cross-horizontal"></div>
+                      </div>
+                    ) : (
+                      <div className="cross">
+                        <div class="lds-ring">
+                          <div></div>
+                          <div></div>
+                          <div></div>
+                          <div></div>
+                        </div>
+                      </div>
+                    )}
                   </div>
-                </button>
+                </label>
               </div>
             </div>
           )}
@@ -113,22 +149,29 @@ export default function BlockEditorModal({
               <div className="canvas-blocks-picker-el">
                 <input
                   type="file"
-                  name="file"
-                  id="file"
+                  name="photo"
+                  id="photo"
+                  accept="image/png, image/jpeg"
                   className="file-input-hidden"
                   onChange={(e) => {
                     console.log("asdasd");
-                    loadCanvasImage(e.target.files[0]);
+                    loadCanvasMedia(e.target.files[0]);
+
+                    setMediaType("photo");
                   }}
                 />
-                <label htmlFor="file">
+                <label htmlFor="photo">
                   <div className="opacity-hover-btn">
                     <img
-                      src={loadedImage || photoPlaceholder}
+                      src={
+                        mediaType === "photo"
+                          ? loadedImage || photoPlaceholder
+                          : photoPlaceholder
+                      }
                       className="canvas-blocks-picker-el-addmedia photo"
                     />
 
-                    {!imageLoading ? (
+                    {!mediaLoading ? (
                       <div className="cross">
                         <div className="cross-vertical"></div>
                         <div className="cross-horizontal"></div>
@@ -149,7 +192,11 @@ export default function BlockEditorModal({
             </div>
           )}
         </div>
-        <button className="save-btn" onClick={onAddBlock}>
+        <button
+          disabled={mediaLoading}
+          className="save-btn"
+          onClick={onAddBlock}
+        >
           Принять
         </button>
       </button>

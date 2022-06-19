@@ -14,6 +14,7 @@ export default function Header({
 }) {
   const [showLinkCopy, setShowLinkCopy] = useState(false);
 
+  console.log(profile);
   function deleteAllCookies() {
     var cookies = document.cookie.split(";");
 
@@ -27,7 +28,7 @@ export default function Header({
   }
 
   function sharePageLink() {
-    const url = window.location.href + userId;
+    const url = window.location.href + (loggedIn ? userId : "");
     navigator.clipboard.writeText(url);
 
     setShowLinkCopy(true);
@@ -54,11 +55,9 @@ export default function Header({
           </button>
         </div>
       )}
-      {loggedIn && (
-        <button className="round-btn" onClick={sharePageLink}>
-          <img src={share}></img>
-        </button>
-      )}
+      <button className="round-btn" onClick={sharePageLink}>
+        <img src={share}></img>
+      </button>
 
       {profile && (
         <div className="profile-mini-container">
@@ -77,12 +76,11 @@ export default function Header({
           >
             <img
               style={{
+                width: 50,
+                height: 40,
                 borderRadius: "50%",
-                overflow: "hidden",
-                width: "100%",
-                objectFit: "cover",
               }}
-              src={profile.profileImg ? profile.profileImg : defaultPicture}
+              src={profile.profileimg ? profile.profileimg : defaultPicture}
             ></img>
           </button>
         </div>

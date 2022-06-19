@@ -19,13 +19,14 @@ const Card = (props) => {
     left,
     top,
     image,
+    video,
     enableRedactMenu,
     enabledKey,
     rotation,
     scale,
+    setMoveBoxState,
+    moveBoxState,
   } = props;
-
-  console.log(rotation, !isNaN(scale) ? scale : 100);
 
   const [scaleState, setScaleState] = useState(!isNaN(scale) ? scale : 100);
   const [rotationState, setRotationState] = useState(
@@ -92,67 +93,61 @@ const Card = (props) => {
   );
 
   useEffect(() => {
-    preview(null, { captureDraggingState: true });
+    preview(null, { captureDraggingState: false });
   }, []);
 
   return (
-    <>
-      <div ref={redact ? dragRef : null}>
-        <CardContainer
-          href={link}
-          ref={redact ? dragRef : null}
-          style={getStyles(left, top, isDragging)}
-          role="DraggableBox"
+    <div style={getStyles(left, top, isDragging)}>
+      <div>
+        {id === enabledKey && (
+          <div className="card-redact-menu">
+            <div className="card-redact-menu-block">
+              <input
+                type="range"
+                id="scale"
+                name="scale"
+                min="0"
+                max="300"
+                onChange={(e) => setScaleState(e.target.value)}
+                value={scaleState}
+              />
+              <label style={{ marginLeft: 5, color: "#000" }} for="scale">
+                scale
+              </label>
+            </div>
+            <div className="card-redact-menu-block">
+              <input
+                type="range"
+                id="rotation"
+                name="rotation"
+                min="0"
+                max="360"
+                onChange={(e) => setRotationState(e.target.value)}
+                value={rotationState}
+              />
+              <label style={{ marginLeft: 5, color: "#000" }} for="rotation">
+                rotation
+              </label>
+            </div>
+          </div>
+        )}
+      </div>
+      {redact && (
+        <button
+          className="canvas-blocks-button small-square-btn "
+          onClick={() => enableRedactMenu(id)}
         >
+          <img src={require("../../../../assets/editSimple.png")}></img>
+        </button>
+      )}
+      <div ref={redact ? dragRef : null}>
+        <CardContainer href={link} role="DraggableBox">
           <div className={"card-redact-container"}>
-            {id === enabledKey && (
-              <div className="card-redact-menu">
-                <div className="card-redact-menu-block">
-                  <input
-                    type="range"
-                    id="scale"
-                    name="scale"
-                    min="0"
-                    max="300"
-                    onChange={(e) => setScaleState(e.target.value)}
-                    value={scaleState}
-                  />
-                  <label style={{ marginLeft: 5, color: "#000" }} for="scale">
-                    scale
-                  </label>
-                </div>
-                <div className="card-redact-menu-block">
-                  <input
-                    type="range"
-                    id="rotation"
-                    name="rotation"
-                    min="0"
-                    max="360"
-                    onChange={(e) => setRotationState(e.target.value)}
-                    value={rotationState}
-                  />
-                  <label
-                    style={{ marginLeft: 5, color: "#000" }}
-                    for="rotation"
-                  >
-                    rotation
-                  </label>
-                </div>
-              </div>
-            )}
-            {redact && (
-              <button
-                className="canvas-blocks-button small-square-btn"
-                onClick={() => enableRedactMenu(id)}
-              >
-                <img src={require("../../../../assets/editSimple.png")}></img>
-              </button>
-            )}
             <div>{cardTypes[props.type].jsx}</div>
           </div>
         </CardContainer>
       </div>
-    </>
+    </div>
   );
 };
 

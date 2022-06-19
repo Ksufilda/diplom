@@ -51,9 +51,6 @@ function App() {
 
     getMyProfile(getCookie("timeKey"))
       .then((res) => {
-        console.log(res);
-
-        console.log(res?.message);
         if (res?.message === "no_profile" || !res?.rows[0]) {
           setNewProfileHint(1);
 
@@ -85,7 +82,6 @@ function App() {
 
   function getLoggedInCanvas() {
     getMyCanvas(getCookie("timeKey")).then((res) => {
-      console.log(res.rows);
       setUserId(res.rows[0].userid);
       if (!res.rows[0].id) return;
       setBoxes(
@@ -96,6 +92,7 @@ function App() {
             title: "Drag me around",
             type: row.type,
             image: row.image,
+            video: row.video,
             link: row.link,
             text: row.text,
             rotation: Number(row.rotation),
@@ -125,7 +122,6 @@ function App() {
 
   function getUserProfile(id) {
     getProfile(id).then((res) => {
-      console.log(res);
       if (res.rows?.length) setProfile(res.rows[0]);
       else goToBlank();
     });
@@ -145,6 +141,7 @@ function App() {
             title: "Drag me around",
             type: row.type,
             image: row.image,
+            video: row.video,
             link: row.link,
             text: row.text,
           };
@@ -197,7 +194,7 @@ function App() {
     <DndProvider backend={HTML5Backend}>
       <div className="main-container background-color">
         {loginModalOpened && <AuthModal finishAuth={finishAuth} />}
-        {!notFound && (
+        {!notFound && profile && (
           <Header
             newProfileHint={newProfileHint}
             loggedIn={loggedIn}

@@ -15,6 +15,7 @@ const PolygonCard = ({
   left,
   top,
   image,
+  video,
 }) => {
   return (
     <div
@@ -22,7 +23,22 @@ const PolygonCard = ({
       style={{ transform: `rotate(${rotation}deg) scale(${scale / 100})` }}
     >
       <div>
-        <img src={image || placeholderImage} alt="test"></img>
+        {video ? (
+          <video
+            width="100%"
+            height="100%"
+            style={{ objectFit: "cover" }}
+            autoPlay={true}
+            muted
+            loop
+          >
+            <source src={video} type="video/mp4" />
+            <source src={video} type="video/ogg" />
+            Your browser does not support the video tag.
+          </video>
+        ) : (
+          <img src={image || placeholderImage} alt="test"></img>
+        )}
 
         {text && (
           <div className="mask-text">

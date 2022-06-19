@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./profile.css";
 import defaultPicture from "../../assets/default-picture.png";
 import storage from "../../common/firebase";
@@ -21,6 +21,10 @@ const Profile = ({
   const [chosenLink, setChosenLink] = useState();
   const [linkText, setLinkText] = useState("");
   const [links, setLinks] = useState(profile.links || []);
+
+  const text1Ref = useRef(null);
+  const text2Ref = useRef(null);
+  const text3Ref = useRef(null);
 
   async function loadImage(image) {
     console.log("asdasd");
@@ -57,7 +61,7 @@ const Profile = ({
     const data = {
       id: profile.id,
       name,
-      profileImg,
+      profileimg: profileImg,
       text1,
       text2,
       text3,
@@ -134,12 +138,17 @@ const Profile = ({
     });
   }
 
-  function adjustTextarea(e) {
-    const el = e.target;
+  function adjustTextarea(el) {
     el.style.height = "1px";
 
     el.style.height = el.scrollHeight + "px";
   }
+
+  useEffect(() => {
+    if (text1Ref.current) adjustTextarea(text1Ref.current);
+    if (text2Ref.current) adjustTextarea(text2Ref.current);
+    if (text3Ref.current) adjustTextarea(text3Ref.current);
+  }, [text1Ref, text2Ref, text3Ref]);
 
   return (
     <div className="profile-container">
@@ -148,6 +157,7 @@ const Profile = ({
           <input
             disabled={!redact}
             type="file"
+            accept="image/png, image/jpeg"
             name="profile-img-file"
             id="profile-img-file"
             className="file-input-hidden"
@@ -200,12 +210,13 @@ const Profile = ({
       <div className="profile-notes-block">
         <div className="profile-notes-block-el">
           <textarea
+            ref={text1Ref}
             placeholder={
               redact ? "Сюда вы можете ввести любую информацию о себе" : ""
             }
             disabled={!redact}
             onChange={(e) => {
-              adjustTextarea(e);
+              adjustTextarea(e.target);
               setText1(e.target.value);
             }}
             value={text1}
@@ -214,9 +225,10 @@ const Profile = ({
         </div>
         <div className="profile-notes-block-el">
           <textarea
+            ref={text2Ref}
             disabled={!redact}
             onChange={(e) => {
-              adjustTextarea(e);
+              adjustTextarea(e.target);
               setText2(e.target.value);
             }}
             value={text2}
@@ -225,9 +237,10 @@ const Profile = ({
         </div>
         <div className="profile-notes-block-el">
           <textarea
+            ref={text3Ref}
             disabled={!redact}
             onChange={(e) => {
-              adjustTextarea(e);
+              adjustTextarea(e.target);
               setText3(e.target.value);
             }}
             value={text3}

@@ -51,7 +51,7 @@ const MainCanvas = ({ redact, userId, boxes, setBoxes }) => {
         text: data.text,
         rotation: 0,
         scale: 100,
-        video: "none",
+        video: data.video || "",
       },
     });
     postCanvas({
@@ -66,7 +66,7 @@ const MainCanvas = ({ redact, userId, boxes, setBoxes }) => {
       image: data.image || "",
       link: data.link,
       text: data.text,
-      video: "none",
+      video: data.video || "",
     });
   }
 

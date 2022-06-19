@@ -8,6 +8,7 @@ import { postCanvas } from "../../../api/queries";
 
 export const Canvas = ({ redact, isOverDelete, boxes, setBoxes, userId }) => {
   const [enabledKey, setEnabledKey] = useState();
+  const [moveBoxState, setMoveBoxState] = useState(false); // кринж, но так надо для rotation и scale
 
   const [{ isOver, canDrop }, drop] = useDrop(() => {
     return {
@@ -18,7 +19,7 @@ export const Canvas = ({ redact, isOverDelete, boxes, setBoxes, userId }) => {
         canDrop: monitor.canDrop(),
       }),
     };
-  }, [boxes]);
+  }, [boxes, moveBoxState]);
 
   const isActive = canDrop && isOver;
   let backgroundColor = "#222";
@@ -47,21 +48,7 @@ export const Canvas = ({ redact, isOverDelete, boxes, setBoxes, userId }) => {
       text: boxes[item.id].text,
       scale: item.scale,
       rotation: item.rotation,
-      video: "",
-    });
-
-    console.log({
-      id: item.id,
-      userId,
-      y: top,
-      x: left,
-      type: boxes[item.id].type,
-      image: boxes[item.id].image || "",
-      link: boxes[item.id].link,
-      text: boxes[item.id].text,
-      scale: Number(item.scale),
-      rotation: Number(item.rotation),
-      video: "",
+      video: boxes[item.id].video || "",
     });
   }
 
@@ -75,7 +62,7 @@ export const Canvas = ({ redact, isOverDelete, boxes, setBoxes, userId }) => {
         })
       );
     },
-    [boxes]
+    [boxes, moveBoxState]
   );
 
   function enableRedactMenu(key) {
@@ -94,6 +81,8 @@ export const Canvas = ({ redact, isOverDelete, boxes, setBoxes, userId }) => {
         Object.keys(boxes).map((key) => {
           return (
             <Card
+              moveBoxState={moveBoxState}
+              setMoveBoxState={setMoveBoxState}
               enabledKey={enabledKey}
               enableRedactMenu={enableRedactMenu}
               redact={redact}
