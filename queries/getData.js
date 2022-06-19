@@ -34,7 +34,7 @@ exports.getMyProfile = (sendBack, data, requestParams) => {
         console.log(res, linksResult);
 
         const newResult = res;
-        newResult.rows[0]?.links = linksResult?.rows || [];
+        newResult.rows[0].links = linksResult?.rows || [];
         sendBack(err, newResult);
       });
     });
@@ -102,7 +102,7 @@ exports.getProfile = (sendBack, data, requestParams) => {
         console.log(res, linksResult);
 
         const newResult = res;
-        newResult.rows[0]?.links = linksResult?.rows || [];
+        newResult.rows[0].links = linksResult?.rows || [];
         sendBack(err, newResult);
       });
     });
