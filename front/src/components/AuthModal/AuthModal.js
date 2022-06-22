@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { loginUser, registerUser } from "../../api/queries";
+import { getEmailCode, loginUser, registerUser } from "../../api/queries";
 import "./AuthModal.css";
 import logo from "../../assets/logo.svg";
 export default function AuthModal({ finishAuth }) {
@@ -8,6 +8,7 @@ export default function AuthModal({ finishAuth }) {
 
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+  const [registartionEvent, setRegistartionEvent] = useState();
 
   function switchLogin() {
     setError([]);
@@ -83,7 +84,6 @@ export default function AuthModal({ finishAuth }) {
   }
 
   function login(event) {
-    event.preventDefault();
     if (!checkField("email", email) || !checkField("password", password))
       return;
 
@@ -112,18 +112,27 @@ export default function AuthModal({ finishAuth }) {
       });
   }
 
-  function register(event) {
+  function getCode(event) {
     event.preventDefault();
     if (!checkField("email", email) || !checkField("password", password))
       return;
+
+    getEmailCode(email);
+
+    setRegistartionEvent(event);
+  }
+
+  function register(event) {
+    if (!registartionEvent) return getCode(event);
+    setRegistartionEvent(undefined);
 
     const cookie = Math.floor(
       Math.random() * Math.floor(Math.random() * Date.now())
     );
     document.cookie = "timeKey=" + cookie;
-    const loginLocal = event.target[1].value;
-    const passwordLocal = event.target[2].value;
-    const name = event.target[0].value;
+    const loginLocal = registartionEvent.target[1].value;
+    const passwordLocal = registartionEvent.target[2].value;
+    const name = registartionEvent.target[0].value;
 
     registerUser({
       id: Math.floor(Math.random() * Math.floor(Math.random() * Date.now())),
@@ -159,81 +168,87 @@ export default function AuthModal({ finishAuth }) {
       <div className="auth-modal">
         <div className="form-container">
           {authState === "register" ? (
-            <form onSubmit={register} class="card-form">
-              <div class="input">
-                <input type="text" class={`input-field`} required />
-                <label class="input-label">Ваше имя</label>
-              </div>
-              <div class="input">
-                <input
-                  onChange={(e) => setEmail(e.target.value)}
-                  onBlur={(e) => checkField("email", e.target.value)}
-                  type="email"
-                  placeholder=" "
-                  class={`input-field${emailError ? " error" : ""}`}
-                  required
-                />
-                <label class="input-label">Email</label>
-                {emailError && <p className="input-error">{emailError}</p>}
-              </div>
-              <div class="input">
-                <input
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder=" "
-                  onBlur={(e) => checkField("password", e.target.value)}
-                  type="password"
-                  class={`input-field${passwordError ? " error" : ""}`}
-                  required
-                />
+            <>
+              <form onSubmit={register} className="card-form">
+                <div className="input">
+                  <input type="text" className={`input-field`} required />
+                  <label className="input-label">Ваше имя</label>
+                </div>
+                <div className="input">
+                  <input
+                    onChange={(e) => setEmail(e.target.value)}
+                    onBlur={(e) => checkField("email", e.target.value)}
+                    type="email"
+                    placeholder=" "
+                    className={`input-field${emailError ? " error" : ""}`}
+                    required
+                  />
+                  <label className="input-label">Email</label>
+                  {emailError && <p className="input-error">{emailError}</p>}
+                </div>
+                <div className="input">
+                  <input
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder=" "
+                    onBlur={(e) => checkField("password", e.target.value)}
+                    type="password"
+                    className={`input-field${passwordError ? " error" : ""}`}
+                    required
+                  />
 
-                <label class="input-label">Пароль</label>
-                {passwordError && (
-                  <p className="input-error">{passwordError}</p>
+                  <label className="input-label">Пароль</label>
+                  {passwordError && (
+                    <p className="input-error">{passwordError}</p>
+                  )}
+                </div>
+                {!!registartionEvent && (
+                  <div className="input">
+                    <input type="text" className={`input-field`} required />
+                    <label className="input-label">Код из email</label>
+                  </div>
                 )}
-              </div>
-              <div class="action">
-                <button class="action-button">Регистрация</button>
-              </div>
-            </form>
+                <div className="action">
+                  <button className="action-button">
+                    {!!registartionEvent ? "Регистрация" : "Отправить код"}
+                  </button>
+                </div>
+              </form>
+            </>
           ) : (
-            <form onSubmit={login} class="card-form">
-              <div class="input">
+            <form onSubmit={login} className="card-form">
+              <div className="input">
                 <input
                   onChange={(e) => setEmail(e.target.value)}
                   onBlur={(e) => checkField("email", e.target.value)}
                   type="email"
-                  class={`input-field${emailError ? " error" : ""}`}
+                  className={`input-field${emailError ? " error" : ""}`}
                   required
                 />
-                <label class="input-label">Email</label>
+                <label className="input-label">Email</label>
 
                 {emailError && <p className="input-error">{emailError}</p>}
               </div>
-              <div class="input">
+              <div className="input">
                 <input
                   onChange={(e) => setPassword(e.target.value)}
                   onBlur={(e) => checkField("password", e.target.value)}
                   type="password"
-                  class={`input-field${passwordError ? " error" : ""}`}
+                  className={`input-field${passwordError ? " error" : ""}`}
                   required
                 />
-                <label class="input-label">Пароль</label>
+                <label className="input-label">Пароль</label>
 
                 {passwordError && (
                   <p className="input-error">{passwordError}</p>
                 )}
               </div>
-              <div class="action">
-                <button class="action-button">Логин</button>
+              <div className="action">
+                <button className="action-button">Логин</button>
               </div>
             </form>
           )}
 
-          <div class="card-info">
-            <p>
-              При регистрации вы соглашаетесь с нашими условиями{" "}
-              <a href="">а их у нас и нет</a>
-            </p>
+          <div className="card-info">
             <a className="link-button" onClick={switchLogin}>
               {authState === "login" ? "Регистрация" : "Логин"}
             </a>

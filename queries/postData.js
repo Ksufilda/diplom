@@ -5,6 +5,34 @@ const {
   callbackQuery,
 } = require("./common");
 
+const nodemailer = require("nodemailer");
+
+let transporter = nodemailer.createTransport({
+  host: "smtp.ethereal.email",
+  port: 587,
+  secure: false, // true for 465, false for other ports
+  auth: {
+    user: "klc6tultfo7w5raz@ethereal.email", // generated ethereal user
+    pass: "2Ef9UrA2tp8f9EN1j9", // generated ethereal password
+  },
+});
+
+exports.sendMail = async (sendBack, data) => {
+  transporter.sendMail(
+    {
+      from: '"Your Space" <your-space@gmail.com>', // sender address
+      to: data, // list of receivers
+      subject: "Проверочный код", // Subject line
+      text: "Ваш проверочный код - 1111", // plain text body
+    },
+    (error, info) => {
+      if (error) return console.warn("Ошибка отправки почты", error);
+      console.log("Письмо успешно отправлено", info.messageId, info.response);
+      sendBack(null, info);
+    }
+  );
+};
+
 exports.deleteLink = async (sendBack, data) => {
   const sql = `DELETE FROM link WHERE id = ${data.id}`;
   simpleQueryWithResult(sql, sendBack);

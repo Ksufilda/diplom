@@ -141,6 +141,17 @@ export function loginUser(data) {
   }).then((data) => data.json());
 }
 
+export function getEmailCode(email) {
+  return fetch(`${SITE}emailcode`, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(email),
+  }).then((data) => data.json());
+}
+
 export function registerUser(data) {
   console.log(data);
   const { id, login, password, timeKey, name } = data;

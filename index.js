@@ -8,6 +8,7 @@ const {
   createLink,
   dropLink,
 } = require("./queries/tableQueries");
+const nodemailer = require("nodemailer");
 
 const { setGlobalConn, reciever } = require("./queries/common");
 const path = require("path");
@@ -26,6 +27,7 @@ const {
   registerUser,
   loginUser,
   postLink,
+  sendMail,
 } = require("./queries/postData");
 const cors = require("cors");
 const { Pool } = require("pg");
@@ -63,6 +65,7 @@ app.get("*", function (req, res) {
 });
 
 app.post(`/profile`, (req, res) => reciever(req, res, postProfile));
+app.post(`/emailcode`, (req, res) => reciever(req, res, sendMail));
 app.post(`/canvas`, (req, res) => reciever(req, res, postCanvas));
 app.post(`/link`, (req, res) => reciever(req, res, postLink));
 
@@ -85,6 +88,8 @@ let pool = new Pool(dbConfig);
 
 async function connectToDatabase() {
   console.log("Connecting...");
+  let testAccount = await nodemailer.createTestAccount();
+  console.log(testAccount, "ciferniirge");
   setGlobalConn(await pool.connect());
   console.log("Connected!");
   // await dropUser();
