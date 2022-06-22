@@ -63,9 +63,9 @@ app.get(`/mycanvas/:key`, (req, res) => reciever(req, res, getMyCanvas));
 app.get("*", function (req, res) {
   res.sendFile(path.resolve(__dirname, "./front/build", "index.html"));
 });
+app.get(`/emailcode/:email`, (req, res) => reciever(req, res, sendMail));
 
 app.post(`/profile`, (req, res) => reciever(req, res, postProfile));
-app.post(`/emailcode`, (req, res) => reciever(req, res, sendMail));
 app.post(`/canvas`, (req, res) => reciever(req, res, postCanvas));
 app.post(`/link`, (req, res) => reciever(req, res, postLink));
 
@@ -91,10 +91,10 @@ async function connectToDatabase() {
 
   setGlobalConn(await pool.connect());
   console.log("Connected!");
-  // await dropUser();
-  // await dropProfile();
-  // await dropCanvas();
-  // await dropLink();
+  await dropUser();
+  await dropProfile();
+  await dropCanvas();
+  await dropLink();
 
   await createUser();
   await createProfile();

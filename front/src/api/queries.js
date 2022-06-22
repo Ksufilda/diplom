@@ -142,13 +142,12 @@ export function loginUser(data) {
 }
 
 export function getEmailCode(email) {
-  return fetch(`${SITE}emailcode`, {
-    method: "POST",
+  return fetch(`${SITE}emailcode/${email}`, {
+    method: "GET",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(email),
   }).then((data) => data.json());
 }
 

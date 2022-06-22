@@ -17,13 +17,13 @@ let transporter = nodemailer.createTransport({
   },
 });
 
-exports.sendMail = async (sendBack, data) => {
+exports.sendMail = async (sendBack, data, requestParams) => {
   console.log("asdasdas");
   transporter
     .sendMail(
       {
         from: '"Your Space" <your-space@gmail.com>', // sender address
-        to: data, // list of receivers
+        to: requestParams.email, // list of receivers
         subject: "Проверочный код", // Subject line
         text: "Ваш проверочный код - 1111", // plain text body
       },
