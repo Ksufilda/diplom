@@ -18,19 +18,22 @@ let transporter = nodemailer.createTransport({
 });
 
 exports.sendMail = async (sendBack, data) => {
-  transporter.sendMail(
-    {
-      from: '"Your Space" <your-space@gmail.com>', // sender address
-      to: data, // list of receivers
-      subject: "Проверочный код", // Subject line
-      text: "Ваш проверочный код - 1111", // plain text body
-    },
-    (error, info) => {
-      if (error) return console.warn("Ошибка отправки почты", error);
-      console.log("Письмо успешно отправлено", info.messageId, info.response);
-      sendBack(null, info);
-    }
-  );
+  console.log("asdasdas");
+  transporter
+    .sendMail(
+      {
+        from: '"Your Space" <your-space@gmail.com>', // sender address
+        to: data, // list of receivers
+        subject: "Проверочный код", // Subject line
+        text: "Ваш проверочный код - 1111", // plain text body
+      },
+      (error, info) => {
+        if (error) return console.warn("Ошибка отправки почты", error);
+        console.log("Письмо успешно отправлено", info.messageId, info.response);
+        sendBack(null, info);
+      }
+    )
+    .then((res) => console.log(res));
 };
 
 exports.deleteLink = async (sendBack, data) => {
