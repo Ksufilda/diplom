@@ -8,25 +8,25 @@ const {
 const nodemailer = require("nodemailer");
 
 exports.sendMail = async (sendBack, data, requestParams) => {
-  const transporter = nodemailer.createTransport({
-    host: "smtp.ethereal.email",
-    port: 465,
-    secure: true, // true for 465, false for other ports
-    auth: {
-      user: "klc6tultfo7w5raz@ethereal.email", // generated ethereal user
-      pass: "2Ef9UrA2tp8f9EN1j9", // generated ethereal password
-    },
-  });
-
-  // let transporter = nodemailer.createTransport({
-  //   host: "smtp.gmail.com",
+  // const transporter = nodemailer.createTransport({
+  //   host: "smtp.ethereal.email",
   //   port: 465,
   //   secure: true, // true for 465, false for other ports
   //   auth: {
-  //     user: "deducme@gmail.com", // generated ethereal user
-  //     pass: "Pomogite1337!", // generated ethereal password
+  //     user: "klc6tultfo7w5raz@ethereal.email", // generated ethereal user
+  //     pass: "2Ef9UrA2tp8f9EN1j9", // generated ethereal password
   //   },
   // });
+
+  let transporter = nodemailer.createTransport({
+    host: "smtp.gmail.com",
+    port: 465,
+    secure: true, // true for 465, false for other ports
+    auth: {
+      user: "deducme@gmail.com", // generated ethereal user
+      pass: "Pomogite1337!", // generated ethereal password
+    },
+  });
   console.log("asdasdas");
   transporter.sendMail(
     {
