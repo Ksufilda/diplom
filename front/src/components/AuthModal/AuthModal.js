@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { getEmailCode, loginUser, registerUser } from "../../api/queries";
 import "./AuthModal.css";
 import logo from "../../assets/logo.svg";
@@ -8,7 +8,7 @@ export default function AuthModal({ finishAuth }) {
 
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
-  const [registartionEvent, setRegistartionEvent] = useState();
+  const [registartionEvent, setRegistartionEvent] = useState(false);
 
   function switchLogin() {
     setError([]);
@@ -84,6 +84,7 @@ export default function AuthModal({ finishAuth }) {
   }
 
   function login(event) {
+    event.preventDefault();
     if (!checkField("email", email) || !checkField("password", password))
       return;
 
@@ -96,7 +97,7 @@ export default function AuthModal({ finishAuth }) {
       .then((res) => {
         const newErr = error?.filter((el) => el.type !== "email");
         if (res?.message)
-          setError([
+          return setError([
             ...newErr,
             {
               msg: res?.message,
@@ -112,27 +113,46 @@ export default function AuthModal({ finishAuth }) {
       });
   }
 
-  function getCode(event) {
-    event.preventDefault();
-    if (!checkField("email", email) || !checkField("password", password))
+  function getCode() {
+    if (
+      !checkField("email", email) ||
+      !checkField("password", password) ||
+      !checkField("emailcode", "")
+    )
       return;
 
     getEmailCode(email);
 
-    setRegistartionEvent(event);
+    setRegistartionEvent(true);
   }
 
   function register(event) {
+    event.preventDefault();
+
     if (!registartionEvent) return getCode(event);
-    setRegistartionEvent(undefined);
+    const emailCode = event.target[3].value;
+
+    if (emailCode !== "1111") {
+      const bufErr = error?.filter((el) => el.type !== "emailcode");
+      setError([
+        ...bufErr,
+        {
+          msg: "Неверный код",
+          type: "emailcode",
+        },
+      ]);
+      return;
+    }
+
+    setRegistartionEvent(false);
 
     const cookie = Math.floor(
       Math.random() * Math.floor(Math.random() * Date.now())
     );
     document.cookie = "timeKey=" + cookie;
-    const loginLocal = registartionEvent.target[1].value;
-    const passwordLocal = registartionEvent.target[2].value;
-    const name = registartionEvent.target[0].value;
+    const loginLocal = event.target[1].value;
+    const passwordLocal = event.target[2].value;
+    const name = event.target[0].value;
 
     registerUser({
       id: Math.floor(Math.random() * Math.floor(Math.random() * Date.now())),
@@ -145,7 +165,7 @@ export default function AuthModal({ finishAuth }) {
         console.log(res);
         const newErr = error?.filter((el) => el.type !== "email");
         if (res?.message)
-          setError([
+          return setError([
             ...newErr,
             {
               msg: res.message,
@@ -162,6 +182,7 @@ export default function AuthModal({ finishAuth }) {
 
   const emailError = error?.find((el) => el.type === "email")?.msg;
   const passwordError = error?.find((el) => el.type === "password")?.msg;
+  const emailCodeError = error?.find((el) => el.type === "emailcode")?.msg;
 
   return (
     <div className="auth-modal-container">
@@ -205,6 +226,9 @@ export default function AuthModal({ finishAuth }) {
                   <div className="input">
                     <input type="text" className={`input-field`} required />
                     <label className="input-label">Код из email</label>
+                    {emailCodeError && (
+                      <p className="input-error">{emailCodeError}</p>
+                    )}
                   </div>
                 )}
                 <div className="action">
