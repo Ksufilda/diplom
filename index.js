@@ -88,8 +88,7 @@ let pool = new Pool(dbConfig);
 
 async function connectToDatabase() {
   console.log("Connecting...");
-  let testAccount = await nodemailer.createTestAccount();
-  console.log(testAccount, "ciferniirge");
+
   setGlobalConn(await pool.connect());
   console.log("Connected!");
   // await dropUser();
