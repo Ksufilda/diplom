@@ -60,10 +60,11 @@ app.get(`/canvas/:id`, (req, res) => reciever(req, res, getCanvas));
 app.get(`/myprofile/:key`, (req, res) => reciever(req, res, getMyProfile));
 app.get(`/myuser/:key`, (req, res) => reciever(req, res, getMyUser));
 app.get(`/mycanvas/:key`, (req, res) => reciever(req, res, getMyCanvas));
+app.get(`/emailcode/:email`, (req, res) => reciever(req, res, sendMail));
+
 app.get("*", function (req, res) {
   res.sendFile(path.resolve(__dirname, "./front/build", "index.html"));
 });
-app.get(`/emailcode/:email`, (req, res) => reciever(req, res, sendMail));
 
 app.post(`/profile`, (req, res) => reciever(req, res, postProfile));
 app.post(`/canvas`, (req, res) => reciever(req, res, postCanvas));

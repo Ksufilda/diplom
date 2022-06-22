@@ -7,18 +7,17 @@ const {
 
 const nodemailer = require("nodemailer");
 
-let transporter = nodemailer.createTransport({
-  host: "smtp.ethereal.email",
-  port: 587,
-  secure: false, // true for 465, false for other ports
-  auth: {
-    user: "klc6tultfo7w5raz@ethereal.email", // generated ethereal user
-    pass: "2Ef9UrA2tp8f9EN1j9", // generated ethereal password
-  },
-});
-
 exports.sendMail = async (sendBack, data, requestParams) => {
   console.log("asdasdas");
+  let transporter = nodemailer.createTransport({
+    host: "smtp.ethereal.email",
+    port: 587,
+    secure: false, // true for 465, false for other ports
+    auth: {
+      user: "klc6tultfo7w5raz@ethereal.email", // generated ethereal user
+      pass: "2Ef9UrA2tp8f9EN1j9", // generated ethereal password
+    },
+  });
   transporter
     .sendMail(
       {
