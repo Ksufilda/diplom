@@ -7,9 +7,18 @@ const {
 
 const nodemailer = require("nodemailer");
 
+// let transporter = nodemailer.createTransport({
+//   host: "smtp.gmail.com",
+//   port: 465,
+//   secure: true, // true for 465, false for other ports
+//   auth: {
+//     user: "deducme@gmail.com", // generated ethereal user
+//     pass: "Pomogite1337!", // generated ethereal password
+//   },
+// });
+
 exports.sendMail = async (sendBack, data, requestParams) => {
-  console.log("asdasdas");
-  let transporter = nodemailer.createTransport({
+  const transporter = nodemailer.createTransport({
     host: "smtp.ethereal.email",
     port: 587,
     secure: false, // true for 465, false for other ports
@@ -18,21 +27,20 @@ exports.sendMail = async (sendBack, data, requestParams) => {
       pass: "2Ef9UrA2tp8f9EN1j9", // generated ethereal password
     },
   });
-  transporter
-    .sendMail(
-      {
-        from: '"Your Space" <your-space@gmail.com>', // sender address
-        to: requestParams.email, // list of receivers
-        subject: "Проверочный код", // Subject line
-        text: "Ваш проверочный код - 1111", // plain text body
-      },
-      (error, info) => {
-        if (error) return console.warn("Ошибка отправки почты", error);
-        console.log("Письмо успешно отправлено", info.messageId, info.response);
-        sendBack(null, info);
-      }
-    )
-    .then((res) => console.log(res));
+  console.log("asdasdas");
+  transporter.sendMail(
+    {
+      from: '"Your Space" <your-space@gmail.com>', // sender address
+      to: requestParams.email, // list of receivers
+      subject: "Проверочный код", // Subject line
+      text: "Ваш проверочный код - 1111", // plain text body
+    },
+    (error, info) => {
+      if (error) return console.warn("Ошибка отправки почты", error);
+      console.log("Письмо успешно отправлено", info.messageId, info.response);
+      sendBack(null, info);
+    }
+  );
 };
 
 exports.deleteLink = async (sendBack, data) => {
