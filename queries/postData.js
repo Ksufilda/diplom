@@ -29,7 +29,7 @@ exports.sendMail = async (sendBack, data, requestParams) => {
       if (error) {
         return sendBack({ message: "ошибка отправки письма" }, info);
       }
-      console.log("Письмо успешно отправлено", info.messageId, info.response);
+      console.log("Письмо успешно отправлено", info);
       sendBack(null, info);
     }
   );
