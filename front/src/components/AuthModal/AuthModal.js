@@ -123,8 +123,8 @@ export default function AuthModal({ finishAuth }) {
       return;
 
     getEmailCode(email).then((res) => {
-      console.log(res);
-      setEmailCode(res);
+      console.log(res.key);
+      setEmailCode(res.key);
     });
 
     setRegistartionEvent(true);
@@ -135,8 +135,8 @@ export default function AuthModal({ finishAuth }) {
 
     if (!registartionEvent) return getCode(event);
     const emailCodeInput = event.target[3].value;
-
-    if (emailCodeInput !== emailCode) {
+    console.log(emailCode, Number(emailCodeInput));
+    if (Number(emailCodeInput) !== emailCode) {
       const bufErr = error?.filter((el) => el.type !== "emailcode");
       setError([
         ...bufErr,

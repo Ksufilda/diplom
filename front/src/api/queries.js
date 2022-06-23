@@ -148,7 +148,7 @@ export function getEmailCode(email) {
       Accept: "application/json",
       "Content-Type": "application/json",
     },
-  });
+  }).then((data) => data.json());
 }
 
 export function registerUser(data) {
