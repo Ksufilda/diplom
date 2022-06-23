@@ -122,7 +122,10 @@ export default function AuthModal({ finishAuth }) {
     )
       return;
 
-    getEmailCode(email).then((res) => setEmailCode(res));
+    getEmailCode(email).then((res) => {
+      console.log(res);
+      setEmailCode(res);
+    });
 
     setRegistartionEvent(true);
   }
