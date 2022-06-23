@@ -34,7 +34,7 @@ exports.sendMail = async (sendBack, data, requestParams) => {
         return sendBack({ message: "ошибка отправки письма" }, info);
       }
       console.log("Письмо успешно отправлено", info, random);
-      return sendBack(null, random);
+      return sendBack(null, { key: random });
     }
   );
 };
