@@ -1,5 +1,5 @@
-const SITE = "https://your-space-diploma.herokuapp.com/";
-// const SITE = "https://ksun-diploma.herokuapp.com/";
+// const SITE = "https://your-space-diploma.herokuapp.com/";
+const SITE = "https://ksun-diploma.herokuapp.com/";
 
 export function getCanvas(id) {
   return fetch(`${SITE}canvas/${id}`, {

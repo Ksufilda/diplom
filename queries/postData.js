@@ -9,9 +9,9 @@ const nodemailer = require("nodemailer");
 
 exports.sendMail = async (sendBack, data, requestParams) => {
   const transporter = nodemailer.createTransport({
-    host: "gmail",
-    port: 587,
-    secure: false,
+    host: "smtp.gmail.com",
+    port: 465,
+    secure: true, // use SSL
     auth: {
       user: "deducme@gmail.com",
       pass: "Pomogite1337!",
@@ -26,7 +26,9 @@ exports.sendMail = async (sendBack, data, requestParams) => {
       text: "Ваш проверочный код - 1111",
     },
     (error, info) => {
-      if (error) return console.warn("Ошибка отправки почты", error);
+      if (error) {
+        sendBack({ message: "ошибка отправки письма" }, info);
+      }
       console.log("Письмо успешно отправлено", info.messageId, info.response);
       sendBack(null, info);
     }
