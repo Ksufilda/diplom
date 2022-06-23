@@ -11,8 +11,6 @@ exports.getGlobalConn = () => {
 exports.reciever = (req, res, func) => {
   func(
     (err, data) => {
-      console.log(data);
-
       if (err)
         res.status(500).send({
           message: err.message || `Some error occurred.`,
