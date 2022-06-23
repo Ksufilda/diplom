@@ -5,6 +5,7 @@ import logo from "../../assets/logo.svg";
 export default function AuthModal({ finishAuth }) {
   const [authState, setAuthState] = useState("login");
   const [error, setError] = useState([]);
+  const [emailCode, setEmailCode] = useState();
 
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
@@ -121,7 +122,7 @@ export default function AuthModal({ finishAuth }) {
     )
       return;
 
-    getEmailCode(email);
+    getEmailCode(email).then((res) => setEmailCode(res));
 
     setRegistartionEvent(true);
   }
@@ -130,9 +131,9 @@ export default function AuthModal({ finishAuth }) {
     event.preventDefault();
 
     if (!registartionEvent) return getCode(event);
-    const emailCode = event.target[3].value;
+    const emailCodeInput = event.target[3].value;
 
-    if (emailCode !== "1111") {
+    if (emailCodeInput !== emailCode) {
       const bufErr = error?.filter((el) => el.type !== "emailcode");
       setError([
         ...bufErr,
