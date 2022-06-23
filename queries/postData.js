@@ -6,7 +6,6 @@ const {
 } = require("./common");
 
 const nodemailer = require("nodemailer");
-const CryptoJS = require("crypto-js");
 
 exports.sendMail = async (sendBack, data, requestParams) => {
   const transporter = nodemailer.createTransport({
@@ -19,9 +18,7 @@ exports.sendMail = async (sendBack, data, requestParams) => {
     },
   });
 
-  var encrypted = CryptoJS.AES.encrypt(requestParams.email, "space");
-
-  var decrypted = CryptoJS.AES.decrypt(encrypted, "space").slice(0, 4);
+  const random = Math.floor(1000 + Math.random() * 9000);
 
   transporter.sendMail(
     {
@@ -37,7 +34,7 @@ exports.sendMail = async (sendBack, data, requestParams) => {
         return sendBack({ message: "ошибка отправки письма" }, info);
       }
       console.log("Письмо успешно отправлено", info, encrypted, decrypted);
-      sendBack(null, decrypted);
+      sendBack(null, random);
     }
   );
 };
