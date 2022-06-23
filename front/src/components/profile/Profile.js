@@ -27,12 +27,12 @@ const Profile = ({
   const text3Ref = useRef(null);
 
   async function loadImage(image) {
-    console.log("asdasd");
     setImageLoading(true);
-    const itemImage = Math.random() * Math.floor(Math.random() * Date.now());
+    const itemImage = Math.random() * Math.floor(Math.random() * Date.now()); // случайный id картинки
+
     if (image == null) return;
-    await storage.ref(`/${itemImage}`).put(image);
-    await storage
+    await storage.ref(`/${itemImage}`).put(image); // загрузка фото в firebase
+    await storage // получение фото из firebase
       .ref(`/${itemImage}`)
       .getDownloadURL()
       .then((url) => {
@@ -76,6 +76,10 @@ const Profile = ({
         return require("../../assets/Telegram.png");
       case "instagram":
         return require("../../assets/Instagram.png");
+      case "vk":
+        return require("../../assets/vk-social.png");
+      case "behance":
+        return require("../../assets/behance.png");
       case "none":
         return require("../../assets/link.png");
 
@@ -86,6 +90,9 @@ const Profile = ({
 
   function getLinkType(text) {
     if (text.includes("www.instagram.com")) return "instagram";
+    if (text.includes("t.me")) return "telegram";
+    if (text.includes("vk.com")) return "vk";
+    if (text.includes("www.behance")) return "behance";
     return "none";
   }
 
