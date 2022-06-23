@@ -25,7 +25,7 @@ exports.sendMail = async (sendBack, data, requestParams) => {
       from: '"Your Space" <your-space@gmail.com>',
       to: requestParams.email,
       subject: "Проверочный код",
-      text: "Ваш проверочный код - " + decrypted,
+      text: "Ваш проверочный код - " + random,
     },
     (error, info) => {
       if (error) {
@@ -33,7 +33,7 @@ exports.sendMail = async (sendBack, data, requestParams) => {
 
         return sendBack({ message: "ошибка отправки письма" }, info);
       }
-      console.log("Письмо успешно отправлено", info, encrypted, decrypted);
+      console.log("Письмо успешно отправлено", info, random);
       sendBack(null, random);
     }
   );
