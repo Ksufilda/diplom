@@ -6,6 +6,7 @@ const {
 } = require("./common");
 
 const nodemailer = require("nodemailer");
+const CryptoJS = require("crypto-js");
 
 exports.sendMail = async (sendBack, data, requestParams) => {
   const transporter = nodemailer.createTransport({
@@ -18,12 +19,19 @@ exports.sendMail = async (sendBack, data, requestParams) => {
     },
   });
 
+  var encrypted = CryptoJS.AES.encrypt(requestParams.email, "space");
+  //U2FsdGVkX18ZUVvShFSES21qHsQEqZXMxQ9zgHy+bu0=
+
+  var decrypted = CryptoJS.AES.decrypt(encrypted, "space");
+  //4d657373616765
+  //decrypted.toString(CryptoJS.enc.Utf8);
+
   transporter.sendMail(
     {
       from: '"Your Space" <your-space@gmail.com>',
       to: requestParams.email,
       subject: "Проверочный код",
-      text: "Ваш проверочный код - 1111",
+      text: "Ваш проверочный код - " + decrypted,
     },
     (error, info) => {
       if (error) {
@@ -31,7 +39,7 @@ exports.sendMail = async (sendBack, data, requestParams) => {
 
         return sendBack({ message: "ошибка отправки письма" }, info);
       }
-      console.log("Письмо успешно отправлено", info);
+      console.log("Письмо успешно отправлено", info, encrypted, decrypted);
       sendBack(null, info);
     }
   );
