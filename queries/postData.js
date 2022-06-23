@@ -9,12 +9,12 @@ const nodemailer = require("nodemailer");
 
 exports.sendMail = async (sendBack, data, requestParams) => {
   const transporter = nodemailer.createTransport({
-    host: "smtp.gmail.com",
-    port: 465,
-    secure: true, // use SSL
+    host: "smtp-relay.sendinblue.com",
+    port: 587,
+    secure: false, // use SSL
     auth: {
       user: "deducme@gmail.com",
-      pass: "Pomogite1337!",
+      pass: "SKJy3fqnkcwXC9Ya",
     },
   });
 
