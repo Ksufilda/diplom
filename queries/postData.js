@@ -27,7 +27,7 @@ exports.sendMail = async (sendBack, data, requestParams) => {
     },
     (error, info) => {
       if (error) {
-        sendBack({ message: "ошибка отправки письма" }, info);
+        return sendBack({ message: "ошибка отправки письма" }, info);
       }
       console.log("Письмо успешно отправлено", info.messageId, info.response);
       sendBack(null, info);
